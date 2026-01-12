@@ -7,6 +7,10 @@
         "/^npm init -y$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^git add app/v2/page\\.tsx; git commit -m \"Remove unused Play icon from v2/page\\.tsx\"; git push$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }
