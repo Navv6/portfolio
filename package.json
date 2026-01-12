@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "set \"GITHUB_PAGES=true\"&& next build && gh-pages -d out -b gh-pages --dest pages"
+    "deploy": "next build && gh-pages -d out"
   },
   "keywords": [],
   "author": "",
