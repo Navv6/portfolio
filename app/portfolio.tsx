@@ -714,7 +714,7 @@ export default function Page() {
       {/* Stack */}
       <section id="stack" className="mt-16 md:mt-24">
         <Container>
-          <div className="mt-10 border-t border-zinc-200 pt-6 text-xs text-zinc-600">
+          <div className="mt-10 border-t border-zinc-200 pt-6 text-center text-xs text-zinc-600">
             DeepVi — 설명 가능한 재무 해석 중심 기업 분석<br /> © 2025 All Rights Reserved
           </div>
         </Container>
