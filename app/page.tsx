@@ -55,14 +55,24 @@ export default function Home() {
             </p>
             
             {/* About Me */}
-            <div className="space-y-3 text-base text-zinc-700 leading-relaxed mb-8 max-w-3xl">
-              <p>회계와 세무를 전공하며 전문 용어와 복잡한 정보가 만드는 '이해의 장벽'을 체감했습니다.</p>
-              <p>복잡한 정보는 누구나 쉽게 접근하고 활용할 수 있어야 한다는 믿음으로,</p>
-              <p>정보를 구조화하고 핵심을 전달하는 데이터 분석의 길을 걷기 시작했습니다.</p>
-              <p>분석은 인사이트를 도출할 수 있지만, 즉시 활용할 수 있는 형태로 재가공하는 과정은 늘 추가적인 과제로 남았습니다.</p>
-              <p>저는 이러한 분석과 활용 사이의 공백을 메우기 위해 AI를 접목했습니다.</p>
-              <p>이후 다양한 AI를 경험하며 최신 트렌드를 학습해 왔고, 이제는 단순히 툴을 활용하는 것을 넘어</p>
-              <p>문제를 근본적으로 해결하기 위한 AI 서비스를 직접 설계하고 구현하는 데 집중하고 있습니다.</p>
+            <div className="flex flex-col md:flex-row gap-8 mb-8 max-w-4xl items-start">
+              <div className="flex-1 space-y-4">
+                <p className="text-base text-zinc-700 leading-relaxed">회계와 세무를 전공하며 전문 용어와 복잡한 정보가 만드는 <span className="font-semibold text-zinc-900">'이해의 장벽'</span>을 체감했습니다. 복잡한 정보는 누구나 쉽게 접근하고 활용할 수 있어야 한다는 믿음으로, 정보를 구조화하고 핵심을 전달하는 데이터 분석의 길을 걷기 시작했습니다.</p>
+                
+                <p className="text-base text-zinc-700 leading-relaxed">분석은 인사이트를 도출할 수 있지만, 즉시 활용할 수 있는 형태로 재가공하는 과정은 늘 추가적인 과제로 남았습니다. 이러한 <span className="font-semibold text-zinc-900">분석과 활용 사이의 공백을 메우기 위해 AI를 접목</span>했고, 다양한 AI를 경험하며 최신 트렌드를 학습해 왔습니다.</p>
+                
+                <p className="text-base text-zinc-700 leading-relaxed">이제는 단순히 툴을 활용하는 것을 넘어, <span className="font-semibold text-zinc-900">문제를 근본적으로 해결하기 위한 AI 서비스를 직접 설계하고 구현</span>하는 데 집중하고 있습니다.</p>
+              </div>
+              
+              <div className="hidden md:block flex-shrink-0">
+                <div className="w-48 h-48 rounded-2xl bg-gradient-to-br from-blue-100 to-violet-100 border-2 border-zinc-200 shadow-md flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="/image.png" 
+                    alt="프로필 사진" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Contact Links */}
