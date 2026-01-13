@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: "백경우 | Portfolio",
     images: [
       {
-        url: `${basePath}/og.svg`,
+        url: `${basePath}/og.png`,
         width: 1200,
         height: 630,
         alt: "백경우 | Portfolio",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "백경우 | Portfolio",
-    images: [`${basePath}/og.svg`],
+    images: [`${basePath}/og.png`],
   },
 }
 
