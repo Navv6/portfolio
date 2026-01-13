@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+const withBasePath = (path: string) => `${basePath}${path}`;
+
 const DeepViPortfolio = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [currentImage, setCurrentImage] = useState(0);
@@ -142,7 +145,7 @@ const DeepViPortfolio = () => {
               muted
               playsInline
             >
-              <source src="/videos/demo.mp4" type="video/mp4" />
+              <source src={withBasePath("/demo.mp4")} type="video/mp4" />
               브라우저가 비디오를 지원하지 않습니다.
             </video>
           </div>

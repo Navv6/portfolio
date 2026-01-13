@@ -43,13 +43,13 @@ function SectionTitle({
 }) {
   return (
     <div className="mb-8">
-      <div className="text-sm text-zinc-400">{eyebrow}</div>
-      <h2 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-100 md:text-3xl">
+      <div className="text-sm text-zinc-600">{eyebrow}</div>
+      <h2 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-900 md:text-3xl">
         {title}
       </h2>
       {desc ? (
         <p
-          className={`mt-3 text-sm leading-6 text-zinc-300 md:text-base break-keep
+          className={`mt-3 text-sm leading-6 text-zinc-700 md:text-base break-keep
             ${wide ? "max-w-4xl" : "max-w-2xl"}`}
         >
           {desc}
@@ -69,12 +69,12 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.03)]">
+    <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
       <div className="flex items-center gap-2">
         {icon}
-        <div className="text-sm font-semibold text-zinc-100">{title}</div>
+        <div className="text-sm font-semibold text-zinc-900">{title}</div>
       </div>
-      <div className="mt-3 text-sm leading-6 text-zinc-300">{children}</div>
+      <div className="mt-3 text-sm leading-6 text-zinc-700">{children}</div>
     </div>
   );
 }
@@ -215,7 +215,7 @@ function FeatureCarousel({
             data-slide="true"
             className="relative w-full flex-none snap-center"
           >
-            <div className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-xl">
+            <div className="group overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-xl">
               {/* ✅ 이미지 영역: 16:9 고정 + contain */}
               <div className="relative w-full bg-black/30 aspect-video">
                 {it.component ? (
@@ -249,7 +249,7 @@ function FeatureCarousel({
 
                 {/* 배지 */}
                 {it.badge ? (
-                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-3 py-1 text-xs text-zinc-100 backdrop-blur">
+                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/90 px-3 py-1 text-xs text-zinc-900 backdrop-blur">
                     {it.icon}
                     <span>{it.badge}</span>
                   </div>
@@ -261,8 +261,8 @@ function FeatureCarousel({
                     <button
                       type="button"
                       onClick={() => scrollByOne("prev")}
-                      className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-black/35 text-zinc-100 opacity-0 backdrop-blur transition
-                                 group-hover:opacity-100 hover:bg-black/55"
+                      className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white/90 text-zinc-900 opacity-0 backdrop-blur transition
+                                 group-hover:opacity-100 hover:bg-zinc-100"
                       aria-label="Previous"
                       title="Previous"
                     >
@@ -274,8 +274,8 @@ function FeatureCarousel({
                     <button
                       type="button"
                       onClick={() => scrollByOne("next")}
-                      className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-black/35 text-zinc-100 opacity-0 backdrop-blur transition
-                                 group-hover:opacity-100 hover:bg-black/55"
+                      className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white/90 text-zinc-900 opacity-0 backdrop-blur transition
+                                 group-hover:opacity-100 hover:bg-zinc-100"
                       aria-label="Next"
                       title="Next"
                     >
@@ -290,10 +290,10 @@ function FeatureCarousel({
 
               {/* 텍스트 */}
               <div className="p-5">
-                <div className="text-base font-semibold text-zinc-100 md:text-lg">
+                <div className="text-base font-semibold text-zinc-900 md:text-lg">
                   {it.title}
                 </div>
-                <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-300 break-keep">
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-700 break-keep">
                   {it.desc}
                 </p>
                 <div className="mt-4 text-xs text-zinc-500">
@@ -316,42 +316,42 @@ export default function Page() {
       title: "AI 재무 해석 코멘트",
       desc: "재무제표(PL/BS/CF)와 핵심 지표를 근거로 성장·수익·안정성 구조를 자연어로 해석합니다.",
       imgSrc: "/reco.png",
-      icon: <BarChart3 className="h-4 w-4 text-zinc-100" />,
+      icon: <BarChart3 className="h-4 w-4 text-zinc-900" />,
     },
     {
       title: "5가지 기업 유형 분류",
       desc: "워렌 버핏과 피터 린치의 투자 철학을 기반으로 기업의 재무지표를 점수화하여 5가지 유형으로 분류.",
       component: <TypeAnalysisVisual />,
-      icon: <Layers3 className="h-4 w-4 text-zinc-100" />,
+      icon: <Layers3 className="h-4 w-4 text-zinc-900" />,
     },
     {
       title: "재무 건전성 평가",
       desc: "성장성·수익성·안정성·현금흐름을 종합해 기업 상태를 구조적으로 평가합니다.",
       imgSrc: "/finacial.png",
-      icon: <ShieldCheck className="h-4 w-4 text-zinc-100" />,
+      icon: <ShieldCheck className="h-4 w-4 text-zinc-900" />,
     },
     {
       title: "뉴스 감정 분석 - 워드 클라우드",
       desc: "뉴스의 맥락을 분석해 기업 이슈를 키워드로 시각화합니다.",
       imgSrc: "/cloud2.png",
-      icon: <MessageCircleQuestion className="h-4 w-4 text-zinc-100" />,
+      icon: <MessageCircleQuestion className="h-4 w-4 text-zinc-900" />,
     },
     {
       title: "뉴스 감정 분석 - 감정 분류",
       desc: "뉴스 내용을 감정 단위로 분석해 긍정/부정/중립을 분류합니다.",
       imgSrc: "/senti.png",
-      icon: <MessageCircleQuestion className="h-4 w-4 text-zinc-100" />,
+      icon: <MessageCircleQuestion className="h-4 w-4 text-zinc-900" />,
     },
     {
       title: "Q&A 해석 시스템",
-      desc: "질문 → 근거 데이터 참조 → 설명형 답변으로 ‘왜’에 답합니다.",
+      desc: "질문 → 근거 데이터 참조 → 설명형 답변으로 '왜'에 답합니다.",
       imgSrc: "/QnA.png",
-      icon: <MessageCircleQuestion className="h-4 w-4 text-zinc-100" />,
+      icon: <MessageCircleQuestion className="h-4 w-4 text-zinc-900" />,
     },
   ];
 
   return (
-    <main className="min-h-screen bg-[#070A12] text-white">
+    <main className="min-h-screen bg-gray-50 text-zinc-900">
       {/* Background */}
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute left-1/2 top-[-200px] h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-blue-500/20 blur-3xl" />
@@ -360,42 +360,56 @@ export default function Page() {
       </div>
 
       {/* Top bar */}
-      <header className="sticky top-0 z-20 border-b border-white/10 bg-[#070A12]/70 backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-zinc-200 bg-white/80 backdrop-blur">
         <Container>
           <div className="flex h-14 items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="grid h-8 w-8 place-items-center rounded-xl bg-white/10 text-sm font-bold">
+              <div className="grid h-8 w-8 place-items-center rounded-xl bg-zinc-100 text-sm font-bold text-zinc-900">
                 DV
               </div>
-              <div className="text-sm font-semibold text-zinc-100">DeepVi</div>
-              <div className="ml-2 hidden text-xs text-zinc-400 md:block">
+              <div className="text-sm font-semibold text-zinc-900">DeepVi</div>
+              <div className="ml-2 hidden text-xs text-zinc-600 md:block">
                 LLM 기반 기업 분석 서비스
               </div>
             </div>
+            <nav className="flex items-center gap-6">
+              <a href="/" className="text-sm text-zinc-600 transition hover:text-zinc-900">
+                홈
+              </a>
+              <a href="/projects/deepvi" className="text-sm text-zinc-900 font-semibold transition hover:text-zinc-700">
+                DeepVi
+              </a>
+              <span className="text-sm text-zinc-400 cursor-not-allowed">
+                PriceLens
+              </span>
+              <span className="text-sm text-zinc-400 cursor-not-allowed">
+                Tableau
+              </span>
+            </nav>
           </div>
         </Container>
       </header>
 
       {/* Hero */}
-      <section className="pt-14 md:pt-20">
+      <section id="intro" className="pt-14 md:pt-20">
         <Container>
           <motion.div initial="hidden" animate="show" variants={fadeUp}>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-zinc-300">
+            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-700 shadow-sm">
               Python · FastAPI · PostgreSQL · LLM · LangChain · RAG
             </div>
 
-            <h1 className="mt-5 text-4xl font-semibold tracking-tight text-zinc-100 md:text-6xl">
+            <h1 className="mt-5 text-4xl font-semibold tracking-tight text-zinc-900 md:text-6xl">
               데이터를 넘어,
               <br className="hidden md:block" /> 기업의 본질을 설명합니다
             </h1>
 
-            <p className="mt-5 max-w-4xl text-sm leading-6 text-zinc-300">
+            <p className="mt-5 max-w-4xl text-sm leading-6 text-zinc-700">
             DeepVi는 재무제표와 시장 맥락을 해석해,<br />
             투자자가 스스로 이해하고 판단할 수 있도록 돕는 LLM 기반 기업 분석 서비스입니다.
             </p>
             
             {/* Quick chips */}
-            <div className="mt-10 flex flex-wrap gap-2 text-xs text-zinc-300">
+            <div className="mt-10 flex flex-wrap gap-2 text-xs text-zinc-700">
               {[
                 "재무 해석 코멘트",
                 "5가지 기업 유형",
@@ -405,7 +419,7 @@ export default function Page() {
               ].map((t) => (
                 <span
                   key={t}
-                  className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1"
+                  className="rounded-full border border-zinc-200 bg-white px-3 py-1 shadow-sm"
                 >
                   {t}
                 </span>
@@ -467,7 +481,7 @@ export default function Page() {
         </Container>
 
         {/* Process Flow */}
-        <section className="mt-16 md:mt-24">
+        <section id="process" className="mt-16 md:mt-24">
         <Container>
             <SectionTitle
             eyebrow="Process"
@@ -488,15 +502,15 @@ export default function Page() {
                   },
                   {
                     step: "02",
-                    title: "DB & 백엔드 구축",
-                    desc: "분석에 필요한 데이터 정제 및 저장",
-                    icon: <Layers3 className="h-5 w-5" />,
+                    title: "ML 기반 지표 도출",
+                    desc: "머신러닝을 활용한 재무 건전성 평가 지표 산출",
+                    icon: <BarChart3 className="h-5 w-5" />,
                   },
                   {
                     step: "03",
-                    title: "핵심 지표 계산",
-                    desc: "재무 비율 및 성장성 분석",
-                    icon: <BarChart3 className="h-5 w-5" />,
+                    title: "DB 및 API 구축",
+                    desc: "PostgreSQL + FastAPI 기반 데이터 연동",
+                    icon: <Layers3 className="h-5 w-5" />,
                   },
                   {
                     step: "04",
@@ -520,25 +534,25 @@ export default function Page() {
                       custom={idx}
                       className="flex-1"
                     >
-                      <div className="group relative z-10 flex h-full flex-col items-center rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-center transition-all hover:bg-white/[0.06] hover:border-white/20">
+                      <div className="group relative z-10 flex h-full flex-col items-center rounded-2xl border border-zinc-200 bg-white p-5 text-center transition-all hover:bg-zinc-50 hover:border-zinc-300 shadow-sm">
                         {/* Glow effect */}
                         <div className="pointer-events-none absolute inset-0 opacity-0 transition group-hover:opacity-100">
                           <div className="absolute -top-12 left-1/2 h-24 w-48 -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl opacity-50" />
                         </div>
 
                         {/* Icon */}
-                        <div className="mb-3 grid h-10 w-10 place-items-center rounded-full bg-white/5 border border-white/10 text-zinc-100">
+                        <div className="mb-3 grid h-10 w-10 place-items-center rounded-full bg-zinc-100 border border-zinc-200 text-zinc-900">
                           {item.icon}
                         </div>
 
                         {/* Text */}
-                        <div className="mb-1 text-[11px] font-bold text-blue-400">
+                        <div className="mb-1 text-[11px] font-bold text-blue-600">
                           STEP {item.step}
                         </div>
-                        <h3 className="text-sm font-semibold text-zinc-100">
+                        <h3 className="text-sm font-semibold text-zinc-900">
                           {item.title}
                         </h3>
-                        <p className="mt-2 text-xs leading-5 text-zinc-400 break-keep">
+                        <p className="mt-2 text-xs leading-5 text-zinc-600 break-keep">
                           {item.desc}
                         </p>
                       </div>
@@ -581,7 +595,7 @@ export default function Page() {
                 label: "리스크(변동성) 최대 유형",
                 value: "투자 유보 53.80%",
                 desc: <>유형 내 성과 분산이 가장 큼. (최대 +261.39% / 최소 -56.5%)<br />이벤트 의존적 리스크 신호로 해석.</>,
-                icon: <BarChart3 className="h-5 w-5 text-zinc-200" />,
+                icon: <BarChart3 className="h-5 w-5 text-zinc-700" />,
                 },
             ].map((item, idx) => (
                 <motion.div
@@ -592,19 +606,19 @@ export default function Page() {
                 variants={fadeUp}
                 custom={idx}
                 >
-                <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:bg-white/[0.06]">
+                <div className="flex h-full flex-col rounded-2xl border border-zinc-200 bg-white p-5 transition hover:bg-zinc-50 shadow-sm">
                     <div className="mb-3 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-zinc-600 uppercase tracking-wider">
                         {item.label}
                     </span>
                     {item.icon}
                     </div>
 
-                    <div className="mb-2 text-2xl font-bold text-zinc-100 break-keep">
+                    <div className="mb-2 text-2xl font-bold text-zinc-900 break-keep">
                     {item.value}
                     </div>
 
-                    <p className="text-xs leading-5 text-zinc-400 break-keep">
+                    <p className="text-xs leading-5 text-zinc-600 break-keep">
                     {item.desc}
                     </p>
                 </div>
@@ -680,7 +694,7 @@ export default function Page() {
             whileInView="show"
             viewport={{ once: true, amount: 0.35 }}
             variants={fadeUp}
-            className="overflow-hidden rounded-2xl border border-white/10 bg-black shadow-xl"
+            className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-xl"
           >
             <video
               src="/demo.mp4"
@@ -692,7 +706,7 @@ export default function Page() {
             />
           </motion.div>
 
-          <p className="mt-3 text-xs text-zinc-400">
+          <p className="mt-3 text-xs text-zinc-600">
           </p>
         </Container>
       </section>
@@ -700,11 +714,46 @@ export default function Page() {
       {/* Stack */}
       <section id="stack" className="mt-16 md:mt-24">
         <Container>
-          <div className="mt-10 border-t border-white/10 pt-6 text-xs text-zinc-400">
+          <div className="mt-10 border-t border-zinc-200 pt-6 text-xs text-zinc-600">
             DeepVi — 설명 가능한 재무 해석 중심 기업 분석<br /> © 2025 All Rights Reserved
           </div>
         </Container>
       </section>
+
+      {/* Floating Navigation */}
+      <nav className="fixed bottom-8 left-1/2 z-30 hidden -translate-x-1/2 lg:block">
+        <div className="flex items-center gap-1 rounded-full border border-zinc-200 bg-white/90 px-2 py-2 shadow-lg backdrop-blur">
+          {[
+            { id: "intro", label: "소개" },
+            { id: "problem", label: "배경" },
+            { id: "process", label: "프로세스" },
+            { id: "achievements", label: "성과" },
+            { id: "features", label: "기능" },
+            { id: "demo", label: "데모" },
+          ].map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                const element = document.getElementById(item.id);
+                if (element) {
+                  const headerOffset = 80;
+                  const elementPosition = element.getBoundingClientRect().top;
+                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                  });
+                }
+              }}
+              className="rounded-full px-4 py-2 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-900"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </nav>
     </main>
   );
 }

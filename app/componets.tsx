@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
   BarChart,
@@ -42,6 +45,12 @@ const typePerf = [
 ];
 export
 function TypeReturnBar() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -82,24 +91,28 @@ function TypeReturnBar() {
       </div>
 
       <div className="h-[260px]">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={typePerf} layout="vertical" margin={{ left: 12, right: 12 }}>
-            <CartesianGrid strokeDasharray="3 3" opacity={0.12} />
-            <YAxis
-              dataKey="type"
-              type="category"
-              width={90}
-              tick={{ fill: "#a1a1aa", fontSize: 12 }}
-            />
-            <XAxis
-              type="number"
-              tick={{ fill: "#a1a1aa", fontSize: 12 }}
-              domain={[0, "dataMax + 5"]}
-            />
-            <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(59,130,246,0.1)" }} />
-            <Bar dataKey="avg" radius={[8, 8, 8, 8]} fill="#3b82f6" />
-          </BarChart>
-        </ResponsiveContainer>
+        {isClient ? (
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={typePerf} layout="vertical" margin={{ left: 12, right: 12 }}>
+              <CartesianGrid strokeDasharray="3 3" opacity={0.12} />
+              <YAxis
+                dataKey="type"
+                type="category"
+                width={90}
+                tick={{ fill: "#a1a1aa", fontSize: 12 }}
+              />
+              <XAxis
+                type="number"
+                tick={{ fill: "#a1a1aa", fontSize: 12 }}
+                domain={[0, "dataMax + 5"]}
+              />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(59,130,246,0.1)" }} />
+              <Bar dataKey="avg" radius={[8, 8, 8, 8]} fill="#3b82f6" />
+            </BarChart>
+          </ResponsiveContainer>
+        ) : (
+          <div className="h-full w-full" />
+        )}
       </div>
 
       <div className="mt-3 text-xs text-zinc-500">
