@@ -2,11 +2,12 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
-const siteUrl = `https://navv6.github.io${basePath}`
+const siteOrigin = "https://navv6.github.io"
+const siteUrl = `${siteOrigin}${basePath}/`
 
 export const metadata: Metadata = {
   title: "백경우 | Portfolio",
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteOrigin),
   icons: {
     icon: `${basePath}/favicon.svg`,
   },
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
       },
     ],
     type: "website",
+    locale: "ko_KR",
   },
   twitter: {
     card: "summary_large_image",
