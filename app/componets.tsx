@@ -78,13 +78,13 @@ function TypeReturnBar() {
 
   return (
     <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-      <div className="mb-3 flex items-end justify-between">
-        <div>
-          <div className="text-sm font-semibold text-zinc-100">
+      <div className="mb-3 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <div className="text-sm font-semibold text-black-100">
             유형별 평균 수익률 비교
           </div>
-          <div className="mt-1 text-xs text-zinc-500">
-            2025.07.02 → 2025.12.30 (단위: %)
+          <div className="text-xs text-zinc-500">
+            완성일(07.02) vs 폐장일(12.30) (단위: %)
           </div>
         </div>
         <div className="text-xs text-zinc-500">n = 종목 수</div>

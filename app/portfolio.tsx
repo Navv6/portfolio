@@ -12,6 +12,8 @@ import {
   LayoutDashboard,
   ArrowRight,
   ArrowDown,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 import React from "react";
@@ -37,11 +39,13 @@ function SectionTitle({
   eyebrow,
   title,
   desc,
+  caption,
   wide = false,
 }: {
   eyebrow: string;
   title: string;
-  desc?: string;
+  desc?: React.ReactNode;
+  caption?: string;
   wide?: boolean;
 }) {
   return (
@@ -56,6 +60,11 @@ function SectionTitle({
             ${wide ? "max-w-4xl" : "max-w-2xl"}`}
         >
           {desc}
+        </p>
+      ) : null}
+      {caption ? (
+        <p className="mt-2 text-xs text-zinc-500">
+          {caption}
         </p>
       ) : null}
     </div>
@@ -269,7 +278,7 @@ function FeatureCarousel({
                       aria-label="Previous"
                       title="Previous"
                     >
-                      <span className="text-xl leading-none">‹</span>
+                      <ChevronLeft className="h-5 w-5" />
                     </button>
                   </div>
 
@@ -282,7 +291,7 @@ function FeatureCarousel({
                       aria-label="Next"
                       title="Next"
                     >
-                      <span className="text-xl leading-none">›</span>
+                      <ChevronRight className="h-5 w-5" />
                     </button>
                   </div>
 
@@ -317,19 +326,19 @@ export default function Page() {
   const featureCards = [
     {
       title: "AI 재무 해석 코멘트",
-      desc: "재무제표(PL/BS/CF)와 핵심 지표를 근거로 성장·수익·안정성 구조를 자연어로 해석합니다.",
+      desc: "최근 2년간 재무제표와 경제 지표,뉴스,주가 등을 근거로 기업에 대한 분석 코멘트를 제공합니다.",
       imgSrc: withBasePath("/reco.png"),
       icon: <BarChart3 className="h-4 w-4 text-zinc-900" />,
     },
     {
       title: "5가지 기업 유형 분류",
-      desc: "워렌 버핏과 피터 린치의 투자 철학을 기반으로 기업의 재무지표를 점수화하여 5가지 유형으로 분류.",
+      desc: "워렌 버핏과 피터 린치의 투자 철학을 기반으로 기업의 재무지표를 점수화하여 5가지 유형으로 분류하였습니다.",
       component: <TypeAnalysisVisual />,
       icon: <Layers3 className="h-4 w-4 text-zinc-900" />,
     },
     {
       title: "재무 건전성 평가",
-      desc: "성장성·수익성·안정성·현금흐름을 종합해 기업 상태를 구조적으로 평가합니다.",
+      desc: "복잡한 재무제표를 수익성·현금·안정성의 핵심 구조로 재구성해, 전년 대비 기업의 재무 상태를 한눈에 파악할 수 있습니다.",
       imgSrc: withBasePath("/finacial.png"),
       icon: <ShieldCheck className="h-4 w-4 text-zinc-900" />,
     },
@@ -440,8 +449,8 @@ export default function Page() {
         <Container>
           <SectionTitle
             eyebrow="Background"
-            title="왜 DeepVi가 필요한가"
-            desc="정보는 많지만 해석은 어렵고, 기존 서비스는 “왜 좋은 기업인지”를 충분히 설명하지 못하는 경우가 많습니다."
+            title="왜 DeepVi가 필요한가?"
+            desc="정보는 넘쳐나지만, 기업의 성격과 위험을 한눈에 설명해주는 해석은 부족합니다."
             wide
           />
 
@@ -458,9 +467,10 @@ export default function Page() {
                 icon={<div className="h-2 w-2 rounded-full bg-red-400" />}
               >
                 <ul className="list-disc space-y-2 pl-5">
-                  <li>재무제표는 중요하지만, 해석은 전문가 영역에 의존</li>
-                  <li>수치·지표는 많지만 “그래서 괜찮은 기업인가?”가 비어 있음</li>
-                  <li>결국 '감'이나 '소문'에 의존하는 투자</li>
+                  <li>재무제표는 중요하지만, 일반 투자자가 해석하기엔 진입 장벽이 높음</li>
+                  <li>수치·지표는 많지만 기업의 성격·리스크를 직관적으로 설명하지 못함</li>
+                  <li>뉴스·지표 데이터는 맥락 없는 나열에 그치는 경우가 많음</li>
+                  <li>그 결과, 투자 판단이 감·소문·이슈 중심으로 흐르기 쉬움</li>
                 </ul>
               </Card>
             </motion.div>
@@ -478,7 +488,8 @@ export default function Page() {
               >
                 <ul className="list-disc space-y-2 pl-5">
                   <li>재무 데이터를 기반으로 기업 성격/리스크 구조를 설명</li>
-                  <li>뉴스 감정 + 주가 흐름을 보조 맥락으로 연결</li>
+                  <li>5가지 기업 유형 분류로 기업의 성격을 한눈에 파악</li>
+                  <li>뉴스 감정 분석을 통한 직관적인 기업 이슈 파악</li>
                   <li>투자자가 “이해하고 판단”할 수 있는 코멘트 제공</li>
                 </ul>
               </Card>
@@ -492,7 +503,14 @@ export default function Page() {
             <SectionTitle
             eyebrow="Process"
             title="DeepVi 분석 프로세스"
-            desc="데이터 수집부터 AI 모델링, 최종 시각화까지의 엔드투엔드 파이프라인"
+            desc={
+              <>
+                데이터 수집부터 AI 모델링까지의 엔드투엔드 파이프라인을 구축했습니다.
+                <span className="ml-2 text-xs font-normal text-zinc-500">
+                  (KOSPI/KOSDAQ 444개 기업 대상)
+                </span>
+              </>
+            }
             wide
             />
 
@@ -583,8 +601,8 @@ export default function Page() {
         <Container>
             <SectionTitle
             eyebrow="Backtest / Post-evaluation"
-            title="DeepVi 유형 분류의 시장 성과"
-            desc="재무 기반 기업 유형 분류가 실제 시장(2025.07.02 → 2025.12.30)에서 어떤 성과 구조를 보였는지 사후 검증했습니다."
+            title="DeepVi 유형 분류의 시장 유효성"
+            desc="재무 기반 유형 분류가 단순 분류를 넘어, 시장 성과와 위험 구조를 설명하는 유효한 정보 구조임을 검증했습니다."
             wide
             />
 
@@ -654,15 +672,15 @@ export default function Page() {
                     </li>
                     <li>
                     <b>성장 잠재주</b>는 평균 수익률이 가장 높았고, <b>투자 유보</b>는 성과 분산이
-                    가장 커 <b>리스크 신호</b>로 해석할 수 있었습니다.
+                    가장 커 <b>리스크 신호</b>로 해석됩니다.
                     </li>
                     <li>
                     투자 유보 유형은 바이오/제약 비중이 높아 <b>신약·임상 이벤트</b>에 의해
                     성과가 크게 갈리는 구조가 관찰되었습니다.
                     </li>
                     <li>
-                    다음 단계로는 뉴스/이슈를 월 단위로 누적 반영하고, 섹터 중립 수익률로
-                    “유형 자체 성과”를 분리해 설명력을 강화할 계획입니다.
+                    이러한 유형 간 성과 차이는 단순 우연이 아닌, 섹터 구성과 재무적 특성 차이에 기반한
+                    구조적 결과임을 시사했습니다.
                     </li>
                 </ul>
                 </Card>
@@ -691,8 +709,8 @@ export default function Page() {
         <Container>
           <SectionTitle
             eyebrow="Demo"
-            title="서비스 데모 영상"
-            desc="실제 화면 흐름으로 DeepVi가 어떻게 작동하는지 확인하세요."
+            title="AI 답변 생성 데모"
+            desc="기업 재무 질문에 대해 LLM이 실시간으로 답변을 생성하는 과정을 담았습니다."
           />
 
           <motion.div
@@ -703,7 +721,7 @@ export default function Page() {
             className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-xl"
           >
             <video
-              src={withBasePath("/demo.mp4")}
+              src={withBasePath("/demo3.mp4")}
               muted
               autoPlay
               loop
