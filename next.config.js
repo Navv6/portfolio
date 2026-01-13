@@ -3,6 +3,7 @@ const isDev = process.env.NODE_ENV === 'development'
 
 const nextConfig = {
   output: 'export',
+  trailingSlash: true,
   basePath: isDev ? '' : '/portfolio',
   assetPrefix: isDev ? '' : '/portfolio/',
   env: {
