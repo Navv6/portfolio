@@ -32,12 +32,12 @@ export default function Home() {
               <Link href="/projects/deepvi" className="text-sm text-zinc-600 transition hover:text-zinc-900">
                 DeepVi
               </Link>
-              <span className="text-sm text-zinc-400 cursor-not-allowed">
+              <Link href="/projects/pricelens" className="text-sm text-zinc-600 transition hover:text-zinc-900">
                 PriceLens
-              </span>
-              <span className="text-sm text-zinc-400 cursor-not-allowed">
+              </Link>
+              <Link href="/projects/tableau" className="text-sm text-zinc-600 transition hover:text-zinc-900">
                 Tableau
-              </span>
+              </Link>
             </nav>
           </div>
         </div>

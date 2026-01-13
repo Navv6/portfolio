@@ -26,6 +26,9 @@ const fadeUp = {
   }),
 };
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const withBasePath = (path: string) => `${basePath}${path}`;
+
 function Container({ children }: { children: React.ReactNode }) {
   return <div className="mx-auto w-full max-w-5xl px-5">{children}</div>;
 }
@@ -315,7 +318,7 @@ export default function Page() {
     {
       title: "AI 재무 해석 코멘트",
       desc: "재무제표(PL/BS/CF)와 핵심 지표를 근거로 성장·수익·안정성 구조를 자연어로 해석합니다.",
-      imgSrc: "/reco.png",
+      imgSrc: withBasePath("/reco.png"),
       icon: <BarChart3 className="h-4 w-4 text-zinc-900" />,
     },
     {
@@ -327,25 +330,25 @@ export default function Page() {
     {
       title: "재무 건전성 평가",
       desc: "성장성·수익성·안정성·현금흐름을 종합해 기업 상태를 구조적으로 평가합니다.",
-      imgSrc: "/finacial.png",
+      imgSrc: withBasePath("/finacial.png"),
       icon: <ShieldCheck className="h-4 w-4 text-zinc-900" />,
     },
     {
       title: "뉴스 감정 분석 - 워드 클라우드",
       desc: "뉴스의 맥락을 분석해 기업 이슈를 키워드로 시각화합니다.",
-      imgSrc: "/cloud2.png",
+      imgSrc: withBasePath("/cloud2.png"),
       icon: <MessageCircleQuestion className="h-4 w-4 text-zinc-900" />,
     },
     {
       title: "뉴스 감정 분석 - 감정 분류",
       desc: "뉴스 내용을 감정 단위로 분석해 긍정/부정/중립을 분류합니다.",
-      imgSrc: "/senti.png",
+      imgSrc: withBasePath("/senti.png"),
       icon: <MessageCircleQuestion className="h-4 w-4 text-zinc-900" />,
     },
     {
       title: "Q&A 해석 시스템",
       desc: "질문 → 근거 데이터 참조 → 설명형 답변으로 '왜'에 답합니다.",
-      imgSrc: "/QnA.png",
+      imgSrc: withBasePath("/QnA.png"),
       icon: <MessageCircleQuestion className="h-4 w-4 text-zinc-900" />,
     },
   ];
@@ -364,27 +367,30 @@ export default function Page() {
         <Container>
           <div className="flex h-14 items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="grid h-8 w-8 place-items-center rounded-xl bg-zinc-100 text-sm font-bold text-zinc-900">
-                DV
-              </div>
               <div className="text-sm font-semibold text-zinc-900">DeepVi</div>
               <div className="ml-2 hidden text-xs text-zinc-600 md:block">
                 LLM 기반 기업 분석 서비스
               </div>
             </div>
             <nav className="flex items-center gap-6">
-              <a href="/" className="text-sm text-zinc-600 transition hover:text-zinc-900">
+              <a href={withBasePath("/")} className="text-sm text-zinc-600 transition hover:text-zinc-900">
                 홈
               </a>
-              <a href="/projects/deepvi" className="text-sm text-zinc-900 font-semibold transition hover:text-zinc-700">
+              <a href={withBasePath("/projects/deepvi")} className="text-sm text-zinc-900 font-semibold transition hover:text-zinc-700">
                 DeepVi
               </a>
-              <span className="text-sm text-zinc-400 cursor-not-allowed">
+              <a
+                href={withBasePath("/projects/pricelens")}
+                className="text-sm text-zinc-600 transition hover:text-zinc-900"
+              >
                 PriceLens
-              </span>
-              <span className="text-sm text-zinc-400 cursor-not-allowed">
+              </a>
+              <a
+                href={withBasePath("/projects/tableau")}
+                className="text-sm text-zinc-600 transition hover:text-zinc-900"
+              >
                 Tableau
-              </span>
+              </a>
             </nav>
           </div>
         </Container>
@@ -697,7 +703,7 @@ export default function Page() {
             className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-xl"
           >
             <video
-              src="/demo.mp4"
+              src={withBasePath("/demo.mp4")}
               muted
               autoPlay
               loop
