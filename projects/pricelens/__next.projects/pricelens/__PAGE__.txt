@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[22016,["/portfolio/_next/static/chunks/796e69ae18b2784c.js"],""]
+3:I[97367,["/portfolio/_next/static/chunks/ff1a16fafef87110.js","/portfolio/_next/static/chunks/6153d1a363729c2c.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"buildId":"S9NF5-ruQcr9H-3TOwXXX","rsc":["$","$1","c",{"children":[["$","main",null,{"className":"min-h-screen bg-gray-50 text-zinc-900","children":["$","div",null,{"className":"mx-auto max-w-3xl px-5 py-16","children":[["$","$L2",null,{"href":"/","className":"text-sm text-zinc-500 hover:text-zinc-800","children":"← 홈으로"}],["$","h1",null,{"className":"mt-6 text-3xl font-semibold","children":"PriceLens"}],["$","p",null,{"className":"mt-3 text-sm text-zinc-600","children":"프로젝트 상세 페이지를 준비 중입니다."}]]}]}],[["$","script","script-0",{"src":"/portfolio/_next/static/chunks/796e69ae18b2784c.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+5:null
