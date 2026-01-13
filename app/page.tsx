@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Mail, Github, Linkedin, FileText, Briefcase, Code2, ArrowRight, Phone } from 'lucide-react'
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
+const withBasePath = (path: string) => `${basePath}${path}`
+
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
@@ -67,7 +70,7 @@ export default function Home() {
               <div className="hidden md:block flex-shrink-0">
                 <div className="w-48 h-48 rounded-2xl bg-gradient-to-br from-blue-100 to-violet-100 border-2 border-zinc-200 shadow-md flex items-center justify-center overflow-hidden">
                   <img 
-                    src="/image.png" 
+                    src={withBasePath("/image.png")} 
                     alt="프로필 사진" 
                     className="w-full h-full object-cover"
                   />
