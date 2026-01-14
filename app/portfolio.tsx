@@ -593,6 +593,13 @@ export default function Page() {
                 ))}
               </div>
             </div>
+
+            <div className="mt-6">
+              <div className="rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-700 shadow-sm">
+                <span className="font-semibold text-zinc-900">프로젝트 내 역할:</span>{" "}
+                뉴스·재무건전성 평가를 제외하고, 기획→수집→백엔드/DB→LLM→대시보드→배포까지 전 과정을 주도했습니다.
+              </div>
+            </div>
         </Container>
         </section>
         
@@ -709,8 +716,8 @@ export default function Page() {
         <Container>
           <SectionTitle
             eyebrow="Demo"
-            title="AI 답변 생성 데모"
-            desc="기업 재무 질문에 대해 LLM이 실시간으로 답변을 생성하는 과정을 담았습니다."
+            title="AI 답변 생성"
+            desc="기업에 대해 LLM이 실시간으로 답변을 생성하는 과정을 담았습니다."
           />
 
           <motion.div
