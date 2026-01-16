@@ -62,7 +62,7 @@ export default function Home() {
               <div className="flex-1 space-y-4">
                 <p className="text-base text-zinc-700 leading-relaxed">회계와 세무를 전공하며 전문 용어와 복잡한 정보가 만드는 <span className="font-semibold text-zinc-900">'이해의 장벽'</span>을 체감했습니다. 복잡한 정보는 누구나 쉽게 접근하고 활용할 수 있어야 한다는 믿음으로, 정보를 구조화하고 핵심을 전달하는 데이터 분석의 길을 걷기 시작했습니다.</p>
                 
-                <p className="text-base text-zinc-700 leading-relaxed">분석은 인사이트를 도출할 수 있지만, 즉시 활용할 수 있는 형태로 재가공하는 과정은 늘 추가적인 과제로 남았습니다. 이러한 <span className="font-semibold text-zinc-900">분석과 활용 사이의 공백을 메우기 위해 AI를 접목</span>했고, 다양한 AI를 경험하며 최신 트렌드를 학습해 왔습니다.</p>
+                <p className="text-base text-zinc-700 leading-relaxed">분석은 인사이트를 도출할 수 있지만, 즉시 활용할 수 있는 형태로 재가공하는 과정은 추가적인 과제로 남았습니다. 이러한 <span className="font-semibold text-zinc-900">분석과 활용 사이의 공백을 메우기 위해 AI를 접목</span>했고, 다양한 AI를 경험하며 최신 트렌드를 학습해 왔습니다.</p>
                 
                 <p className="text-base text-zinc-700 leading-relaxed">이제는 단순히 툴을 활용하는 것을 넘어, <span className="font-semibold text-zinc-900">문제를 근본적으로 해결하기 위한 AI 서비스를 직접 설계하고 구현</span>하는 데 집중하고 있습니다.</p>
               </div>
@@ -129,15 +129,15 @@ export default function Home() {
             <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h3 className="text-lg font-semibold text-zinc-900">마크클라우드 (인턴)</h3>
+                  <h3 className="text-lg font-semibold text-zinc-900">마크클라우드 (데이터/AI 인턴)</h3>
                   <p className="text-sm text-zinc-600 mt-1">2025.11 ~ 2025.12</p>
                 </div>
                 <Briefcase className="h-5 w-5 text-zinc-600" />
               </div>
               <ul className="space-y-2 text-sm text-zinc-700">
-                <li>• LLM API 호출 부하로 인한 서비스 불안정 문제를 분석하고, 로컬 LLM 전환을 포함한 개선 방안을 검토 및 테스트 진행</li>
-                <li>• STT 모델의 구조적 특성을 비교하여 사업 요구 사항에 적합한 모델로 교체, 테스트 및 성능 지표 산출을 통해 성능 개선</li>
-                <li>• 보고서 템플릿과 생성 엔진을 직접 설계하여, CSV 데이터를 기반으로 일관된 형식의 PDF 보고서를 자동 생성하는 프로세스 구축</li>
+                <li>• 외부 LLM API 호출 실패 원인 분석 및 의존성에 따른 처리 한계를 식별하여 로컬 LLM 전환 타당성 검토를 위한 모델 테스트</li>
+                <li>• 기존 STT 모델의 특성 분석을 통해 KPI 미달성 원인을 파악하고, NeMo 기반 STT 모델 교체 및 의미 정확도 평가를 추가·보완하여 KPI 달성</li>
+                <li>• 자동 보고서 생성을 위한 출력 구조 템플릿과 CSV 기반 데이터 처리·렌더링·LLM 코멘트 생성을 수행하는 프로세스를 설계·구현</li>
               </ul>
             </div>
 
@@ -151,7 +151,7 @@ export default function Home() {
                 <Briefcase className="h-5 w-5 text-zinc-600" />
               </div>
               <ul className="space-y-2 text-sm text-zinc-700">
-                <li>• Python, SQL 기반 데이터 수집·정제·분석·시각화 전 과정을 경험</li>
+                <li>• Python, SQL 기반 데이터 수집·정제·분석·시각화 전 과정을 학습</li>
                 <li>• 데이터를 통해 가설을 검증하며 문제의 근본 원인을 파악하는 분석 프로젝트 수행</li>
                 <li>• 머신러닝 모델링을 통한 분석 및 액션 가능한 인사이트 제시</li>
               </ul>
@@ -169,8 +169,8 @@ export default function Home() {
               <ul className="space-y-2 text-sm text-zinc-700">
                 <li>• 다중 센서 데이터 환경에서 실시간 정보를 해석하고 판단 및 시스템 운용</li>
                 <li>• 탄착군 영상 분석, 오차 패턴 규명 및 개선안 도출</li>
-                <li>• 노이즈와 간섭 환경에서 파라미터 튜닝으로 출력 품질과 신뢰도를 개선하는 최적화 경험</li>
-                <li>• 시스템 장애 발생 시 오류 코드를 기반으로 원인을 추적하고, 설정 및 복구 조치를 통한 유지 보수 경험</li>
+                <li>• 파라미터 튜닝으로 노이즈와 간섭 환경에서 출력 품질과 신뢰도를 개선</li>
+                <li>• 시스템 장애 발생 시 오류 코드를 기반으로 원인을 추적하고, 설정 및 복구 조치를 통한 유지 보수</li>
               </ul>
             </div>
           </div>
@@ -323,7 +323,7 @@ export default function Home() {
         <div className="flex items-center gap-1 rounded-full border border-zinc-200 bg-white/90 px-2 py-2 shadow-lg backdrop-blur">
           {[
             { id: "intro", label: "소개" },
-            { id: "experience", label: "경력" },
+            { id: "experience", label:"활동" },
             { id: "skills", label: "기술" },
             { id: "projects", label: "프로젝트" },
           ].map((item) => (

@@ -1,5 +1,5 @@
-import DeepViPortfolio from '../../portfolio'
+﻿import DeepViPortfolioPage from './portfolio'
 
 export default function DeepViPage() {
-  return <DeepViPortfolio />
+  return <DeepViPortfolioPage />
 }
