@@ -30,7 +30,7 @@ export default function Home() {
             </Link>
             <nav className="flex items-center gap-6">
               <Link href="/" className="text-sm text-zinc-900 font-semibold transition hover:text-zinc-700">
-                홈
+                Home
               </Link>
               <Link href="/projects/deepvi" className="text-sm text-zinc-600 transition hover:text-zinc-900">
                 DeepVi
