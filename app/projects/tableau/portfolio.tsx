@@ -186,7 +186,7 @@ export default function TableauPortfolioPage() {
         <Container>
           <SectionTitle
             eyebrow="Guidebook"
-            title="캐러셀: 가이드북 대시보드 결과물"
+            title="TEST"
             desc="최종 가이드북 대시보드 화면을 큰 이미지로 보여주는 영역입니다."
             wide
           />

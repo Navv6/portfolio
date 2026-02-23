@@ -91,7 +91,6 @@ function Card({
   );
 }
 
-
 // ✅ 5가지 유형 분류 비주얼 컴포넌트 (HTML 디자인 이식)
 function TypeAnalysisVisual() {
   return (
@@ -418,17 +417,17 @@ export default function DeepViPortfolioPage() {
 
             <p className="mt-5 max-w-4xl text-sm leading-6 text-zinc-700">
             DeepVi는 재무제표와 시장 맥락을 해석해,<br />
-            투자자가 스스로 이해하고 판단할 수 있도록 돕는 LLM 기반 기업 분석 서비스입니다.
+            기업을 ‘투자 판단 이전 단계에서 이해’하도록 돕는 LLM 기반 기업 분석 서비스입니다.
             </p>
             
             {/* Quick chips */}
-            <div className="mt-10 flex flex-wrap gap-2 text-xs text-zinc-700">
+            <div className="mt-5 flex flex-wrap gap-2 text-xs text-zinc-700">
               {[
-                "재무 해석 코멘트",
+                "기간: 25.05.28 - 25.07.02",
                 "5가지 기업 유형",
                 "재무 건전성 평가",
                 "뉴스 감정 분석",
-                "Q&A 기반 설명"
+                "RAG 기반 Q&A",
               ].map((t) => (
                 <span
                   key={t}
