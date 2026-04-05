@@ -283,17 +283,34 @@ export default function Home() {
             </Link>
 
             {/* Project 2: PriceLens */}
-            <div className="rounded-2xl border border-zinc-200 bg-white p-8 opacity-50 shadow-sm">
+            <Link
+              href="/projects/pricelens"
+              className="group block rounded-2xl border border-zinc-200 bg-white p-8 hover:bg-zinc-50 transition shadow-sm"
+            >
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h3 className="text-xl font-semibold text-zinc-900 mb-2">PriceLens</h3>
-                  <p className="text-sm text-zinc-600">Airbnb 가격 요인 분석</p>
+                  <p className="text-sm text-zinc-600">Airbnb 가격 결정 요인 해석</p>
                 </div>
+                <ArrowRight className="h-5 w-5 text-zinc-600 group-hover:text-zinc-900 group-hover:translate-x-1 transition" />
               </div>
-              <p className="text-sm text-zinc-700 leading-relaxed">
-                준비 중입니다...
+
+              <p className="text-sm text-zinc-700 leading-relaxed mb-4">
+                NYC Airbnb 53,659개 숙소 데이터를 기반으로 가격에 영향을 미치는 요인을 정량적으로 분석했습니다.
+                4가지 트리 모델 비교, Optuna 튜닝, SHAP 해석을 통해 "왜 이 가격인가"를 설명할 수 있는 구조를 만들었습니다.
               </p>
-            </div>
+
+              <div className="flex flex-wrap gap-2">
+                {['Python', 'XGBoost', 'LightGBM', 'Optuna', 'SHAP', 'Statsmodels'].map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </Link>
 
             {/* Project 3: Tableau */}
             <div className="rounded-2xl border border-zinc-200 bg-white p-8 opacity-50 shadow-sm">

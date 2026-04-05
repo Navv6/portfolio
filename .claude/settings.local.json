@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(cp \"C:\\\\Users\\\\bwme3\\\\Desktop\\\\스파르타\\\\심화프로젝트\\\\가격구간별 숙소비율.png\" \"C:\\\\Users\\\\bwme3\\\\Desktop\\\\포트폴리오\\\\public\\\\pricelens\\\\price-distribution.png\")",
+      "Bash(cp \"C:\\\\Users\\\\bwme3\\\\Desktop\\\\스파르타\\\\심화프로젝트\\\\지역별가격비교.png\" \"C:\\\\Users\\\\bwme3\\\\Desktop\\\\포트폴리오\\\\public\\\\pricelens\\\\region-price.png\")",
+      "Bash(cp \"C:\\\\Users\\\\bwme3\\\\Desktop\\\\스파르타\\\\심화프로젝트\\\\지역별숙소유형.png\" \"C:\\\\Users\\\\bwme3\\\\Desktop\\\\포트폴리오\\\\public\\\\pricelens\\\\region-type.png\")",
+      "Bash(cp \"C:\\\\Users\\\\bwme3\\\\Desktop\\\\스파르타\\\\심화프로젝트\\\\모델튜닝전후비교 RMSE.png\" \"C:\\\\Users\\\\bwme3\\\\Desktop\\\\포트폴리오\\\\public\\\\pricelens\\\\model-rmse.png\")",
+      "Bash(cp \"C:\\\\Users\\\\bwme3\\\\Desktop\\\\스파르타\\\\심화프로젝트\\\\새 폴더\\\\shap비교3333333.png\" \"C:\\\\Users\\\\bwme3\\\\Desktop\\\\포트폴리오\\\\public\\\\pricelens\\\\shap.png\")",
+      "WebFetch(domain:canva.link)",
+      "WebFetch(domain:www.canva.com)",
+      "Read(//c/Users/bwme3/Desktop/태블로/_inspect_twbx/**)",
+      "Read(//mnt/c/Users/bwme3/Desktop/태블로/**)",
+      "Bash(python3 -c \":*)",
+      "Bash(LC_ALL=C grep -Pn x1d C:Usersbwme3Desktop포트폴리오appprojectstableauportfolio.tsx)"
+    ]
+  }
+}
