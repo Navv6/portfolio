@@ -68,11 +68,11 @@ export default function Home() {
               </div>
               
               <div className="hidden md:block flex-shrink-0">
-                <div className="w-48 h-48 rounded-2xl bg-gradient-to-br from-blue-100 to-violet-100 border-2 border-zinc-200 shadow-md flex items-center justify-center overflow-hidden">
+                <div className="w-48 h-48 rounded-2xl bg-white border-2 border-zinc-200 shadow-md flex items-center justify-center overflow-hidden">
                   <img 
                     src={withBasePath("/profile.jpg")} 
                     alt="프로필 사진" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain object-top"
                   />
                 </div>
               </div>
