@@ -190,7 +190,7 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-zinc-900">LLM / AI</h3>
               </div>
               <div className="flex flex-wrap gap-2">
-                {['OpenAI', 'Oven', 'LLama', 'RAG', 'LangChain'].map((skill) => (
+                {['OpenAI', 'Pinecone', 'Llama', 'RAG', 'LangChain', 'Claude'].map((skill) => (
                   <span key={skill} className="px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-xs text-purple-700">
                     {skill}
                   </span>
@@ -267,7 +267,7 @@ export default function Home() {
               
               <p className="text-sm text-zinc-700 leading-relaxed mb-4">
                 재무제표와 시장 맥락을 AI로 해석해, 투자자가 스스로 이해하고 판단할 수 있도록 돕는 서비스입니다.
-                KOSPI/KOSDAQ 447개 기업을 대상으로 데이터 수집부터 AI 분석, 대시보드 구축까지 전체 프로세스를 설계했습니다.
+                KOSPI/KOSDAQ 444개 기업을 대상으로 데이터 수집부터 AI 분석, 대시보드 구축까지 전체 프로세스를 설계했습니다.
               </p>
               
               <div className="flex flex-wrap gap-2">
@@ -297,7 +297,7 @@ export default function Home() {
 
               <p className="text-sm text-zinc-700 leading-relaxed mb-4">
                 NYC Airbnb 53,659개 숙소 데이터를 기반으로 가격에 영향을 미치는 요인을 정량적으로 분석했습니다.
-                4가지 트리 모델 비교, Optuna 튜닝, SHAP 해석을 통해 "왜 이 가격인가"를 설명할 수 있는 구조를 만들었습니다.
+                4가지 트리 모델 비교, Optuna 튜닝, SHAP 해석을 통해 가격 영향 요인을 검증하고 이를 서비스 개선 방안으로 연결했습니다.
               </p>
 
               <div className="flex flex-wrap gap-2">
@@ -313,17 +313,32 @@ export default function Home() {
             </Link>
 
             {/* Project 3: Tableau */}
-            <div className="rounded-2xl border border-zinc-200 bg-white p-8 opacity-50 shadow-sm">
+            <Link
+              href="/projects/tableau"
+              className="group block rounded-2xl border border-zinc-200 bg-white p-8 hover:bg-zinc-50 transition shadow-sm"
+            >
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h3 className="text-xl font-semibold text-zinc-900 mb-2">Tableau</h3>
-                  <p className="text-sm text-zinc-600">LoL 초보자 가이드 시각화</p>
+                  <p className="text-sm text-zinc-600">LoL 챔피언 분석 가이드</p>
                 </div>
+                <ArrowRight className="h-5 w-5 text-zinc-600 group-hover:text-zinc-900 group-hover:translate-x-1 transition" />
               </div>
-              <p className="text-sm text-zinc-700 leading-relaxed">
-                준비 중입니다...
+              <p className="text-sm text-zinc-700 leading-relaxed mb-4">
+                Riot API와 CSV 데이터를 기반으로 챔피언 스탯, 성장 패턴, 라인별 특성을 분석하고,
+                이를 Tableau 인터랙티브 대시보드로 구현한 프로젝트입니다.
               </p>
-            </div>
+              <div className="flex flex-wrap gap-2">
+                {['Tableau', 'Riot API', 'Python', 'CSV Data', 'Data Storytelling'].map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </Link>
           </div>
         </div>
       </section>

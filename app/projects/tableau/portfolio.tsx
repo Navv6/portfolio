@@ -17,7 +17,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const withBasePath = (path: string) => `${basePath}${path}`;
 
 function Container({ children }: { children: React.ReactNode }) {
-  return <div className="mx-auto w-full max-w-6xl px-5">{children}</div>;
+  return <div className="mx-auto w-full max-w-5xl px-5">{children}</div>;
 }
 
 function SectionTitle({
