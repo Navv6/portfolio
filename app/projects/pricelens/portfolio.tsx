@@ -130,7 +130,7 @@ export default function PriceLensPortfolioPage() {
   } | null>(null);
 
   return (
-    <main className="min-h-screen bg-[#f6f4f0] text-slate-900">
+    <main className="min-h-screen bg-[#fff8f0] text-slate-900">
       {/* Background */}
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute left-1/2 top-[-180px] h-[540px] w-[540px] -translate-x-1/2 rounded-full bg-[#ffb347]/30 blur-3xl" />
@@ -140,7 +140,7 @@ export default function PriceLensPortfolioPage() {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-[#f6f4f0]/80 backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/80 backdrop-blur">
         <Container>
           <div className="flex h-14 items-center justify-between">
             <div className="flex items-center gap-2">

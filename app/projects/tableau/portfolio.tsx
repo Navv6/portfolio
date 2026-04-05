@@ -165,13 +165,13 @@ export default function TableauPortfolioPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#f3f6fb] text-slate-900">
+    <main className="min-h-screen bg-[#eef3ff] text-slate-900">
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute left-1/2 top-[-220px] h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-[#7dd3fc]/35 blur-3xl" />
         <div className="absolute right-[-220px] top-[140px] h-[520px] w-[520px] rounded-full bg-[#a5b4fc]/35 blur-3xl" />
       </div>
 
-      <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-[#f3f6fb]/80 backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/80 backdrop-blur">
         <Container>
           <div className="flex h-14 items-center justify-between">
             <div className="flex items-center gap-2">

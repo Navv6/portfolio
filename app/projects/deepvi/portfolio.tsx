@@ -360,7 +360,7 @@ export default function DeepViPortfolioPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gray-50 text-zinc-900">
+    <main className="min-h-screen bg-[#eef0f4] text-zinc-900">
       {/* Background */}
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute left-1/2 top-[-200px] h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-blue-500/20 blur-3xl" />
