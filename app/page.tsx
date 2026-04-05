@@ -358,15 +358,21 @@ export default function Home() {
                 name: "VibeCoder",
                 url: "https://vibecoderlabs.vercel.app/",
                 status: "In Progress",
-                summary: "AI와 함께 아이디어를 빠르게 서비스 형태로 실험하는 프로토타입입니다.",
-                tags: ["AI Workflow", "Prototype", "Product Iteration"],
+                preview: true,
+                video: null,
+                summary: "비개발자도 AI로 직접 만들 수 있게 돕는 워크플로우 커뮤니티 서비스로, AI 뉴스·영상·플레이북·빌드 로그를 한 곳에서 탐색할 수 있도록 구성하고 있습니다.",
+                done: ["홈 피드와 추천 캐러셀 구성", "커뮤니티/플레이북 탐색 구조 구현", "빌드 로그 공유 흐름과 라이브 배포"],
+                next: ["피드백 기반 정보 구조 보완", "커뮤니티 참여 흐름 고도화", "큐레이션 품질과 운영 기능 확장"],
               },
               {
                 name: "DaVinci Note",
                 url: "https://navv6.github.io/Davinci/",
                 status: "In Progress",
-                summary: "생각과 기록을 더 구조적으로 정리하기 위한 노트형 서비스 프로토타입입니다.",
-                tags: ["Note Service", "UX Experiment", "Frontend Build"],
+                preview: false,
+                video: withBasePath("/davinci-demo.mp4"),
+                summary: "아이디어를 기록하는 데서 끝나지 않고, 말과 손동작, 시각적 연결, AI 보조를 통해 생각을 확장하는 노트형 서비스로 발전시키고 있습니다.",
+                done: ["초기 노트 화면과 탐색 흐름 구현", "전체 톤앤매너와 인터랙션 방향 설계", "프로토타입 배포 환경 구성"],
+                next: ["모션캡처 기반 손동작 인식", "STT 기반 음성 입력", "구조를 자유롭게 이동·연결하는 인터랙션", "AI 어시스턴트로 아이디어 확장·검토·보완 추천"],
               },
             ].map((item) => (
               <div key={item.name} className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
@@ -391,32 +397,61 @@ export default function Home() {
                   </a>
                 </div>
 
-                <div className="mt-5 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
-                  <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-2 text-xs text-zinc-500">
-                    <span>{item.url}</span>
-                    <span>Live Preview</span>
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                  <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4">
+                    <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">현재까지 구현</div>
+                    <div className="mt-2 space-y-1.5">
+                      {item.done.map((point) => (
+                        <div key={point} className="text-sm text-zinc-700">• {point}</div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="aspect-[16/9] bg-white">
-                    <iframe
-                      src={item.url}
-                      title={`${item.name} preview`}
-                      className="h-full w-full"
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                    />
+                  <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
+                    <div className="text-xs font-semibold uppercase tracking-wide text-blue-600">개발 예정</div>
+                    <div className="mt-2 space-y-1.5">
+                      {item.next.map((point) => (
+                        <div key={point} className="text-sm text-blue-800">• {point}</div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {item.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                {item.video ? (
+                  <div className="mt-5 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                    <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-2 text-xs text-zinc-500">
+                      <span>{item.name} Demo</span>
+                      <span>Video Preview</span>
+                    </div>
+                    <div className="bg-white">
+                      <video
+                        src={item.video}
+                        className="aspect-[16/9] w-full bg-black"
+                        autoPlay
+                        controls
+                        loop
+                        muted
+                        playsInline
+                        preload="metadata"
+                      />
+                    </div>
+                  </div>
+                ) : item.preview ? (
+                  <div className="mt-5 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                    <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-2 text-xs text-zinc-500">
+                      <span>{item.url}</span>
+                      <span>Live Preview</span>
+                    </div>
+                    <div className="aspect-[16/9] bg-white">
+                      <iframe
+                        src={item.url}
+                        title={`${item.name} preview`}
+                        className="h-full w-full"
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                      />
+                    </div>
+                  </div>
+                ) : null}
               </div>
             ))}
           </div>
