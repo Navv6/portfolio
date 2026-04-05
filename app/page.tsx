@@ -343,6 +343,86 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Building Now */}
+      <section id="building" className="py-16 border-t border-zinc-200">
+        <div className="mx-auto max-w-4xl px-5">
+          <h2 className="text-2xl font-semibold text-zinc-900 mb-3">Building Now</h2>
+          <p className="text-sm leading-6 text-zinc-700 max-w-3xl mb-8">
+            포트폴리오 프로젝트와 별도로, 실제 서비스 제작 과정에 가까운 프로토타입도 병행하고 있습니다.
+            문제 정의부터 화면 설계, 인터랙션 구현, 배포까지 빠르게 반복하며 제품 감각을 다듬고 있습니다.
+          </p>
+
+          <div className="grid gap-6">
+            {[
+              {
+                name: "VibeCoder",
+                url: "https://vibecoderlabs.vercel.app/",
+                status: "In Progress",
+                summary: "AI와 함께 아이디어를 빠르게 서비스 형태로 실험하는 프로토타입입니다.",
+                tags: ["AI Workflow", "Prototype", "Product Iteration"],
+              },
+              {
+                name: "DaVinci Note",
+                url: "https://navv6.github.io/Davinci/",
+                status: "In Progress",
+                summary: "생각과 기록을 더 구조적으로 정리하기 위한 노트형 서비스 프로토타입입니다.",
+                tags: ["Note Service", "UX Experiment", "Frontend Build"],
+              },
+            ].map((item) => (
+              <div key={item.name} className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className="text-xl font-semibold text-zinc-900">{item.name}</h3>
+                      <span className="rounded-full border border-blue-200 bg-blue-50 px-2.5 py-0.5 text-[11px] font-medium text-blue-700">
+                        {item.status}
+                      </span>
+                    </div>
+                    <p className="text-sm leading-6 text-zinc-700 max-w-2xl">{item.summary}</p>
+                  </div>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm text-zinc-800 transition hover:bg-zinc-100"
+                  >
+                    바로가기
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+
+                <div className="mt-5 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                  <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-2 text-xs text-zinc-500">
+                    <span>{item.url}</span>
+                    <span>Live Preview</span>
+                  </div>
+                  <div className="aspect-[16/9] bg-white">
+                    <iframe
+                      src={item.url}
+                      title={`${item.name} preview`}
+                      className="h-full w-full"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-zinc-200 py-8 mt-16">
         <div className="mx-auto max-w-4xl px-5 text-center text-sm text-zinc-600">
@@ -358,6 +438,7 @@ export default function Home() {
             { id: "experience", label:"활동" },
             { id: "skills", label: "기술" },
             { id: "projects", label: "프로젝트" },
+            { id: "building", label: "빌딩중" },
           ].map((item) => (
             <a
               key={item.id}
