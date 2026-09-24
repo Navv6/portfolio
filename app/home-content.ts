@@ -12,7 +12,7 @@ export const featuredProjects = [
   {
     id: "preflight", eyebrow: "Production · Internal Use", title: "Preflight",
     description: "샘플조달·시사출·CT 테스트 업무의 지연과 조달 현황을 한 화면에서 관리하는 Pre-Production R&D 워크스페이스",
-    shows: "Productization", metric: "사내망 전용", metricLabel: "조립 인원 제외 · 실사용",
+    shows: "Productization", metric: "사내망 전용", metricLabel: "실사용",
     href: "/projects/preflight", visible: true,
   },
   {
