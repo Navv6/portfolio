@@ -12,17 +12,33 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 }
 
+function SectionHeading({ title, desc }: { title: string; desc?: string }) {
+  return (
+    <div className="mb-8">
+      <h2 className="text-2xl font-semibold text-zinc-900">{title}</h2>
+      {desc ? <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-700 break-keep">{desc}</p> : null}
+    </div>
+  )
+}
+
+const aiSteps = [
+  { step: "01", title: "타당성부터", desc: "AI와 대화하며 자동화할 수 있는 범위와 위험 요소를 먼저 점검합니다." },
+  { step: "02", title: "문서로 설계", desc: "기획 문서와 작업지시서로 요구사항과 미확정 결정을 분리합니다." },
+  { step: "03", title: "골격 먼저", desc: "큰 단위 구조를 먼저 세우고, 검증이 끝나면 한 기능씩 확장합니다." },
+  { step: "04", title: "실데이터로 검증", desc: "AI가 만든 결과는 실제 데이터 대조와 테스트로 확인한 뒤에만 씁니다." },
+]
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50 text-zinc-900">
       {/* Background */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
+      <div className="pointer-events-none fixed inset-0 -z-10 print:hidden">
         <div className="absolute left-1/2 top-[-200px] h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl" />
         <div className="absolute right-[-160px] top-[160px] h-[420px] w-[420px] rounded-full bg-violet-500/10 blur-3xl" />
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-20 border-b border-zinc-200 bg-white/80 backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-zinc-200 bg-white/80 backdrop-blur print:hidden">
         <div className="mx-auto max-w-5xl px-5">
           <div className="flex h-14 items-center justify-between">
             <Link href="/" className="text-sm font-semibold text-zinc-900 hover:text-zinc-700 transition">
@@ -32,6 +48,9 @@ export default function Home() {
               <Link href="/" className="text-sm text-zinc-900 font-semibold transition hover:text-zinc-700">
                 Home
               </Link>
+              <Link href="/projects/preflight" className="text-sm text-zinc-600 transition hover:text-zinc-900">
+                Preflight
+              </Link>
               <Link href="/projects/deepvi" className="text-sm text-zinc-600 transition hover:text-zinc-900">
                 DeepVi
               </Link>
@@ -40,6 +59,9 @@ export default function Home() {
               </Link>
               <Link href="/projects/tableau" className="text-sm text-zinc-600 transition hover:text-zinc-900">
                 Tableau
+              </Link>
+              <Link href="/lab" className="text-sm text-zinc-600 transition hover:text-zinc-900">
+                끄적임
               </Link>
             </nav>
           </div>
@@ -53,25 +75,28 @@ export default function Home() {
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900 mb-6">
               백경우
             </h1>
-            <p className="text-2xl md:text-3xl text-zinc-700 mb-8">
+            <p className="text-2xl md:text-3xl text-zinc-700 mb-3">
               AI Application Engineer
             </p>
-            
+            <p className="text-base md:text-lg text-zinc-600 mb-8 break-keep">
+              현장의 문제를 AI로 끝까지 풀어, 팀이 매일 쓰는 도구로 만듭니다.
+            </p>
+
             {/* About Me */}
             <div className="flex flex-col md:flex-row gap-8 mb-8 max-w-4xl items-start">
               <div className="flex-1 space-y-4">
                 <p className="text-base text-zinc-700 leading-relaxed">회계와 세무를 전공하며 전문 용어와 복잡한 정보가 만드는 <span className="font-semibold text-zinc-900">'이해의 장벽'</span>을 체감했습니다. 복잡한 정보는 누구나 쉽게 접근하고 활용할 수 있어야 한다는 믿음으로, 정보를 구조화하고 핵심을 전달하는 데이터 분석의 길을 걷기 시작했습니다.</p>
-                
+
                 <p className="text-base text-zinc-700 leading-relaxed">분석은 인사이트를 도출할 수 있지만, 즉시 활용할 수 있는 형태로 재가공하는 과정은 추가적인 과제로 남았습니다. 이러한 <span className="font-semibold text-zinc-900">분석과 활용 사이의 공백을 메우기 위해 AI를 접목</span>했고, 다양한 AI를 경험하며 최신 트렌드를 학습해 왔습니다.</p>
-                
+
                 <p className="text-base text-zinc-700 leading-relaxed">이제는 단순히 툴을 활용하는 것을 넘어, <span className="font-semibold text-zinc-900">문제를 근본적으로 해결하기 위한 AI 서비스를 직접 설계하고 구현</span>하는 데 집중하고 있습니다.</p>
               </div>
-              
+
               <div className="hidden md:block flex-shrink-0">
                 <div className="w-48 h-48 rounded-2xl bg-white border-2 border-zinc-200 shadow-md flex items-center justify-center overflow-hidden">
-                  <img 
-                    src={withBasePath("/profile.jpg")} 
-                    alt="프로필 사진" 
+                  <img
+                    src={withBasePath("/profile.jpg")}
+                    alt="프로필 사진"
                     className="w-full h-full object-contain object-top"
                   />
                 </div>
@@ -80,8 +105,8 @@ export default function Home() {
 
             {/* Contact Links */}
             <div className="flex flex-wrap gap-4">
-              <a 
-                href="https://github.com/Navv6" 
+              <a
+                href="https://github.com/Navv6"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-zinc-200 hover:bg-zinc-50 transition text-sm shadow-sm"
@@ -89,8 +114,8 @@ export default function Home() {
                 <Github className="h-4 w-4" />
                 GitHub
               </a>
-              <a 
-                href="http://www.linkedin.com/in/navv6" 
+              <a
+                href="http://www.linkedin.com/in/navv6"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-zinc-200 hover:bg-zinc-50 transition text-sm shadow-sm"
@@ -98,14 +123,14 @@ export default function Home() {
                 <Linkedin className="h-4 w-4" />
                 LinkedIn
               </a>
-              <a 
-                href="mailto:bwme43@gmail.com" 
+              <a
+                href="mailto:bwme43@gmail.com"
                 className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-zinc-200 hover:bg-zinc-50 transition text-sm shadow-sm"
               >
                 <Mail className="h-4 w-4" />
                 bwme43@gmail.com
               </a>
-              <div 
+              <div
                 className="group flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-zinc-200 hover:bg-zinc-50 transition-all duration-300 cursor-pointer overflow-hidden shadow-sm"
                 style={{ width: 'auto' }}
               >
@@ -119,130 +144,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section id="experience" className="py-16 border-t border-zinc-200">
+      {/* How I Work with AI */}
+      <section id="ai" className="py-16 border-t border-zinc-200">
         <div className="mx-auto max-w-4xl px-5">
-          <h2 className="text-2xl font-semibold text-zinc-900 mb-8">Experience</h2>
-          
-          <div className="space-y-8">
-            {/* Experience 1 */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-zinc-900">마크클라우드 (데이터/AI 인턴)</h3>
-                  <p className="text-sm text-zinc-600 mt-1">2025.11 ~ 2025.12</p>
-                </div>
-                <Briefcase className="h-5 w-5 text-zinc-600" />
-              </div>
-              <ul className="space-y-2 text-sm text-zinc-700">
-                <li>• 외부 LLM API 호출 실패 원인 분석 및 의존성에 따른 처리 한계를 식별하여 로컬 LLM 전환 타당성 검토를 위한 모델 테스트</li>
-                <li>• 기존 STT 모델의 특성 분석을 통해 KPI 미달성 원인을 파악하고, NeMo 기반 STT 모델 교체 및 의미 정확도 평가를 추가·보완하여 KPI 달성</li>
-                <li>• 자동 보고서 생성을 위한 출력 구조 템플릿과 CSV 기반 데이터 처리·렌더링·LLM 코멘트 생성을 수행하는 프로세스를 설계·구현</li>
-              </ul>
-            </div>
-
-            {/* Experience 2 */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-zinc-900">내일배움캠프 데이터분석가과정</h3>
-                  <p className="text-sm text-zinc-600 mt-1">2025.02 ~ 2025.07</p>
-                </div>
-                <Briefcase className="h-5 w-5 text-zinc-600" />
-              </div>
-              <ul className="space-y-2 text-sm text-zinc-700">
-                <li>• Python, SQL 기반 데이터 수집·정제·분석·시각화 전 과정을 학습</li>
-                <li>• 데이터를 통해 가설을 검증하며 문제의 근본 원인을 파악하는 분석 프로젝트 수행</li>
-                <li>• 머신러닝 모델링을 통한 분석 및 액션 가능한 인사이트 제시</li>
-              </ul>
-            </div>
-
-            {/* Experience 3 */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-zinc-900">해군부사관</h3>
-                  <p className="text-sm text-zinc-600 mt-1">2015.06 ~ 2019.08</p>
-                </div>
-                <Briefcase className="h-5 w-5 text-zinc-600" />
-              </div>
-              <ul className="space-y-2 text-sm text-zinc-700">
-                <li>• 다중 센서 데이터 환경에서 실시간 정보를 해석하고 판단 및 시스템 운용</li>
-                <li>• 탄착군 영상 분석, 오차 패턴 규명 및 개선안 도출</li>
-                <li>• 파라미터 튜닝으로 노이즈와 간섭 환경에서 출력 품질과 신뢰도를 개선</li>
-                <li>• 시스템 장애 발생 시 오류 코드를 기반으로 원인을 추적하고, 설정 및 복구 조치를 통한 유지 보수</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-16 border-t border-zinc-200">
-        <div className="mx-auto max-w-4xl px-5">
-          <h2 className="text-2xl font-semibold text-zinc-900 mb-8">Skill Set</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* LLM / AI */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-2 mb-4">
-                <Briefcase className="h-5 w-5 text-purple-600" />
-                <h3 className="text-lg font-semibold text-zinc-900">LLM / AI</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['OpenAI', 'Pinecone', 'Llama', 'RAG', 'LangChain', 'Claude'].map((skill) => (
-                  <span key={skill} className="px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-xs text-purple-700">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Data Analysis */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-2 mb-4">
-                <FileText className="h-5 w-5 text-emerald-600" />
-                <h3 className="text-lg font-semibold text-zinc-900">Data Analysis</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['Python', 'SQL', 'Tableau'].map((skill) => (
-                  <span key={skill} className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs text-emerald-700">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Backend / Data Handling */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-2 mb-4">
-                <Code2 className="h-5 w-5 text-blue-600" />
-                <h3 className="text-lg font-semibold text-zinc-900">Backend / Data Handling</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['Python', 'FastAPI', 'PostgreSQL', 'Docker', 'SQLAlchemy'].map((skill) => (
-                  <span key={skill} className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-xs text-blue-700">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Others */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-2 mb-4">
-                <Code2 className="h-5 w-5 text-zinc-600" />
-                <h3 className="text-lg font-semibold text-zinc-900">Others</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['Streamlit', 'Linux/Ubuntu', 'WSL'].map((skill) => (
-                  <span key={skill} className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+          <SectionHeading
+            title="AI를 설계 파트너로, 검증은 직접"
+            desc="AI에게 바로 코드를 맡기지 않습니다. 문제를 쪼개고 문서로 설계한 다음, AI가 만든 결과는 실제 데이터와 테스트로 확인한 뒤에만 다음 단계로 넘깁니다."
+          />
+          <ol className="grid gap-3 md:grid-cols-4">
+            {aiSteps.map((s) => (
+              <li key={s.step} className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm break-inside-avoid">
+                <div className="font-mono text-xs text-zinc-400">{s.step}</div>
+                <div className="mt-2 text-sm font-semibold text-zinc-900">{s.title}</div>
+                <p className="mt-2 text-xs leading-5 text-zinc-600 break-keep">{s.desc}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -252,6 +169,36 @@ export default function Home() {
           <h2 className="text-2xl font-semibold text-zinc-900 mb-8">Projects</h2>
           
           <div className="grid gap-6">
+            {/* Project 0: Preflight */}
+            <Link
+              href="/projects/preflight"
+              className="group block rounded-2xl border border-zinc-200 bg-white p-8 hover:bg-zinc-50 transition shadow-sm"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h3 className="text-xl font-semibold text-zinc-900 mb-2">Preflight</h3>
+                  <p className="text-sm text-zinc-600">R&D 업무 관리 워크스페이스</p>
+                </div>
+                <ArrowRight className="h-5 w-5 text-zinc-600 group-hover:text-zinc-900 group-hover:translate-x-1 transition" />
+              </div>
+
+              <p className="text-sm text-zinc-700 leading-relaxed mb-4">
+                매일 ERP 엑셀을 내려받아 수기로 비교하고, KPI와 생산 계획을 따로 작성하던 R&D 팀 업무를
+                파일 업로드 한 번으로 현황이 정리되는 워크스페이스로 바꿨습니다. 기획부터 개발, 운영까지 혼자 맡아 팀에서 사용 중입니다.
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {['Next.js', 'TypeScript', 'PostgreSQL', 'SheetJS', 'Vitest', 'Claude'].map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </Link>
+
             {/* Project 1: DeepVi */}
             <Link 
               href="/projects/deepvi"
@@ -343,117 +290,145 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Building Now */}
-      <section id="building" className="py-16 border-t border-zinc-200">
+      {/* Experience Section */}
+      <section id="experience" className="py-16 border-t border-zinc-200">
         <div className="mx-auto max-w-4xl px-5">
-          <h2 className="text-2xl font-semibold text-zinc-900 mb-3">Building Now</h2>
-          <p className="text-sm leading-6 text-zinc-700 max-w-3xl mb-8">
-            포트폴리오 프로젝트와 별도로, 실제 서비스 제작 과정에 가까운 프로토타입도 병행하고 있습니다.
-            문제 정의부터 화면 설계, 인터랙션 구현, 배포까지 빠르게 반복하며 제품 감각을 다듬고 있습니다.
-          </p>
+          <SectionHeading title="Experience" />
 
-          <div className="grid gap-6">
-            {[
-              {
-                name: "VibeCoder",
-                url: "https://vibecoderlabs.vercel.app/",
-                status: "In Progress",
-                preview: true,
-                video: null,
-                summary: "비개발자도 AI로 직접 만들 수 있게 돕는 워크플로우 커뮤니티 서비스로, AI 뉴스·영상·플레이북·빌드 로그를 한 곳에서 탐색할 수 있도록 구성하고 있습니다.",
-                done: ["홈 피드와 추천 캐러셀 구성", "커뮤니티/플레이북 탐색 구조 구현", "빌드 로그 공유 흐름과 라이브 배포"],
-                next: ["피드백 기반 정보 구조 보완", "커뮤니티 참여 흐름 고도화", "큐레이션 품질과 운영 기능 확장"],
-              },
-              {
-                name: "DaVinci Note",
-                url: "https://navv6.github.io/Davinci/",
-                status: "In Progress",
-                preview: false,
-                video: withBasePath("/davinci-demo.mp4"),
-                summary: "아이디어를 기록하는 데서 끝나지 않고, 말과 손동작, 시각적 연결, AI 보조를 통해 생각을 확장하는 노트형 서비스로 발전시키고 있습니다.",
-                done: ["초기 노트 화면과 탐색 흐름 구현", "전체 톤앤매너와 인터랙션 방향 설계", "프로토타입 배포 환경 구성"],
-                next: ["모션캡처 기반 손동작 인식", "STT 기반 음성 입력", "구조를 자유롭게 이동·연결하는 인터랙션", "AI 어시스턴트로 아이디어 확장·검토·보완 추천"],
-              },
-            ].map((item) => (
-              <div key={item.name} className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <h3 className="text-xl font-semibold text-zinc-900">{item.name}</h3>
-                      <span className="rounded-full border border-blue-200 bg-blue-50 px-2.5 py-0.5 text-[11px] font-medium text-blue-700">
-                        {item.status}
-                      </span>
-                    </div>
-                    <p className="text-sm leading-6 text-zinc-700 max-w-2xl">{item.summary}</p>
-                  </div>
-                  <a
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm text-zinc-800 transition hover:bg-zinc-100"
-                  >
-                    바로가기
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
+          <div className="space-y-8">
+            {/* Experience 0 */}
+            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm break-inside-avoid">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-900">삼화 (R&D본부 Pre-Production팀 · 사원)</h3>
+                  <p className="text-sm text-zinc-600 mt-1">2026.06 ~ 재직 중 · 화장품 용기 제조</p>
                 </div>
-
-                <div className="mt-4 grid gap-3 md:grid-cols-2">
-                  <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4">
-                    <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">현재까지 구현</div>
-                    <div className="mt-2 space-y-1.5">
-                      {item.done.map((point) => (
-                        <div key={point} className="text-sm text-zinc-700">• {point}</div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
-                    <div className="text-xs font-semibold uppercase tracking-wide text-blue-600">개발 예정</div>
-                    <div className="mt-2 space-y-1.5">
-                      {item.next.map((point) => (
-                        <div key={point} className="text-sm text-blue-800">• {point}</div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {item.video ? (
-                  <div className="mt-5 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
-                    <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-2 text-xs text-zinc-500">
-                      <span>{item.name} Demo</span>
-                      <span>Video Preview</span>
-                    </div>
-                    <div className="bg-white">
-                      <video
-                        src={item.video}
-                        className="aspect-[16/9] w-full bg-black"
-                        autoPlay
-                        controls
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                      />
-                    </div>
-                  </div>
-                ) : item.preview ? (
-                  <div className="mt-5 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
-                    <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-2 text-xs text-zinc-500">
-                      <span>{item.url}</span>
-                      <span>Live Preview</span>
-                    </div>
-                    <div className="aspect-[16/9] bg-white">
-                      <iframe
-                        src={item.url}
-                        title={`${item.name} preview`}
-                        className="h-full w-full"
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                      />
-                    </div>
-                  </div>
-                ) : null}
+                <Briefcase className="h-5 w-5 text-zinc-600" />
               </div>
-            ))}
+              <ul className="space-y-2 text-sm text-zinc-700">
+                <li>• 고객사 CT 요청 샘플의 출고 전 사내 CT 테스트, 신제품 · 개발 샘플 시사출 후 CT 테스트 및 검토</li>
+                <li>• 샘플 생산 금형 이동 관리 및 생산 계획 수립</li>
+                <li>• 수기 · 엑셀 중심의 팀 업무를 R&D 업무 관리 워크스페이스(Preflight)로 전환 — 기획 · 개발 · 운영을 혼자 맡아 팀에서 사용 중</li>
+              </ul>
+            </div>
+
+            {/* Experience 1 */}
+            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm break-inside-avoid">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-900">마크클라우드 (데이터/AI 인턴)</h3>
+                  <p className="text-sm text-zinc-600 mt-1">2025.11 ~ 2025.12</p>
+                </div>
+                <Briefcase className="h-5 w-5 text-zinc-600" />
+              </div>
+              <ul className="space-y-2 text-sm text-zinc-700">
+                <li>• 외부 LLM API 호출 실패 원인 분석 및 의존성에 따른 처리 한계를 식별하여 로컬 LLM 전환 타당성 검토를 위한 모델 테스트</li>
+                <li>• 기존 STT 모델의 특성 분석을 통해 KPI 미달성 원인을 파악하고, NeMo 기반 STT 모델 교체 및 의미 정확도 평가를 추가·보완하여 KPI 달성</li>
+                <li>• 자동 보고서 생성을 위한 출력 구조 템플릿과 CSV 기반 데이터 처리·렌더링·LLM 코멘트 생성을 수행하는 프로세스를 설계·구현</li>
+              </ul>
+            </div>
+
+            {/* Experience 2 */}
+            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm break-inside-avoid">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-900">내일배움캠프 데이터분석가과정</h3>
+                  <p className="text-sm text-zinc-600 mt-1">2025.02 ~ 2025.07</p>
+                </div>
+                <Briefcase className="h-5 w-5 text-zinc-600" />
+              </div>
+              <ul className="space-y-2 text-sm text-zinc-700">
+                <li>• Python, SQL 기반 데이터 수집·정제·분석·시각화 전 과정을 학습</li>
+                <li>• 데이터를 통해 가설을 검증하며 문제의 근본 원인을 파악하는 분석 프로젝트 수행</li>
+                <li>• 머신러닝 모델링을 통한 분석 및 액션 가능한 인사이트 제시</li>
+              </ul>
+            </div>
+
+            {/* Experience 3 */}
+            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm break-inside-avoid">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-900">해군부사관</h3>
+                  <p className="text-sm text-zinc-600 mt-1">2015.06 ~ 2019.08</p>
+                </div>
+                <Briefcase className="h-5 w-5 text-zinc-600" />
+              </div>
+              <ul className="space-y-2 text-sm text-zinc-700">
+                <li>• 다중 센서 데이터 환경에서 실시간 정보를 해석하고 판단 및 시스템 운용</li>
+                <li>• 탄착군 영상 분석, 오차 패턴 규명 및 개선안 도출</li>
+                <li>• 파라미터 튜닝으로 노이즈와 간섭 환경에서 출력 품질과 신뢰도를 개선</li>
+                <li>• 시스템 장애 발생 시 오류 코드를 기반으로 원인을 추적하고, 설정 및 복구 조치를 통한 유지 보수</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-16 border-t border-zinc-200">
+        <div className="mx-auto max-w-4xl px-5">
+          <SectionHeading title="Skill Set" />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* LLM / AI */}
+            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+              <div className="flex items-center gap-2 mb-4">
+                <Briefcase className="h-5 w-5 text-purple-600" />
+                <h3 className="text-lg font-semibold text-zinc-900">LLM / AI</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {['OpenAI', 'Pinecone', 'Llama', 'RAG', 'LangChain', 'Claude'].map((skill) => (
+                  <span key={skill} className="px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-xs text-purple-700">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Data Analysis */}
+            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+              <div className="flex items-center gap-2 mb-4">
+                <FileText className="h-5 w-5 text-emerald-600" />
+                <h3 className="text-lg font-semibold text-zinc-900">Data Analysis</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {['Python', 'SQL', 'Tableau'].map((skill) => (
+                  <span key={skill} className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs text-emerald-700">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Backend / Data Handling */}
+            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+              <div className="flex items-center gap-2 mb-4">
+                <Code2 className="h-5 w-5 text-blue-600" />
+                <h3 className="text-lg font-semibold text-zinc-900">Backend / Data Handling</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {['Python', 'FastAPI', 'PostgreSQL', 'Docker', 'SQLAlchemy'].map((skill) => (
+                  <span key={skill} className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-xs text-blue-700">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Frontend / Others */}
+            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
+              <div className="flex items-center gap-2 mb-4">
+                <Code2 className="h-5 w-5 text-zinc-600" />
+                <h3 className="text-lg font-semibold text-zinc-900">Frontend / Others</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {['Next.js', 'TypeScript', 'Vitest', 'Streamlit', 'Linux/Ubuntu', 'WSL'].map((skill) => (
+                  <span key={skill} className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -466,14 +441,14 @@ export default function Home() {
       </footer>
 
       {/* Floating Navigation */}
-      <nav className="fixed bottom-8 left-1/2 z-30 hidden -translate-x-1/2 lg:block">
+      <nav className="fixed bottom-8 left-1/2 z-30 hidden -translate-x-1/2 lg:block print:hidden">
         <div className="flex items-center gap-1 rounded-full border border-zinc-200 bg-white/90 px-2 py-2 shadow-lg backdrop-blur">
           {[
             { id: "intro", label: "소개" },
-            { id: "experience", label:"활동" },
-            { id: "skills", label: "기술" },
+            { id: "ai", label: "AI 활용" },
             { id: "projects", label: "프로젝트" },
-            { id: "building", label: "빌딩중" },
+            { id: "experience", label: "경력" },
+            { id: "skills", label: "기술" },
           ].map((item) => (
             <a
               key={item.id}
@@ -496,6 +471,13 @@ export default function Home() {
               {item.label}
             </a>
           ))}
+          <span className="mx-1 h-4 w-px bg-zinc-200" />
+          <Link
+            href="/lab"
+            className="rounded-full bg-zinc-900 px-4 py-2 text-xs font-medium text-white transition hover:bg-zinc-700"
+          >
+            끄적임
+          </Link>
         </div>
       </nav>
     </main>
