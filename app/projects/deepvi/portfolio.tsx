@@ -4,21 +4,17 @@ import { motion } from "framer-motion";
 import {
   BarChart3,
   ShieldCheck,
-  Layers3,
   MessageCircleQuestion,
-  Database,
   ArrowUpRight,
-  BrainCircuit,
-  LayoutDashboard,
   ArrowRight,
-  ArrowDown,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 
 import React from "react";
 import { TypeReturnBar } from "../../componets";
-import { SiteHeader } from "../../site";
+import { SiteFooter, SiteHeader } from "../../site";
+import { ArchitectureFlow } from "../../case-study";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -95,8 +91,8 @@ function Card({
 // ✅ 5가지 유형 분류 비주얼 컴포넌트 (HTML 디자인 이식)
 function TypeAnalysisVisual() {
   return (
-    <div className="flex h-full w-full items-center justify-center bg-[#0a0e1a] p-2 text-white overflow-hidden select-none">
-      <div className="flex w-full max-w-5xl items-stretch gap-2 lg:gap-4 scale-[0.6] sm:scale-[0.7] md:scale-[0.85] lg:scale-100 origin-center transition-transform">
+    <div className="w-full rounded-2xl bg-[#0a0e1a] p-4 text-white select-none md:p-6">
+      <div className="flex w-full flex-col items-stretch gap-3 md:flex-row md:gap-4">
         
         {/* Card 1: 투자철학 */}
         <div className="flex flex-1 flex-col rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
@@ -122,7 +118,7 @@ function TypeAnalysisVisual() {
 
         {/* Arrow 1 */}
         <div className="flex items-center justify-center text-zinc-500">
-          <ArrowRight className="h-6 w-6" />
+          <ArrowRight className="h-6 w-6 rotate-90 md:rotate-0" />
         </div>
 
         {/* Card 2: 분류 기준 */}
@@ -159,7 +155,7 @@ function TypeAnalysisVisual() {
 
         {/* Arrow 2 */}
         <div className="flex items-center justify-center text-zinc-500">
-          <ArrowRight className="h-6 w-6" />
+          <ArrowRight className="h-6 w-6 rotate-90 md:rotate-0" />
         </div>
 
         {/* Card 3: 투자유형 */}
@@ -229,20 +225,20 @@ function FeatureCarousel({
           >
             <div className="group overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-xl">
               {/* ✅ 이미지 영역: 16:9 고정 + contain */}
-              <div className="relative w-full bg-black/30 aspect-video">
+              <div className="relative w-full bg-zinc-100 aspect-video">
                 {it.component ? (
                     it.component
                 ) : Array.isArray(it.imgSrc) ? (
                   // 2장일 때
                   <div className="grid h-full w-full grid-cols-1 gap-2 p-3 sm:grid-cols-2">
-                    <div className="overflow-hidden rounded-lg bg-black/20">
+                    <div className="overflow-hidden rounded-lg bg-white">
                       <img
                         src={it.imgSrc[0]}
                         alt={`${it.title} view 1`}
                         className="h-full w-full object-contain"
                       />
                     </div>
-                    <div className="overflow-hidden rounded-lg bg-black/20">
+                    <div className="overflow-hidden rounded-lg bg-white">
                       <img
                         src={it.imgSrc[1]}
                         alt={`${it.title} view 2`}
@@ -329,12 +325,6 @@ export default function DeepViPortfolioPage() {
       icon: <BarChart3 className="h-4 w-4 text-zinc-900" />,
     },
     {
-      title: "5가지 기업 유형 분류",
-      desc: "워렌 버핏과 피터 린치의 투자 철학을 기반으로 기업의 재무지표를 점수화하여 5가지 유형으로 분류하였습니다.",
-      component: <TypeAnalysisVisual />,
-      icon: <Layers3 className="h-4 w-4 text-zinc-900" />,
-    },
-    {
       title: "재무 건전성 평가",
       desc: "복잡한 재무제표를 수익성·현금·안정성의 핵심 구조로 재구성해, 전년 대비 기업의 재무 상태를 한눈에 파악할 수 있습니다.",
       imgSrc: withBasePath("/finacial.png"),
@@ -412,7 +402,7 @@ export default function DeepViPortfolioPage() {
       </section>
 
       {/* Problem / Solution */}
-      <section id="problem" className="mt-16 md:mt-24">
+      <section id="problem" className="scroll-mt-20 mt-12 md:mt-16">
         <Container>
           <SectionTitle
             eyebrow="Background"
@@ -463,207 +453,97 @@ export default function DeepViPortfolioPage() {
             </motion.div>
           </div>
         </Container>
+      </section>
 
-        {/* Process Flow */}
-        <section id="process" className="mt-16 md:mt-24">
+      <section id="architecture" className="scroll-mt-20 mt-16 md:mt-24">
         <Container>
-            <SectionTitle
-            eyebrow="Process"
-            title="DeepVi 분석 프로세스"
-            desc={
-              <>
-                데이터 수집부터 AI 모델링까지의 엔드투엔드 파이프라인을 구축했습니다.
-                <span className="ml-2 text-xs font-normal text-zinc-500">
-                  (KOSPI/KOSDAQ 444개 기업 대상)
-                </span>
-              </>
-            }
+          <SectionTitle
+            eyebrow="Architecture"
+            title="기업 데이터를 답변의 근거로 연결"
+            desc="수집한 데이터를 점수화·분류해 저장하고, 질문이 들어오면 해당 기업의 데이터를 근거로 묶어 LLM이 설명합니다."
             wide
-            />
-
-            <div className="relative">
-              {/* Mobile: Vertical stack / Desktop: Horizontal row */}
-              <div className="flex flex-col gap-4 lg:flex-row lg:items-stretch lg:gap-2">
-                {[
-                  {
-                    step: "01",
-                    title: "데이터 수집",
-                    desc: "재무·뉴스·주가·기업·경제 데이터 수집",
-                    icon: <Database className="h-5 w-5" />,
-                  },
-                  {
-                    step: "02",
-                    title: "ML 기반 지표 도출",
-                    desc: "머신러닝을 활용한 재무 건전성 평가 지표 산출",
-                    icon: <BarChart3 className="h-5 w-5" />,
-                  },
-                  {
-                    step: "03",
-                    title: "DB 및 API 구축",
-                    desc: "PostgreSQL + FastAPI 기반 데이터 연동",
-                    icon: <Layers3 className="h-5 w-5" />,
-                  },
-                  {
-                    step: "04",
-                    title: "AI 분석",
-                    desc: "LangChain+RAG 활용 LLM 기반 자연어 해석",
-                    icon: <BrainCircuit className="h-5 w-5" />,
-                  },
-                  {
-                    step: "05",
-                    title: "대시보드 제공",
-                    desc: "보고서·Q&A·시각화 결과",
-                    icon: <LayoutDashboard className="h-5 w-5" />,
-                  },
-                ].map((item, idx, arr) => (
-                  <React.Fragment key={item.step}>
-                    <motion.div
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: true, amount: 0.35 }}
-                      variants={fadeUp}
-                      custom={idx}
-                      className="flex-1"
-                    >
-                      <div className="group relative z-10 flex h-full flex-col items-center rounded-2xl border border-zinc-200 bg-white p-5 text-center transition-all hover:bg-zinc-50 hover:border-zinc-300 shadow-sm">
-                        {/* Glow effect */}
-                        <div className="pointer-events-none absolute inset-0 opacity-0 transition group-hover:opacity-100">
-                          <div className="absolute -top-12 left-1/2 h-24 w-48 -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl opacity-50" />
-                        </div>
-
-                        {/* Icon */}
-                        <div className="mb-3 grid h-10 w-10 place-items-center rounded-full bg-zinc-100 border border-zinc-200 text-zinc-900">
-                          {item.icon}
-                        </div>
-
-                        {/* Text */}
-                        <div className="mb-1 text-[11px] font-bold text-blue-600">
-                          STEP {item.step}
-                        </div>
-                        <h3 className="text-sm font-semibold text-zinc-900">
-                          {item.title}
-                        </h3>
-                        <p className="mt-2 text-xs leading-5 text-zinc-600 break-keep">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </motion.div>
-
-                    {/* Arrow between steps (except last) */}
-                    {idx < arr.length - 1 && (
-                      <div className="flex items-center justify-center py-2 text-zinc-600 lg:py-0">
-                        <ArrowDown className="block h-5 w-5 lg:hidden" />
-                        <ArrowRight className="hidden h-5 w-5 lg:block" />
-                      </div>
-                    )}
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-6">
-              <div className="rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-700 shadow-sm">
-                <span className="font-semibold text-zinc-900">프로젝트 내 역할:</span>{" "}
-                뉴스 분석과 재무건전성 평가는 팀원이 담당했고, 그 외 기획부터 데이터 수집, 백엔드/DB, LLM, 대시보드, 배포까지 전체 흐름을 주도했습니다.
-              </div>
-            </div>
+          />
+          <ArchitectureFlow label="DeepVi 데이터와 AI 처리 흐름" nodes={[
+            { title: "데이터 수집", description: "재무·주가·뉴스·거시경제" },
+            { title: "ML 지표 · 유형 분류", description: "재무 건전성 점수 · 5가지 유형" },
+            { title: "PostgreSQL · FastAPI", description: "정형 데이터 보관·조회" },
+            { title: "RAG Context", description: "기업별 근거 구성" },
+            { title: "LLM", description: "설명·Q&A 생성" },
+          ]} />
+          <div id="data-role" className="mt-5 scroll-mt-20 rounded-2xl border border-zinc-200 bg-white p-5 text-sm leading-7 text-zinc-600">
+            <p><strong className="text-zinc-900">데이터.</strong> KOSPI·KOSDAQ 444개 기업의 재무·주가·뉴스·거시경제 데이터를 연결했습니다.</p>
+            <p className="mt-3"><strong className="text-zinc-900">담당 범위.</strong> 뉴스 분석과 재무건전성 평가는 팀원이 담당했고, 기획·데이터 수집·백엔드/DB·LLM·대시보드·배포 흐름을 주도했습니다.</p>
+          </div>
         </Container>
-        </section>
-        
-        {/* Achievements (Post-evaluation) */}
-        <section id="achievements" className="mt-16 md:mt-24">
-        <Container>
-            <SectionTitle
-            eyebrow="Backtest / Post-evaluation"
-            title="DeepVi 유형 분류의 시장 유효성"
-            desc="재무 기반 유형 분류가 단순 분류를 넘어, 시장 성과와 위험 구조를 설명하는 유효한 정보 구조임을 검증했습니다."
-            wide
-            />
+      </section>
 
-            {/* KPI Cards (줄이고 의미만 남김) */}
-            <div className="grid gap-4 md:grid-cols-2">
+      {/* Classification */}
+      <section id="classification" className="scroll-mt-20 mt-16 md:mt-24">
+        <Container>
+          <SectionTitle
+            eyebrow="Classification"
+            title="재무지표로 5가지 기업 유형 분류"
+            desc="워렌 버핏(가치·안정)과 피터 린치(성장) 관점의 재무 점수를 조합해, 기업의 성격을 다섯 유형으로 나눴습니다."
+            wide
+          />
+          <TypeAnalysisVisual />
+        </Container>
+      </section>
+
+      {/* Post-evaluation */}
+      <section id="achievements" className="scroll-mt-20 mt-16 md:mt-24">
+        <Container>
+          <SectionTitle
+            eyebrow="Post-evaluation"
+            title="기업 유형별 시장 성과 관찰"
+            desc="분류한 유형별로 수익률과 변동성을 사후 비교했습니다. 투자 성과를 주장하는 결과가 아니며, RAG 답변 품질 평가와도 별개의 분석입니다."
+            wide
+          />
+
+          <div className="grid gap-4 md:grid-cols-2">
             {[
-                {
+              {
                 label: "유형별 최고 평균 수익률",
                 value: "성장 잠재주 +22.96%",
-                desc: "유형 평균 수익률 1위 (31개). 성장 지표가 시장 성과로 연결된 경향을 확인.",
-                icon: <ArrowUpRight className="h-5 w-5 text-emerald-400" />,
-                },
-                {
-                label: "리스크(변동성) 최대 유형",
+                desc: "유형 평균 수익률 1위 (31개 종목). 성장 지표가 시장 성과로 이어진 경향이 관찰됐습니다.",
+                icon: <ArrowUpRight className="h-5 w-5 text-emerald-500" />,
+              },
+              {
+                label: "변동성 최대 유형",
                 value: "투자 유보 53.80%",
-                desc: <>유형 내 성과 분산이 가장 큼. (최대 +261.39% / 최소 -56.5%)<br />이벤트 의존적 리스크 신호로 해석.</>,
+                desc: "유형 안에서 성과 편차가 가장 컸습니다 (최대 +261.39% / 최소 −56.5%).",
                 icon: <BarChart3 className="h-5 w-5 text-zinc-700" />,
-                },
-            ].map((item, idx) => (
-                <motion.div
-                key={item.label}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.35 }}
-                variants={fadeUp}
-                custom={idx}
-                >
-                <div className="flex h-full flex-col rounded-2xl border border-zinc-200 bg-white p-5 transition hover:bg-zinc-50 shadow-sm">
-                    <div className="mb-3 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-zinc-600 uppercase tracking-wider">
-                        {item.label}
-                    </span>
-                    {item.icon}
-                    </div>
-
-                    <div className="mb-2 text-2xl font-bold text-zinc-900 break-keep">
-                    {item.value}
-                    </div>
-
-                    <p className="text-xs leading-5 text-zinc-600 break-keep">
-                    {item.desc}
-                    </p>
+              },
+            ].map((item) => (
+              <div key={item.label} className="flex h-full flex-col rounded-2xl border border-zinc-200 bg-white p-5">
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="text-xs font-semibold text-zinc-600">{item.label}</span>
+                  {item.icon}
                 </div>
-                </motion.div>
+                <div className="mb-2 text-2xl font-bold text-zinc-900 break-keep">{item.value}</div>
+                <p className="text-sm leading-6 text-zinc-600 break-keep">{item.desc}</p>
+              </div>
             ))}
-            </div>
+          </div>
 
-            <TypeReturnBar />
+          <TypeReturnBar />
 
-            {/* Key Insight (1박스로 압축) */}
-            <div className="mt-8">
-            <motion.div
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.35 }}
-                variants={fadeUp}
-                custom={8}
-            >
-                <Card
-                title="후평가 핵심 인사이트"
-                icon={<div className="h-2 w-2 rounded-full bg-blue-400" />}
-                >
-                <ul className="list-disc space-y-2 pl-5 text-sm">
-                    <li>
-                    재무 기반 유형 분류만으로도 <b>유형별 성과 구조(수익/리스크)가 구분</b>되는
-                    경향을 확인했습니다.
-                    </li>
-                    <li>
-                    <b>성장 잠재주</b>는 평균 수익률이 가장 높았고, <b>투자 유보</b>는 성과 분산이
-                    가장 커 <b>리스크 신호</b>로 해석됩니다.
-                    </li>
-                    <li>
-                    투자 유보 유형은 바이오/제약 비중이 높아 <b>신약·임상 이벤트</b>에 의해
-                    성과가 크게 갈리는 구조가 관찰되었습니다.
-                    </li>
-                    <li>
-                    이러한 유형 간 성과 차이는 단순 우연이 아닌, 섹터 구성과 재무적 특성 차이에 기반한
-                    구조적 결과임을 시사했습니다.
-                    </li>
-                </ul>
-                </Card>
-            </motion.div>
-            </div>
+          <div className="mt-6 rounded-2xl border border-zinc-200 bg-white p-5">
+            <h3 className="text-sm font-semibold text-zinc-900">관찰 내용</h3>
+            <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-600">
+              <li className="flex gap-2.5 break-keep">
+                <span className="mt-[0.6rem] h-1 w-1 shrink-0 rounded-full bg-zinc-400" aria-hidden />
+                재무 기반 유형 분류만으로도 유형별 수익·변동성 구조가 서로 다르게 나타났습니다.
+              </li>
+              <li className="flex gap-2.5 break-keep">
+                <span className="mt-[0.6rem] h-1 w-1 shrink-0 rounded-full bg-zinc-400" aria-hidden />
+                투자 유보 유형은 바이오·제약 비중이 높아, 신약·임상 이벤트에 따라 성과가 크게 갈리는 모습이 관찰됐습니다.
+              </li>
+            </ul>
+          </div>
         </Container>
-        </section>
-
       </section>
+
         {/* Features */}
         <section id="features" className="mt-16 md:mt-24">
         <Container>
@@ -709,14 +589,7 @@ export default function DeepViPortfolioPage() {
         </Container>
       </section>
 
-      {/* Stack */}
-      <section id="stack" className="mt-16 md:mt-24">
-        <Container>
-          <div className="mt-10 border-t border-zinc-200 pt-6 text-center text-xs text-zinc-600">
-            DeepVi — 설명 가능한 재무 해석 중심 기업 분석<br /> © 2025 All Rights Reserved
-          </div>
-        </Container>
-      </section>
+      <SiteFooter className="mt-16 md:mt-24" />
 
       {/* Floating Navigation */}
       <nav className="fixed bottom-8 left-1/2 z-30 hidden -translate-x-1/2 lg:block">
@@ -724,7 +597,8 @@ export default function DeepViPortfolioPage() {
           {[
             { id: "intro", label: "소개" },
             { id: "problem", label: "배경" },
-            { id: "process", label: "프로세스" },
+            { id: "architecture", label: "구조" },
+            { id: "classification", label: "분류" },
             { id: "achievements", label: "성과" },
             { id: "features", label: "기능" },
             { id: "demo", label: "데모" },
@@ -736,6 +610,8 @@ export default function DeepViPortfolioPage() {
                 e.preventDefault();
                 const element = document.getElementById(item.id);
                 if (element) {
+                  const details = element.closest("details");
+                  if (details) details.open = true;
                   const headerOffset = 80;
                   const elementPosition = element.getBoundingClientRect().top;
                   const offsetPosition = elementPosition + window.pageYOffset - headerOffset;

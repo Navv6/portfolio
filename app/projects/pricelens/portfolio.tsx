@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import React from "react";
-import { SiteHeader } from "../../site";
+import { SiteFooter, SiteHeader } from "../../site";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -1121,15 +1121,7 @@ export default function PriceLensPortfolioPage() {
         </Container>
       </section>
 
-      {/* Footer */}
-      <section className="mt-16 md:mt-24 border-t border-slate-200/70 pt-10 pb-16">
-        <Container>
-          <div className="text-center text-xs text-slate-500">
-            PriceLens · Airbnb 숙소 가격 결정 요인 분석
-            <br />© 2025 백경우. All Rights Reserved.
-          </div>
-        </Container>
-      </section>
+      <SiteFooter className="mt-16 md:mt-24" />
 
       {activeImage !== null && (
         <div

@@ -53,11 +53,11 @@ export default function PersonalProjects() {
   return (
     <BoardPage category="personal">
       {/* Entries */}
-      <section className="border-t border-zinc-200 pt-12 pb-24">
-        <div className="mx-auto max-w-4xl px-5 mb-6">
-          <h2 className="text-xl font-semibold text-zinc-900">진행 상황</h2>
+      <section className="border-t border-zinc-200 pt-12 pb-16">
+        <div className="mx-auto max-w-5xl px-5 mb-6">
+          <h2 className="text-2xl font-bold tracking-tight text-zinc-900">진행 상황</h2>
         </div>
-        <div className="mx-auto max-w-4xl px-5 grid gap-6">
+        <div className="mx-auto max-w-5xl px-5 grid gap-6">
           {entries.map((item) => (
             <article key={item.id} id={item.id} className="scroll-mt-20 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm break-inside-avoid">
               <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">

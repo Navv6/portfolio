@@ -1,395 +1,291 @@
-"use client";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
+import { SectionHeader, SiteFooter, SiteHeader, StatusBadge } from "./site";
+import { introduction, featuredProjects, aiSteps, responsibilities, experience, skills, currentlyBuilding } from "./home-content";
 
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { Mail, Github, Linkedin, FileText, Briefcase, Code2, ArrowRight, Phone } from 'lucide-react'
-import { SiteHeader, StatusBadge, categories, projectsIn } from './site'
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
-const withBasePath = (path: string) => `${basePath}${path}`
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-}
-
-function SectionHeading({ title, desc }: { title: string; desc?: string }) {
-  return (
-    <div className="mb-8">
-      <h2 className="text-2xl font-semibold text-zinc-900">{title}</h2>
-      {desc ? <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-700 break-keep">{desc}</p> : null}
-    </div>
-  )
-}
-
-const aiSteps = [
-  { step: "01", title: "타당성부터", desc: "AI와 대화하며 자동화할 수 있는 범위와 위험 요소를 먼저 점검합니다." },
-  { step: "02", title: "문서로 설계", desc: "기획 문서와 작업지시서로 요구사항과 미확정 결정을 분리합니다." },
-  { step: "03", title: "골격 먼저", desc: "큰 단위 구조를 먼저 세우고, 검증이 끝나면 한 기능씩 확장합니다." },
-  { step: "04", title: "실데이터로 검증", desc: "AI가 만든 결과는 실제 데이터 대조와 테스트로 확인한 뒤에만 씁니다." },
-]
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const focus = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600";
+const section = "scroll-mt-20 border-t border-zinc-200 py-14 md:py-20";
+const card = "rounded-2xl border border-zinc-200 bg-white";
 
 export default function Home() {
-  return (
-    <main className="min-h-screen bg-gray-50 text-zinc-900">
-      {/* Background */}
-      <div className="pointer-events-none fixed inset-0 -z-10 print:hidden">
-        <div className="absolute left-1/2 top-[-200px] h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-3xl" />
-        <div className="absolute right-[-160px] top-[160px] h-[420px] w-[420px] rounded-full bg-violet-500/10 blur-3xl" />
-      </div>
+  const visibleProjects = featuredProjects.filter((project) => project.visible);
+  const [lead, ...others] = visibleProjects;
 
-      {/* Header */}
+  return (
+    <main className="min-h-screen bg-zinc-50 text-zinc-900">
       <SiteHeader active="home" className="print:hidden" />
 
-      {/* Hero Section */}
-      <section id="intro" className="pt-20 md:pt-32 pb-16">
-        <div className="mx-auto max-w-4xl px-5">
-          <motion.div initial="hidden" animate="show" variants={fadeUp}>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900 mb-6">
-              백경우
+      {/* Intro */}
+      <section id="intro" className="scroll-mt-20 pb-14 pt-12 md:pb-20 md:pt-20" aria-labelledby="intro-title">
+        <div className="mx-auto grid max-w-5xl items-start gap-8 px-5 md:grid-cols-[minmax(0,1fr)_auto] md:gap-12">
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-zinc-500">{introduction.name}</p>
+            <h1 id="intro-title" className="mt-2 text-4xl font-bold tracking-tight md:text-6xl">
+              {introduction.role}
             </h1>
-            <p className="text-2xl md:text-3xl text-zinc-700 mb-3">
-              AI Application Engineer
+            <p className="mt-6 text-xl font-semibold leading-snug tracking-tight text-zinc-800 break-keep md:text-2xl">
+              {introduction.headline.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </p>
-            <p className="text-base md:text-lg text-zinc-600 mb-8 break-keep">
-              현장의 문제를 AI로 끝까지 풀어, 팀이 매일 쓰는 도구로 만듭니다.
-            </p>
-
-            {/* About Me */}
-            <div className="flex flex-col md:flex-row gap-8 mb-8 max-w-4xl items-start">
-              <div className="flex-1 space-y-4">
-                <p className="text-base text-zinc-700 leading-relaxed">회계와 세무를 전공하며 전문 용어와 복잡한 정보가 만드는 <span className="font-semibold text-zinc-900">'이해의 장벽'</span>을 체감했습니다. 복잡한 정보는 누구나 쉽게 접근하고 활용할 수 있어야 한다는 믿음으로, 정보를 구조화하고 핵심을 전달하는 데이터 분석의 길을 걷기 시작했습니다.</p>
-
-                <p className="text-base text-zinc-700 leading-relaxed">분석은 인사이트를 도출할 수 있지만, 즉시 활용할 수 있는 형태로 재가공하는 과정은 추가적인 과제로 남았습니다. 이러한 <span className="font-semibold text-zinc-900">분석과 활용 사이의 공백을 메우기 위해 AI를 접목</span>했고, 다양한 AI를 경험하며 최신 트렌드를 학습해 왔습니다.</p>
-
-                <p className="text-base text-zinc-700 leading-relaxed">이제는 단순히 툴을 활용하는 것을 넘어, <span className="font-semibold text-zinc-900">문제를 근본적으로 해결하기 위한 AI 서비스를 직접 설계하고 구현</span>하는 데 집중하고 있습니다.</p>
-              </div>
-
-              <div className="hidden md:block flex-shrink-0">
-                <div className="w-48 h-48 rounded-2xl bg-white border-2 border-zinc-200 shadow-md flex items-center justify-center overflow-hidden">
-                  <img
-                    src={withBasePath("/profile.jpg")}
-                    alt="프로필 사진"
-                    className="w-full h-full object-contain object-top"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Contact Links */}
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="https://github.com/Navv6"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-zinc-200 hover:bg-zinc-50 transition text-sm shadow-sm"
-              >
-                <Github className="h-4 w-4" />
+            <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-600 break-keep">{introduction.description}</p>
+            <p className="mt-2 max-w-2xl text-sm leading-7 text-zinc-500 break-keep">{introduction.about}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href="#projects" className={"inline-flex min-h-11 items-center gap-2 rounded-lg bg-zinc-900 px-5 text-sm font-semibold text-white transition hover:bg-zinc-700 " + focus}>
+                View Work
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </a>
+              <a href="https://github.com/Navv6" target="_blank" rel="noopener noreferrer" className={"inline-flex min-h-11 items-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 text-sm transition hover:bg-zinc-100 " + focus}>
+                <Github className="h-4 w-4" aria-hidden />
                 GitHub
               </a>
-              <a
-                href="http://www.linkedin.com/in/navv6"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-zinc-200 hover:bg-zinc-50 transition text-sm shadow-sm"
-              >
-                <Linkedin className="h-4 w-4" />
+              <a href="https://www.linkedin.com/in/navv6" target="_blank" rel="noopener noreferrer" className={"inline-flex min-h-11 items-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 text-sm transition hover:bg-zinc-100 " + focus}>
+                <Linkedin className="h-4 w-4" aria-hidden />
                 LinkedIn
               </a>
-              <a
-                href="mailto:bwme43@gmail.com"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-zinc-200 hover:bg-zinc-50 transition text-sm shadow-sm"
-              >
-                <Mail className="h-4 w-4" />
-                bwme43@gmail.com
-              </a>
-              <div
-                className="group flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-zinc-200 hover:bg-zinc-50 transition-all duration-300 cursor-pointer overflow-hidden shadow-sm"
-                style={{ width: 'auto' }}
-              >
-                <Phone className="h-4 w-4 flex-shrink-0" />
-                <span className="whitespace-nowrap text-sm transition-all duration-300 max-w-0 group-hover:max-w-xs opacity-0 group-hover:opacity-100">
-                  010-5279-3430
-                </span>
-              </div>
             </div>
-          </motion.div>
+          </div>
+          <img
+            src={basePath + "/profile.jpg"}
+            alt="백경우 프로필"
+            width={160}
+            height={160}
+            className="hidden h-40 w-40 rounded-2xl border border-zinc-200 bg-white object-contain object-top shadow-sm md:block"
+          />
         </div>
       </section>
 
-      {/* How I Work with AI */}
-      <section id="ai" className="py-16 border-t border-zinc-200">
-        <div className="mx-auto max-w-4xl px-5">
-          <SectionHeading
-            title="AI를 설계 파트너로, 검증은 직접"
-            desc="AI에게 바로 코드를 맡기지 않습니다. 문제를 쪼개고 문서로 설계한 다음, AI가 만든 결과는 실제 데이터와 테스트로 확인한 뒤에만 다음 단계로 넘깁니다."
+      {/* Selected Work */}
+      <section id="projects" className={section} aria-labelledby="work-heading">
+        <div className="mx-auto max-w-5xl px-5">
+          <SectionHeader
+            id="work-heading"
+            eyebrow="Selected Work"
+            title="대표 프로젝트"
+            action={
+              <Link href="/projects" className={"inline-flex min-h-11 items-center gap-1.5 text-sm text-zinc-600 transition hover:text-zinc-900 " + focus}>
+                More Projects
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            }
           />
-          <ol className="grid gap-3 md:grid-cols-4">
-            {aiSteps.map((s) => (
-              <li key={s.step} className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm break-inside-avoid">
-                <div className="font-mono text-xs text-zinc-400">{s.step}</div>
-                <div className="mt-2 text-sm font-semibold text-zinc-900">{s.title}</div>
-                <p className="mt-2 text-xs leading-5 text-zinc-600 break-keep">{s.desc}</p>
+
+          {lead ? (
+            <Link href={lead.href} className={`group grid overflow-hidden md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] ${card} transition hover:border-zinc-300 hover:shadow-md ${focus}`}>
+              <div className="flex flex-col p-6 md:p-8">
+                <p className="text-xs font-semibold text-zinc-500">{lead.eyebrow}</p>
+                <h3 className="mt-3 text-3xl font-bold tracking-tight">{lead.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-zinc-600 break-keep">{lead.description}</p>
+                <p className="mt-4 text-xs text-zinc-500">
+                  Shows <span className="ml-1.5 font-medium text-blue-700">{lead.shows}</span>
+                </p>
+                <div className="mt-8 flex items-end justify-between gap-4 border-t border-zinc-100 pt-5 md:mt-auto">
+                  <div>
+                    <p className="text-3xl font-bold tracking-tight tabular-nums">{lead.metric}</p>
+                    <p className="mt-1 text-xs text-zinc-500">{lead.metricLabel}</p>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-900">
+                    Case Study
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+                  </span>
+                </div>
+              </div>
+              <div className="relative hidden min-h-[22rem] border-l border-zinc-100 bg-zinc-100 md:block">
+                <img
+                  src={basePath + "/preflight/home.webp"}
+                  alt="Preflight 메인 화면 (가상 데이터)"
+                  className="absolute bottom-0 left-6 top-6 w-[calc(100%-1.5rem)] rounded-tl-xl border-l border-t border-zinc-200 object-cover object-left-top shadow-sm"
+                />
+              </div>
+            </Link>
+          ) : null}
+
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {others.map((project) => (
+              <Link key={project.id} href={project.href} className={`group flex flex-col p-6 md:p-7 ${card} transition hover:border-zinc-300 hover:shadow-md ${focus}`}>
+                <p className="text-xs font-semibold text-zinc-500">{project.eyebrow}</p>
+                <h3 className="mt-3 text-2xl font-bold tracking-tight">{project.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-zinc-600 break-keep">{project.description}</p>
+                <p className="mt-4 text-xs text-zinc-500">
+                  Shows <span className="ml-1.5 font-medium text-blue-700">{project.shows}</span>
+                </p>
+                <div className="mt-8 flex items-end justify-between gap-4 border-t border-zinc-100 pt-5 md:mt-auto">
+                  <div>
+                    <p className="text-2xl font-bold tracking-tight tabular-nums">{project.metric}</p>
+                    <p className="mt-1 text-xs text-zinc-500">{project.metricLabel}</p>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-900">
+                    Case Study
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How I Build with AI */}
+      <section id="ai" className={section} aria-labelledby="ai-heading">
+        <div className="mx-auto max-w-5xl px-5">
+          <SectionHeader id="ai-heading" eyebrow="How I Build with AI" title="AI는 빠르게, 판단과 검증은 직접" />
+          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {aiSteps.map((step) => (
+              <li key={step.step} className={`flex flex-col p-5 ${card}`}>
+                <p className="font-mono text-xs text-zinc-400">{step.step}</p>
+                <h3 className="mt-3 text-base font-semibold">{step.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-zinc-600 break-keep">{step.description}</p>
+                {step.href ? (
+                  <Link href={step.href} className={"mt-auto inline-flex items-center gap-1 pt-5 text-xs font-medium text-blue-700 hover:text-blue-900 " + focus}>
+                    {step.example}
+                    <ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                  </Link>
+                ) : (
+                  <p className="mt-auto pt-5 text-xs text-zinc-500">{step.example}</p>
+                )}
               </li>
             ))}
+          </ol>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {responsibilities.map((group, i) => (
+              <div key={group.title} className={`p-5 ${i === 0 ? "rounded-2xl border border-blue-200 bg-blue-50/60" : card}`}>
+                <h3 className={`text-sm font-semibold ${i === 0 ? "text-blue-900" : "text-zinc-900"}`}>{group.title}</h3>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <li key={item} className={`rounded-full border px-3 py-1 text-xs ${i === 0 ? "border-blue-200 bg-white text-blue-900" : "border-zinc-200 bg-zinc-50 text-zinc-700"}`}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Experience */}
+      <section id="experience" className={section} aria-labelledby="experience-heading">
+        <div className="mx-auto max-w-5xl px-5">
+          <SectionHeader id="experience-heading" eyebrow="Experience" title="경력" />
+          <ol className={`divide-y divide-zinc-100 ${card}`}>
+            {experience
+              .filter((item) => item.visible)
+              .map((item) => (
+                <li key={item.id} className="grid gap-2 p-5 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-6 md:p-6">
+                  <p className="text-xs leading-6 text-zinc-500 tabular-nums">
+                    {item.period.split(" · ").map((part, i) => (
+                      <span key={part} className={i === 0 ? "block font-medium text-zinc-700" : "block"}>
+                        {part}
+                      </span>
+                    ))}
+                  </p>
+                  <div className="min-w-0">
+                    <h3 className="text-base font-semibold break-keep">
+                      {item.company ? <>{item.company} · </> : null}
+                      {item.title}
+                    </h3>
+                    <ul className="mt-2 space-y-1.5">
+                      {item.items.map((line) => (
+                        <li key={line} className="flex gap-2.5 text-sm leading-6 text-zinc-600 break-keep">
+                          <span className="mt-[0.6rem] h-1 w-1 shrink-0 rounded-full bg-zinc-400" aria-hidden />
+                          {line}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              ))}
           </ol>
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section id="experience" className="py-16 border-t border-zinc-200">
-        <div className="mx-auto max-w-4xl px-5">
-          <SectionHeading title="Experience" />
-
-          <div className="space-y-8">
-            {/* Experience 0 */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm break-inside-avoid">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-zinc-900">삼화 (R&D본부 Pre-Production팀 · 사원)</h3>
-                  <p className="text-sm text-zinc-600 mt-1">2026.06 ~ 재직 중 · 화장품 용기 제조</p>
-                </div>
-                <Briefcase className="h-5 w-5 text-zinc-600" />
-              </div>
-              <ul className="space-y-2 text-sm text-zinc-700">
-                <li>• 고객사 CT 요청 샘플의 출고 전 사내 CT 테스트, 신제품 · 개발 샘플 시사출 후 CT 테스트 및 검토</li>
-                <li>• 샘플 생산 금형 이동 관리 및 생산 계획 수립</li>
-                <li>• 반복 현황 집계와 관리 문서 작성을 자동화한 업무 관리 워크스페이스(Preflight) 구축 — 기획 · 개발 · 운영을 혼자 맡아 팀에서 사용 중</li>
-              </ul>
-            </div>
-
-            {/* Experience 1 */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm break-inside-avoid">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-zinc-900">마크클라우드 (데이터/AI 인턴)</h3>
-                  <p className="text-sm text-zinc-600 mt-1">2025.11 ~ 2025.12</p>
-                </div>
-                <Briefcase className="h-5 w-5 text-zinc-600" />
-              </div>
-              <ul className="space-y-2 text-sm text-zinc-700">
-                <li>• 외부 LLM API 호출 실패 원인 분석 및 의존성에 따른 처리 한계를 식별하여 로컬 LLM 전환 타당성 검토를 위한 모델 테스트</li>
-                <li>• 기존 STT 모델의 특성 분석을 통해 KPI 미달성 원인을 파악하고, NeMo 기반 STT 모델 교체 및 의미 정확도 평가를 추가·보완하여 KPI 달성</li>
-                <li>• 자동 보고서 생성을 위한 출력 구조 템플릿과 CSV 기반 데이터 처리·렌더링·LLM 코멘트 생성을 수행하는 프로세스를 설계·구현</li>
-              </ul>
-            </div>
-
-            {/* Experience 2 */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm break-inside-avoid">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-zinc-900">내일배움캠프 데이터분석가과정</h3>
-                  <p className="text-sm text-zinc-600 mt-1">2025.02 ~ 2025.07</p>
-                </div>
-                <Briefcase className="h-5 w-5 text-zinc-600" />
-              </div>
-              <ul className="space-y-2 text-sm text-zinc-700">
-                <li>• Python, SQL 기반 데이터 수집·정제·분석·시각화 전 과정을 학습</li>
-                <li>• 데이터를 통해 가설을 검증하며 문제의 근본 원인을 파악하는 분석 프로젝트 수행</li>
-                <li>• 머신러닝 모델링을 통한 분석 및 액션 가능한 인사이트 제시</li>
-              </ul>
-            </div>
-
-            {/* Experience 3 */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm break-inside-avoid">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-zinc-900">해군부사관</h3>
-                  <p className="text-sm text-zinc-600 mt-1">2015.06 ~ 2019.08</p>
-                </div>
-                <Briefcase className="h-5 w-5 text-zinc-600" />
-              </div>
-              <ul className="space-y-2 text-sm text-zinc-700">
-                <li>• 다중 센서 데이터 환경에서 실시간 정보를 해석하고 판단 및 시스템 운용</li>
-                <li>• 탄착군 영상 분석, 오차 패턴 규명 및 개선안 도출</li>
-                <li>• 파라미터 튜닝으로 노이즈와 간섭 환경에서 출력 품질과 신뢰도를 개선</li>
-                <li>• 시스템 장애 발생 시 오류 코드를 기반으로 원인을 추적하고, 설정 및 복구 조치를 통한 유지 보수</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-16 border-t border-zinc-200">
-        <div className="mx-auto max-w-4xl px-5">
-          <h2 className="text-2xl font-semibold text-zinc-900 mb-8">Projects</h2>
-
-          {/* 현업 프로젝트: 대표 카드 */}
-          {categories
-            .filter((cat) => cat.key === "work")
-            .map((cat) => (
-              <div key={cat.key}>
-                <h3 className="mb-3 text-sm font-semibold text-zinc-500">{cat.label}</h3>
-                <div className="grid gap-4">
-                  {projectsIn(cat.key).map((p) => (
-                    <Link
-                      key={p.id}
-                      href={p.href}
-                      className="group block rounded-2xl border border-zinc-200 bg-white p-8 hover:bg-zinc-50 transition shadow-sm break-inside-avoid"
-                    >
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <div className="flex flex-wrap items-center gap-2 mb-2">
-                            <h4 className="text-xl font-semibold text-zinc-900">{p.title}</h4>
-                            <StatusBadge status={p.status} />
-                          </div>
-                          <p className="text-sm text-zinc-600">{p.subtitle}</p>
-                        </div>
-                        <ArrowRight className="h-5 w-5 shrink-0 text-zinc-600 group-hover:text-zinc-900 group-hover:translate-x-1 transition" />
-                      </div>
-                      <p className="text-sm text-zinc-700 leading-relaxed break-keep">{p.summary}</p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {p.tags.map((tech) => (
-                          <span key={tech} className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </Link>
+      {/* Skills */}
+      <section id="skills" className={section} aria-labelledby="skills-heading">
+        <div className="mx-auto max-w-5xl px-5">
+          <SectionHeader id="skills-heading" eyebrow="Skills" title="기술" />
+          <div className="grid gap-4 sm:grid-cols-2">
+            {skills.map((group) => (
+              <div key={group.title} className={`flex flex-col p-5 ${card}`}>
+                <h3 className="text-base font-semibold">{group.title}</h3>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <li key={item} className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-700">
+                      {item}
+                    </li>
                   ))}
-                </div>
+                </ul>
+                <Link href={group.href} className={"mt-auto inline-flex items-center gap-1 pt-4 text-xs font-medium text-blue-700 hover:text-blue-900 " + focus}>
+                  {group.evidence}에서 사용
+                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                </Link>
               </div>
             ))}
+          </div>
+          <p className="mt-5 text-xs leading-6 text-zinc-500">Development workflow · Claude, Codex (AI-assisted development, human-verified)</p>
+        </div>
+      </section>
 
-          {/* 개인 · 부트캠프 프로젝트: 한 줄 목록 */}
-          <div className="mt-10 grid gap-8 md:grid-cols-2 md:gap-6">
-            {categories
-              .filter((cat) => cat.key !== "work")
-              .map((cat) => (
-                <div key={cat.key}>
-                  <h3 className="mb-3 text-sm font-semibold text-zinc-500">{cat.label}</h3>
-                  <ul className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm break-inside-avoid">
-                    {projectsIn(cat.key).map((p) => (
-                      <li key={p.id} className="border-b border-zinc-100 last:border-b-0">
-                        <Link href={p.href} className="group flex items-center justify-between gap-3 px-5 py-4 transition hover:bg-zinc-50">
-                          <span className="min-w-0">
-                            <span className="flex flex-wrap items-center gap-2">
-                              <span className="font-semibold text-zinc-900">{p.title}</span>
-                              {p.status !== "완료" ? <StatusBadge status={p.status} /> : null}
-                            </span>
-                            <span className="mt-0.5 block text-sm text-zinc-500 break-keep">{p.subtitle}</span>
-                          </span>
-                          <ArrowRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:translate-x-1 group-hover:text-zinc-900" />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+      {/* Currently Building */}
+      <section id="building" className={section} aria-labelledby="building-heading">
+        <div className="mx-auto max-w-5xl px-5">
+          <SectionHeader id="building-heading" eyebrow="Currently Building" title="진행 중인 작업" />
+          <div className="grid gap-4 md:grid-cols-3">
+            {currentlyBuilding.map((item) => {
+              const body = (
+                <>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-base font-semibold">{item.title}</h3>
+                    {item.status ? <StatusBadge status={item.status} /> : null}
+                  </div>
+                  <p className="mt-2 text-sm leading-6 text-zinc-600 break-keep">{item.description}</p>
+                  {item.href ? (
+                    <span className="mt-auto inline-flex items-center gap-1 pt-4 text-xs font-medium text-blue-700">
+                      자세히 보기
+                      <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" aria-hidden />
+                    </span>
+                  ) : null}
+                </>
+              );
+              return item.href ? (
+                <Link key={item.title} href={item.href} className={`group flex flex-col p-5 ${card} transition hover:border-zinc-300 hover:shadow-md ${focus}`}>
+                  {body}
+                </Link>
+              ) : (
+                <div key={item.title} className={`flex flex-col p-5 ${card}`}>
+                  {body}
                 </div>
-              ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-16 border-t border-zinc-200">
-        <div className="mx-auto max-w-4xl px-5">
-          <SectionHeading title="Skill Set" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* LLM / AI */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-2 mb-4">
-                <Briefcase className="h-5 w-5 text-purple-600" />
-                <h3 className="text-lg font-semibold text-zinc-900">LLM / AI</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['OpenAI', 'Pinecone', 'Llama', 'RAG', 'LangChain', 'Claude'].map((skill) => (
-                  <span key={skill} className="px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-xs text-purple-700">
-                    {skill}
-                  </span>
-                ))}
-              </div>
+      {/* Contact */}
+      <section id="contact" className={section} aria-labelledby="contact-heading">
+        <div className="mx-auto max-w-5xl px-5">
+          <div className={`flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between md:p-8 ${card}`}>
+            <div>
+              <h2 id="contact-heading" className="text-2xl font-bold tracking-tight">Contact</h2>
+              <p className="mt-2 text-sm text-zinc-600">협업이나 채용 관련 연락은 메일로 부탁드립니다.</p>
             </div>
-
-            {/* Data Analysis */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-2 mb-4">
-                <FileText className="h-5 w-5 text-emerald-600" />
-                <h3 className="text-lg font-semibold text-zinc-900">Data Analysis</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['Python', 'SQL', 'Tableau'].map((skill) => (
-                  <span key={skill} className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs text-emerald-700">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Backend / Data Handling */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-2 mb-4">
-                <Code2 className="h-5 w-5 text-blue-600" />
-                <h3 className="text-lg font-semibold text-zinc-900">Backend / Data Handling</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['Python', 'FastAPI', 'PostgreSQL', 'Docker', 'SQLAlchemy'].map((skill) => (
-                  <span key={skill} className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-xs text-blue-700">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Frontend / Others */}
-            <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center gap-2 mb-4">
-                <Code2 className="h-5 w-5 text-zinc-600" />
-                <h3 className="text-lg font-semibold text-zinc-900">Frontend / Others</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {['Next.js', 'TypeScript', 'Vitest', 'Streamlit', 'Linux/Ubuntu', 'WSL'].map((skill) => (
-                  <span key={skill} className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700">
-                    {skill}
-                  </span>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-3">
+              <a href="mailto:bwme43@gmail.com" className={"inline-flex min-h-11 items-center gap-2 rounded-lg bg-zinc-900 px-5 text-sm font-semibold text-white transition hover:bg-zinc-700 " + focus}>
+                <Mail className="h-4 w-4" aria-hidden />
+                bwme43@gmail.com
+              </a>
+              <a href="https://www.linkedin.com/in/navv6" target="_blank" rel="noopener noreferrer" className={"inline-flex min-h-11 items-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 text-sm transition hover:bg-zinc-100 " + focus}>
+                <Linkedin className="h-4 w-4" aria-hidden />
+                LinkedIn
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-zinc-200 py-8 mt-16">
-        <div className="mx-auto max-w-4xl px-5 text-center text-sm text-zinc-600">
-          © 2025 백경우. All rights reserved.
-        </div>
-      </footer>
-
-      {/* Floating Navigation */}
-      <nav className="fixed bottom-8 left-1/2 z-30 hidden -translate-x-1/2 lg:block print:hidden">
-        <div className="flex items-center gap-1 rounded-full border border-zinc-200 bg-white/90 px-2 py-2 shadow-lg backdrop-blur">
-          {[
-            { id: "intro", label: "소개" },
-            { id: "ai", label: "AI 활용" },
-            { id: "experience", label: "경력" },
-            { id: "projects", label: "프로젝트" },
-            { id: "skills", label: "기술" },
-          ].map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                const element = document.getElementById(item.id);
-                if (element) {
-                  const headerOffset = 80;
-                  const elementPosition = element.getBoundingClientRect().top;
-                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                  window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                  });
-                }
-              }}
-              className="rounded-full px-4 py-2 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-900"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </nav>
+      <SiteFooter />
     </main>
-  )
+  );
 }

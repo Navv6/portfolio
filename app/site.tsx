@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { confirmations } from "./content-confirmations";
 
 export type CategoryKey = "work" | "personal" | "bootcamp";
 
@@ -51,7 +52,7 @@ export const projects: Project[] = [
     period: "2026.08 ~",
     status: "운영 중",
     href: "/projects/preflight",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "SheetJS", "Vitest", "Claude"],
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "SheetJS", "Vitest"],
   },
   {
     id: "vibecoder",
@@ -111,7 +112,18 @@ export const projects: Project[] = [
   },
 ];
 
-export const projectsIn = (key: CategoryKey) => projects.filter((p) => p.category === key);
+const markCloudProject: Project = {
+  id: "markcloud-ai", category: "work", title: "MarkCloud AI",
+  subtitle: "STT 모델 평가 · 로컬 LLM 타당성 검토",
+  summary: "음성인식 모델을 비교하고 의미 기반 평가를 보완했습니다. 로컬 LLM은 전환 타당성을 검토한 단계입니다.",
+  period: "2025.11 ~ 2025.12", status: "인턴 프로젝트", href: "/projects/markcloud-ai",
+  tags: ["STT", "Model Evaluation", "Local LLM"],
+};
+
+export const projectsIn = (key: CategoryKey) => [
+  ...projects,
+  ...(confirmations.markCloudPublic === true ? [markCloudProject] : []),
+].filter((p) => p.category === key);
 
 /** 모든 페이지 공통 상단 바. 왼쪽은 페이지 이름, 오른쪽은 카테고리 메뉴 */
 export function SiteHeader({
@@ -246,17 +258,17 @@ export function BoardPage({ category, children }: { category: CategoryKey; child
   const cat = categories.find((c) => c.key === category)!;
   const list = projectsIn(category);
   return (
-    <main className="min-h-screen bg-gray-50 text-zinc-900">
+    <main className="min-h-screen bg-zinc-50 text-zinc-900">
       <SiteHeader active={category} />
-      <section className="pt-14 pb-10 md:pt-20">
-        <div className="mx-auto max-w-4xl px-5">
-          <p className="font-mono text-xs uppercase tracking-widest text-zinc-500">Projects · {list.length}</p>
-          <h1 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">{cat.label}</h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-700 break-keep">{cat.desc}</p>
+      <section className="pb-10 pt-12 md:pb-12 md:pt-16">
+        <div className="mx-auto max-w-5xl px-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">Projects · {list.length}</p>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">{cat.label}</h1>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-600 break-keep">{cat.desc}</p>
         </div>
       </section>
       <section className="pb-16">
-        <div className="mx-auto max-w-4xl px-5">
+        <div className="mx-auto max-w-5xl px-5">
           <ProjectBoard list={list} />
           <div className="mt-6 flex flex-wrap gap-2 text-sm">
             {categories
@@ -270,9 +282,51 @@ export function BoardPage({ category, children }: { category: CategoryKey; child
         </div>
       </section>
       {children}
-      <footer className="border-t border-zinc-200 py-8">
-        <div className="mx-auto max-w-4xl px-5 text-center text-sm text-zinc-600">© 2025 백경우. All rights reserved.</div>
-      </footer>
+      <SiteFooter />
     </main>
+  );
+}
+
+/* ---------- 공통 디자인 요소: 섹션 제목 · 푸터 ---------- */
+
+export function SectionHeader({
+  eyebrow,
+  title,
+  desc,
+  id,
+  action,
+}: {
+  eyebrow?: string;
+  title: ReactNode;
+  desc?: ReactNode;
+  id?: string;
+  action?: ReactNode;
+}) {
+  return (
+    <div className="mb-8 flex flex-wrap items-end justify-between gap-x-6 gap-y-3 md:mb-10">
+      <div className="min-w-0 max-w-3xl">
+        {eyebrow ? <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">{eyebrow}</p> : null}
+        <h2 id={id} className="mt-2 text-2xl font-bold tracking-tight text-zinc-900 break-keep md:text-3xl">
+          {title}
+        </h2>
+        {desc ? <p className="mt-3 text-sm leading-7 text-zinc-600 break-keep md:text-base">{desc}</p> : null}
+      </div>
+      {action}
+    </div>
+  );
+}
+
+export function SiteFooter({ className = "" }: { className?: string }) {
+  return (
+    <footer className={`border-t border-zinc-200 py-10 ${className}`}>
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-5 text-xs text-zinc-500">
+        <span>© 2026 백경우</span>
+        <span className="flex gap-4">
+          <a href="mailto:bwme43@gmail.com" className="hover:text-zinc-900">bwme43@gmail.com</a>
+          <a href="https://github.com/Navv6" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-900">GitHub</a>
+          <a href="https://www.linkedin.com/in/navv6" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-900">LinkedIn</a>
+        </span>
+      </div>
+    </footer>
   );
 }

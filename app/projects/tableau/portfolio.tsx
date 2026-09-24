@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useState } from "react";
-import { SiteHeader } from "../../site";
+import { SiteFooter, SiteHeader } from "../../site";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -518,14 +518,7 @@ export default function TableauPortfolioPage() {
         </Container>
       </section>
 
-      {/* 푸터 */}
-      <section className="mt-16 md:mt-24 border-t border-slate-200/70 pt-10 pb-16">
-        <Container>
-          <div className="text-center text-xs text-slate-400">
-            Tableau · 전투사관학교 챔피언 가이드북 © 2025
-          </div>
-        </Container>
-      </section>
+      <SiteFooter className="mt-16 md:mt-24" />
 
       {/* 모달 */}
       {activeFrame !== null && (
