@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ArrowUpRight, Maximize2, X, ZoomIn, ZoomOut } from "lucide-react";
 import { SiteFooter, SiteHeader } from "../../site";
+import { ProjectTexture } from "../../visuals";
 import { DecisionCard, ImpactCard } from "../../case-study";
 import { confirmations } from "../../content-confirmations";
 import { roadmap, impacts, timeline, constraints } from "./content";
@@ -118,7 +119,8 @@ export default function PreflightPage() {
   return (
     <main className="preflight-case min-h-screen bg-zinc-50 text-zinc-900">
       <SiteHeader active="work" title="Preflight" subtitle="Pre-Production R&D 업무 관리 워크스페이스" className="print:hidden" />
-      <section className="preflight-intro mx-auto max-w-5xl px-5 pb-14 pt-12 md:pb-20 md:pt-16 print:p-0">
+      <section className="preflight-intro relative mx-auto max-w-5xl px-5 pb-14 pt-12 md:pb-20 md:pt-16 print:p-0">
+        <ProjectTexture kind="data" className="pointer-events-none absolute right-5 top-14 hidden w-56 opacity-70 lg:block print:hidden" />
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">Production · Internal Use · 삼화 R&D본부</p>
         <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-6xl print:text-3xl">Preflight</h1>
         <p className="mt-5 text-xl font-semibold leading-snug tracking-tight text-zinc-800 break-keep md:text-2xl print:text-lg">흩어진 팀 업무를, 함께 확인하는 한 화면으로.</p>

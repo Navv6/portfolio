@@ -2,11 +2,15 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import { SectionHeader, SiteFooter, SiteHeader, StatusBadge } from "./site";
 import { introduction, featuredProjects, aiSteps, responsibilities, experience, skills, currentlyBuilding } from "./home-content";
+import { HeroVisual } from "./motion";
+import { ProjectTexture, type TextureKind } from "./visuals";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const focus = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600";
 const section = "scroll-mt-20 border-t border-zinc-200 py-14 md:py-20";
 const card = "rounded-2xl border border-zinc-200 bg-white";
+const textureOf: Record<string, TextureKind> = { preflight: "data", "markcloud-ai": "wave", deepvi: "network" };
+const delay = (i: number) => ({ "--reveal-delay": `${i * 80}ms` }) as React.CSSProperties;
 
 export default function Home() {
   const visibleProjects = featuredProjects.filter((project) => project.visible);
@@ -17,8 +21,9 @@ export default function Home() {
       <SiteHeader active="home" className="print:hidden" />
 
       {/* Intro */}
-      <section id="intro" className="scroll-mt-20 pb-14 pt-12 md:pb-20 md:pt-20" aria-labelledby="intro-title">
-        <div className="mx-auto grid max-w-5xl items-start gap-8 px-5 md:grid-cols-[minmax(0,1fr)_auto] md:gap-12">
+      <section id="intro" className="relative scroll-mt-20 overflow-hidden pb-14 pt-12 md:pb-16 md:pt-16" aria-labelledby="intro-title">
+        <div className="hero-glow pointer-events-none absolute inset-0 -z-0" aria-hidden />
+        <div className="relative mx-auto grid max-w-5xl items-center gap-8 px-5 md:grid-cols-[minmax(0,1fr)_auto] md:gap-8">
           <div className="min-w-0">
             <p className="text-sm font-semibold text-zinc-500">{introduction.name}</p>
             <h1 id="intro-title" className="mt-2 text-4xl font-bold tracking-tight md:text-6xl">
@@ -32,7 +37,6 @@ export default function Home() {
               ))}
             </p>
             <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-600 break-keep">{introduction.description}</p>
-            <p className="mt-2 max-w-2xl text-sm leading-7 text-zinc-500 break-keep">{introduction.about}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#projects" className={"inline-flex min-h-11 items-center gap-2 rounded-lg bg-zinc-900 px-5 text-sm font-semibold text-white transition hover:bg-zinc-700 " + focus}>
                 View Work
@@ -48,13 +52,9 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <img
-            src={basePath + "/profile.jpg"}
-            alt="백경우 프로필"
-            width={160}
-            height={160}
-            className="hidden h-40 w-40 rounded-2xl border border-zinc-200 bg-white object-contain object-top shadow-sm md:block"
-          />
+          <div className="hidden md:block">
+            <HeroVisual />
+          </div>
         </div>
       </section>
 
@@ -74,9 +74,10 @@ export default function Home() {
           />
 
           {lead ? (
-            <Link href={lead.href} className={`group grid overflow-hidden md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] ${card} transition hover:border-zinc-300 hover:shadow-md ${focus}`}>
-              <div className="flex flex-col p-6 md:p-8">
-                <p className="text-xs font-semibold text-zinc-500">{lead.eyebrow}</p>
+            <Link href={lead.href} data-reveal className={`card-lift group isolate grid overflow-hidden md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] ${card} ${focus}`}>
+              <div className="relative flex flex-col p-6 md:p-8">
+                <ProjectTexture kind={textureOf[lead.id] ?? "data"} className="card-texture pointer-events-none absolute right-5 top-5 -z-10 w-36 opacity-50" />
+                <p className="relative text-xs font-semibold text-zinc-500">{lead.eyebrow}</p>
                 <h3 className="mt-3 text-3xl font-bold tracking-tight">{lead.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-zinc-600 break-keep">{lead.description}</p>
                 <p className="mt-4 text-xs text-zinc-500">
@@ -104,8 +105,9 @@ export default function Home() {
           ) : null}
 
           <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {others.map((project) => (
-              <Link key={project.id} href={project.href} className={`group flex flex-col p-6 md:p-7 ${card} transition hover:border-zinc-300 hover:shadow-md ${focus}`}>
+            {others.map((project, i) => (
+              <Link key={project.id} href={project.href} data-reveal style={delay(i + 1)} className={`card-lift group relative isolate flex flex-col overflow-hidden p-6 md:p-7 ${card} ${focus}`}>
+                <ProjectTexture kind={textureOf[project.id] ?? "network"} className="card-texture pointer-events-none absolute right-5 top-5 -z-10 w-32 opacity-50" />
                 <p className="text-xs font-semibold text-zinc-500">{project.eyebrow}</p>
                 <h3 className="mt-3 text-2xl font-bold tracking-tight">{project.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-zinc-600 break-keep">{project.description}</p>
@@ -133,8 +135,9 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-5">
           <SectionHeader id="ai-heading" eyebrow="How I Build with AI" title="AI는 빠르게, 판단과 검증은 직접" />
           <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {aiSteps.map((step) => (
-              <li key={step.step} className={`flex flex-col p-5 ${card}`}>
+            {aiSteps.map((step, i) => (
+              <li key={step.step} data-reveal style={delay(i)} className={`relative flex flex-col p-5 ${card}`}>
+                <span data-reveal="line" style={delay(i + 2)} className="absolute inset-x-5 top-0 h-0.5 rounded-full bg-blue-500/70" aria-hidden />
                 <p className="font-mono text-xs text-zinc-400">{step.step}</p>
                 <h3 className="mt-3 text-base font-semibold">{step.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-zinc-600 break-keep">{step.description}</p>
@@ -149,9 +152,9 @@ export default function Home() {
               </li>
             ))}
           </ol>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="focus-pair mt-4 grid gap-4 sm:grid-cols-2">
             {responsibilities.map((group, i) => (
-              <div key={group.title} className={`p-5 ${i === 0 ? "rounded-2xl border border-blue-200 bg-blue-50/60" : card}`}>
+              <div key={group.title} data-reveal style={delay(i + 4)} className={`p-5 ${i === 0 ? "rounded-2xl border border-blue-200 bg-blue-50/60" : card}`}>
                 <h3 className={`text-sm font-semibold ${i === 0 ? "text-blue-900" : "text-zinc-900"}`}>{group.title}</h3>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {group.items.map((item) => (
@@ -169,12 +172,12 @@ export default function Home() {
       {/* Experience */}
       <section id="experience" className={section} aria-labelledby="experience-heading">
         <div className="mx-auto max-w-5xl px-5">
-          <SectionHeader id="experience-heading" eyebrow="Experience" title="경력" />
+          <SectionHeader id="experience-heading" eyebrow="Experience" title="경력" desc={introduction.about} />
           <ol className={`divide-y divide-zinc-100 ${card}`}>
             {experience
               .filter((item) => item.visible)
-              .map((item) => (
-                <li key={item.id} className="grid gap-2 p-5 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-6 md:p-6">
+              .map((item, i) => (
+                <li key={item.id} data-reveal style={delay(i)} className="grid gap-2 p-5 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-6 md:p-6">
                   <p className="text-xs leading-6 text-zinc-500 tabular-nums">
                     {item.period.split(" · ").map((part, i) => (
                       <span key={part} className={i === 0 ? "block font-medium text-zinc-700" : "block"}>
@@ -207,12 +210,12 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-5">
           <SectionHeader id="skills-heading" eyebrow="Skills" title="기술" />
           <div className="grid gap-4 sm:grid-cols-2">
-            {skills.map((group) => (
-              <div key={group.title} className={`flex flex-col p-5 ${card}`}>
+            {skills.map((group, i) => (
+              <div key={group.title} data-reveal style={delay(i)} className={`flex flex-col p-5 ${card}`}>
                 <h3 className="text-base font-semibold">{group.title}</h3>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {group.items.map((item) => (
-                    <li key={item} className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-700">
+                    <li key={item} className="chip-lift rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-700">
                       {item}
                     </li>
                   ))}
@@ -233,7 +236,7 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-5">
           <SectionHeader id="building-heading" eyebrow="Currently Building" title="진행 중인 작업" />
           <div className="grid gap-4 md:grid-cols-3">
-            {currentlyBuilding.map((item) => {
+            {currentlyBuilding.map((item, i) => {
               const body = (
                 <>
                   <div className="flex flex-wrap items-center gap-2">
@@ -250,11 +253,11 @@ export default function Home() {
                 </>
               );
               return item.href ? (
-                <Link key={item.title} href={item.href} className={`group flex flex-col p-5 ${card} transition hover:border-zinc-300 hover:shadow-md ${focus}`}>
+                <Link key={item.title} href={item.href} data-reveal style={delay(i)} className={`card-lift group flex flex-col p-5 ${card} ${focus}`}>
                   {body}
                 </Link>
               ) : (
-                <div key={item.title} className={`flex flex-col p-5 ${card}`}>
+                <div key={item.title} data-reveal style={delay(i)} className={`flex flex-col p-5 ${card}`}>
                   {body}
                 </div>
               );
@@ -266,7 +269,7 @@ export default function Home() {
       {/* Contact */}
       <section id="contact" className={section} aria-labelledby="contact-heading">
         <div className="mx-auto max-w-5xl px-5">
-          <div className={`flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between md:p-8 ${card}`}>
+          <div data-reveal className={`flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between md:p-8 ${card}`}>
             <div>
               <h2 id="contact-heading" className="text-2xl font-bold tracking-tight">Contact</h2>
               <p className="mt-2 text-sm text-zinc-600">협업이나 채용 관련 연락은 메일로 부탁드립니다.</p>

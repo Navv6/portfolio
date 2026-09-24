@@ -59,3 +59,164 @@ body {
     display: none;
   }
 }
+
+/* ---------------------------------------------------------------
+   Visual layer — 콘텐츠보다 효과가 먼저 보이지 않도록 약하게 유지
+   --------------------------------------------------------------- */
+
+/* 스크롤 등장: JS가 켜진 경우에만 숨겼다가(.js) 화면에 들어오면 표시 */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+/* 단계 카드 위쪽의 진행선: 왼쪽에서 오른쪽으로 그려짐 */
+.js [data-reveal="line"] {
+  opacity: 1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js [data-reveal="line"].is-visible {
+  transform: scaleX(1);
+}
+
+/* 첫 화면 그래픽: 층마다 깊이를 주고, 마우스 값(--rx/--ry)으로 아주 약하게 기울임 */
+.hero-visual {
+  perspective: 1100px;
+}
+.hero-stage {
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: hero-float 14s ease-in-out infinite;
+}
+.hero-layer {
+  transform: translateZ(var(--z, 0px));
+}
+.hero-node {
+  animation: hero-node 9s ease-in-out infinite;
+}
+.hero-particle {
+  animation: hero-particle 12s ease-in-out infinite;
+}
+@keyframes hero-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -6px; }
+}
+@keyframes hero-node {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+@keyframes hero-particle {
+  0%, 100% { translate: 0 0; opacity: 0.5; }
+  50% { translate: 0 -10px; opacity: 1; }
+}
+
+/* 첫 화면 뒤의 약한 빛: 16초 주기로 천천히 호흡 */
+.hero-glow {
+  background:
+    radial-gradient(closest-side, rgba(96, 165, 250, 0.28), transparent),
+    radial-gradient(closest-side, rgba(167, 139, 250, 0.18), transparent);
+  background-size: 70% 80%, 55% 70%;
+  background-position: 70% 30%, 88% 70%;
+  background-repeat: no-repeat;
+  filter: blur(40px);
+  animation: hero-glow 16s ease-in-out infinite;
+}
+@keyframes hero-glow {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+/* 카드: 올리면 4px 떠오르고 테두리·그림자가 조금 진해짐. 터치에서는 누르는 느낌만 */
+.card-lift {
+  transition:
+    transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+}
+.card-lift:active {
+  transform: scale(0.99);
+}
+@media (hover: hover) and (pointer: fine) {
+  .card-lift:hover {
+    transform: translateY(-4px);
+    border-color: rgb(212 212 216);
+    box-shadow: 0 18px 40px -24px rgba(24, 24, 27, 0.35);
+  }
+  .card-lift:hover .card-texture {
+    opacity: 0.9;
+  }
+  /* 기술 태그: 2px만 */
+  .chip-lift {
+    transition: transform 200ms ease, border-color 200ms ease;
+  }
+  .chip-lift:hover {
+    transform: translateY(-2px);
+    border-color: rgb(161 161 170);
+  }
+  /* 직접 결정 / AI 활용: 한쪽에 올리면 다른 쪽이 살짝 물러남 */
+  .focus-pair > * {
+    transition: opacity 250ms ease;
+  }
+  .focus-pair:hover > * {
+    opacity: 0.8;
+  }
+  .focus-pair:hover > *:hover {
+    opacity: 1;
+  }
+  /* 구조 흐름도 노드 강조 */
+  .flow-node {
+    transition: background-color 200ms ease, box-shadow 200ms ease;
+  }
+  .flow-node:hover {
+    background-color: white;
+    box-shadow: 0 0 0 1px rgb(191 219 254);
+  }
+}
+.card-texture {
+  transition: opacity 300ms ease;
+}
+
+/* 모션 감소 설정: 등장 효과·연속 애니메이션·기울임 모두 제거 */
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal],
+  .js [data-reveal="line"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-stage,
+  .hero-node,
+  .hero-particle,
+  .hero-glow {
+    animation: none;
+    transform: none;
+  }
+  .card-lift,
+  .card-lift:hover,
+  .chip-lift:hover {
+    transform: none;
+  }
+}
+
+/* 인쇄: 숨겨 둔 요소가 PDF에서 빠지지 않도록 */
+@media print {
+  .js [data-reveal],
+  .js [data-reveal="line"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-glow {
+    display: none;
+  }
+}

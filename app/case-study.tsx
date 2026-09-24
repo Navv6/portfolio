@@ -10,7 +10,7 @@ export function CaseSection({ id, title, children }: { id: string; title: string
 
 export function MetricCard({ value, label, description, baseline }: { value: string | number | null; label: string; description?: string; baseline?: string | null }) {
   if (value === null || value === "") return null;
-  return <div className="rounded-2xl border border-zinc-200 bg-white p-5">
+  return <div data-reveal className="rounded-2xl border border-zinc-200 bg-white p-5">
     <p className="text-3xl font-bold tracking-tight text-zinc-900 tabular-nums">{value}</p>
     <p className="mt-2 text-sm font-medium text-zinc-800">{label}</p>
     {description && <p className="mt-1 text-xs leading-5 text-zinc-500">{description}</p>}
@@ -35,7 +35,7 @@ export function DecisionCard({ decision, reason, tradeoff, result, children, id 
 }
 
 export function FailureCard({ problem, action, result }: { problem: string; action: string; result?: string | null }) {
-  return <article className="rounded-2xl border border-zinc-200 bg-white p-5">
+  return <article data-reveal className="rounded-2xl border border-zinc-200 bg-white p-5">
     <h3 className="font-semibold text-zinc-900">{problem}</h3>
     <p className="mt-2 text-sm leading-6 text-zinc-600">{action}</p>
     {result && <p className="mt-3 text-sm leading-6 text-blue-800">{result}</p>}
@@ -46,8 +46,8 @@ export function ArchitectureFlow({ nodes, label }: { nodes: { title: string; des
   return <figure aria-label={label} className="rounded-2xl border border-zinc-200 bg-white p-4 sm:p-5">
     <figcaption className="mb-4 text-xs font-medium text-zinc-500">{label}</figcaption>
     <ol className="flex flex-col gap-3 lg:flex-row">
-      {nodes.map((node, index) => <li key={node.title} className="flex min-w-0 flex-1 flex-col gap-3 lg:flex-row">
-        <div className="flex-1 rounded-lg bg-zinc-50 p-3">
+      {nodes.map((node, index) => <li key={node.title} data-reveal style={{ "--reveal-delay": `${index * 90}ms` } as React.CSSProperties} className="flex min-w-0 flex-1 flex-col gap-3 lg:flex-row">
+        <div className="flow-node flex-1 rounded-lg bg-zinc-50 p-3">
           <p className="text-sm font-semibold text-zinc-900">{node.title}</p>
           {node.description && <p className="mt-1 text-xs leading-5 text-zinc-600">{node.description}</p>}
         </div>

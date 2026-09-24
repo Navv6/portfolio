@@ -14,6 +14,7 @@ import {
 import React from "react";
 import { TypeReturnBar } from "../../componets";
 import { SiteFooter, SiteHeader } from "../../site";
+import { ProjectTexture } from "../../visuals";
 import { ArchitectureFlow } from "../../case-study";
 
 const fadeUp = {
@@ -365,6 +366,9 @@ export default function DeepViPortfolioPage() {
       {/* Hero */}
       <section id="intro" className="pt-14 md:pt-20">
         <Container>
+          <div className="relative">
+            <ProjectTexture kind="network" className="pointer-events-none absolute right-0 top-10 hidden w-56 opacity-70 lg:block" />
+          </div>
           <motion.div initial="hidden" animate="show" variants={fadeUp}>
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-700 shadow-sm">
               Python · FastAPI · PostgreSQL · LLM · LangChain · RAG

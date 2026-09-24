@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
+import { RevealObserver } from "./motion"
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 const siteOrigin = "https://navv6.github.io"
@@ -39,15 +40,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <head>
+        {/* 스크롤 등장 효과는 JS가 켜진 경우에만 적용 (없으면 내용이 처음부터 보임) */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <RevealObserver />
+      </body>
     </html>
   )
 }

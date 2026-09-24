@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import { SiteFooter, SiteHeader } from "../../site";
 import { CaseSection, MetricCard, FailureCard, ArchitectureFlow } from "../../case-study";
 import { confirmations } from "../../content-confirmations";
-import { sttModels, evaluationConditions, failures, localCriteria, outputFields } from "./content";
+import { ProjectTexture } from "../../visuals";
+import { sttModels, evaluationConditions, failures, localCriteria, outputFields, semanticResults } from "./content";
 
 export default function MarkCloudCaseStudy() {
   if (confirmations.markCloudPublic !== true) notFound();
@@ -12,7 +13,8 @@ export default function MarkCloudCaseStudy() {
     <main className="min-h-screen bg-gray-50 text-zinc-900">
       <SiteHeader active="work" title="MarkCloud AI" className="print:hidden" />
       <div className="mx-auto max-w-5xl px-5">
-        <section className="pb-14 pt-12 md:pb-20 md:pt-16">
+        <section className="relative pb-14 pt-12 md:pb-20 md:pt-16">
+          <ProjectTexture kind="wave" className="pointer-events-none absolute right-5 top-14 hidden w-56 opacity-70 lg:block" />
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">Internship · MarkCloud</p>
           <h1 className="mt-2 max-w-4xl text-4xl font-bold leading-tight tracking-tight break-keep md:text-5xl">한국어 STT 모델 평가와<br className="hidden sm:block" /> 로컬 LLM 타당성 검토</h1>
           <p className="mt-5 max-w-3xl text-base leading-7 text-zinc-600 break-keep">음성인식 모델의 오류율·처리 속도·의미 보존을 비교하고, 긴 문서 요약을 로컬 LLM으로 옮길 수 있는지 검토했습니다.</p>
@@ -29,7 +31,26 @@ export default function MarkCloudCaseStudy() {
 
         <CaseSection id="evaluation" title="모델 이름보다, 같은 기준의 결과를 먼저">
           <p id="problem" className="scroll-mt-20">한국어 음성인식에 사용할 후보를 고르기 위해 같은 데이터셋과 평가 조건으로 정확도와 처리 시간을 비교했습니다.</p>
-          <div className="mt-5 rounded-2xl border border-zinc-200 bg-white p-4 sm:p-6">
+          <div className="mt-5 rounded-2xl border border-zinc-200 bg-white p-4 sm:hidden">
+            <p className="font-semibold text-zinc-900">후보 모델 비교</p>
+            <p className="mt-1 text-xs text-zinc-600">WER·CER·RTF 모두 낮을수록 좋음 · 비율 표기</p>
+            <ul className="mt-3 divide-y divide-zinc-100">
+              {sttModels.map(model => (
+                <li key={model.name} className="py-3 last:pb-0">
+                  <p className="text-sm font-semibold leading-5 text-zinc-900 [overflow-wrap:anywhere]">{model.name}</p>
+                  <dl className="mt-2 grid grid-cols-3 gap-2 tabular-nums">
+                    {([["WER", model.wer], ["CER", model.cer], ["RTF", model.rtf]] as const).map(([label, value]) => (
+                      <div key={label} className="rounded-lg bg-zinc-50 px-2.5 py-2">
+                        <dt className="text-[11px] text-zinc-500">{label}</dt>
+                        <dd className="mt-0.5 whitespace-nowrap text-sm font-medium text-zinc-900">{value.toFixed(4)}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="mt-5 hidden rounded-2xl border border-zinc-200 bg-white p-4 sm:block sm:p-6">
             <table className="w-full table-fixed text-left text-xs sm:text-sm">
               <caption className="mb-4 text-left font-semibold text-zinc-900">후보 모델 비교 <span className="block pt-1 text-xs font-normal text-zinc-600 sm:inline sm:pl-2">WER·CER·RTF 모두 낮을수록 좋음 · 비율 표기</span></caption>
               <thead>
@@ -67,6 +88,26 @@ export default function MarkCloudCaseStudy() {
         <CaseSection id="semantic-evaluation" title="글자가 달라도, 의미는 같을 수 있었습니다.">
           <p>WER·CER만으로는 의미가 유지된 표현 차이와 핵심 의미가 바뀐 오류를 구분하기 어려웠습니다. KR-SBERT로 정답과 인식 결과의 의미 유사도를 계산하고, 반복 샘플링으로 평가의 안정성을 확인했습니다.</p>
           <p className="mt-3 font-medium text-zinc-900">문자 오류율을 대체하는 대신, 의미 보존을 함께 살피는 보조 평가를 추가했습니다.</p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {semanticResults.map((group, i) => (
+              <div key={group.metric} data-reveal style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties} className="rounded-2xl border border-zinc-200 bg-white p-5">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                  <h3 className="text-sm font-semibold text-zinc-900">{group.metric}</h3>
+                  <span className="text-xs text-zinc-500">{group.direction}</span>
+                </div>
+                <dl className="mt-4 grid grid-cols-2 gap-3">
+                  {group.values.map(item => (
+                    <div key={item.model} className={"rounded-xl p-3 " + (item.better ? "bg-blue-50" : "bg-zinc-50")}>
+                      <dt className="text-xs text-zinc-500">{item.model}</dt>
+                      <dd className={"mt-1 whitespace-nowrap text-2xl font-bold tracking-tight tabular-nums " + (item.better ? "text-blue-800" : "text-zinc-900")}>{item.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className="mt-3 text-xs leading-5 text-zinc-500">{group.caption}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4">NeMo는 문자 단위 오류율뿐 아니라 의미 보존 평가에서도 더 낮은 오류율과 높은 유사도를 보였습니다.</p>
           {confirmations.semanticThresholdReason && <p className="mt-3 text-xs">{confirmations.semanticThresholdReason}</p>}
         </CaseSection>
 

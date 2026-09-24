@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { confirmations } from "./content-confirmations";
+import { HeaderShell } from "./motion";
 
 export type CategoryKey = "work" | "personal" | "bootcamp";
 
@@ -140,7 +141,7 @@ export function SiteHeader({
   const linkCls = (key: string) =>
     `text-sm transition ${active === key ? "font-semibold text-zinc-900" : "text-zinc-600 hover:text-zinc-900"}`;
   return (
-    <header className={`sticky top-0 z-20 border-b border-zinc-200 bg-white/80 backdrop-blur ${className}`}>
+    <HeaderShell className={className}>
       <div className="mx-auto max-w-5xl px-5">
         <div className="flex h-14 items-center justify-between gap-4">
           <Link href="/" className="flex min-w-0 items-baseline gap-2 text-sm font-semibold text-zinc-900 transition hover:text-zinc-700">
@@ -192,7 +193,7 @@ export function SiteHeader({
           </nav>
         </div>
       </div>
-    </header>
+    </HeaderShell>
   );
 }
 

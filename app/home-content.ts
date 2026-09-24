@@ -66,7 +66,7 @@ export const experience = [
 
 export const skills = [
   { title: "AI Engineering", items: confirmations.markCloudPublic === true ? ["LLM Integration", "RAG", "Structured Output", "STT", "Model Evaluation"] : ["LLM Integration", "RAG"], evidence: "DeepVi · MarkCloud", href: confirmations.markCloudPublic === true ? "/projects/markcloud-ai#evaluation" : "/projects/deepvi#architecture" },
-  { title: "Models & Frameworks", items: confirmations.markCloudPublic === true ? ["OpenAI", "NeMo", "Whisper", "LangChain", "Sentence Transformers"] : ["OpenAI", "LangChain"], evidence: "DeepVi · MarkCloud", href: confirmations.markCloudPublic === true ? "/projects/markcloud-ai#evaluation" : "/projects/deepvi#architecture" },
+  { title: "Models & Frameworks", items: confirmations.markCloudPublic === true ? ["OpenAI", "Qwen", "Whisper", "NeMo", "NVIDIA Riva", "vLLM", "LangChain", "Sentence Transformers"] : ["OpenAI", "LangChain"], evidence: "DeepVi · MarkCloud", href: confirmations.markCloudPublic === true ? "/projects/markcloud-ai#evaluation" : "/projects/deepvi#architecture" },
   { title: "Data", items: ["Python", "SQL", "PostgreSQL", "Pandas"], evidence: "DeepVi · Preflight", href: "/projects/preflight#storage-decision" },
   { title: "Product Engineering", items: ["Next.js", "TypeScript", "FastAPI", "Vitest", "Docker"], evidence: "Preflight · DeepVi", href: "/projects/preflight#technical-details" },
 ];

@@ -44,3 +44,25 @@ export const outputFields = [
   { field: "citation_evidence[]", description: "인용 근거" },
   { field: "final_summary", description: "최종 요약" },
 ];
+
+// 2026-09-25 사용자 제공 의미 평가 결과
+export const semanticResults = [
+  {
+    metric: "Semantic Similarity",
+    direction: "높을수록 좋음",
+    caption: "정답 문장과 인식 결과의 의미 유사도",
+    values: [
+      { model: "Whisper", value: "0.917" },
+      { model: "NeMo", value: "0.934", better: true },
+    ],
+  },
+  {
+    metric: "SemWER @ 0.85",
+    direction: "낮을수록 좋음",
+    caption: "의미 유사도 0.85 기준으로 집계한 의미 오류율",
+    values: [
+      { model: "Whisper", value: "0.0776" },
+      { model: "NeMo", value: "0.0664", better: true },
+    ],
+  },
+];
