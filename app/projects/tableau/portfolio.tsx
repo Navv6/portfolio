@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useState } from "react";
+import { SiteHeader } from "../../site";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -171,32 +172,7 @@ export default function TableauPortfolioPage() {
         <div className="absolute right-[-220px] top-[140px] h-[520px] w-[520px] rounded-full bg-[#a5b4fc]/35 blur-3xl" />
       </div>
 
-      <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/80 backdrop-blur">
-        <Container>
-          <div className="flex h-14 items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-semibold text-slate-900">Tableau</span>
-              <span className="ml-2 hidden text-xs text-slate-600 md:block">전투사관학교 챔피언 가이드북</span>
-            </div>
-            <nav className="flex items-center gap-6">
-              {[
-                { label: "Home", href: "/" },
-                { label: "DeepVi", href: "/projects/deepvi" },
-                { label: "PriceLens", href: "/projects/pricelens" },
-                { label: "Tableau", href: "/projects/tableau", active: true },
-              ].map((item) => (
-                <a
-                  key={item.label}
-                  href={withBasePath(item.href)}
-                  className={`text-sm transition hover:text-slate-900 ${"active" in item ? "font-semibold text-slate-900" : "text-slate-600"}`}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-          </div>
-        </Container>
-      </header>
+      <SiteHeader active="bootcamp" title="Tableau" subtitle="전투사관학교 챔피언 가이드북" />
 
       {/* Hero */}
       <section className="pt-16 md:pt-24">

@@ -18,6 +18,7 @@ import {
 
 import React from "react";
 import { TypeReturnBar } from "../../componets";
+import { SiteHeader } from "../../site";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -369,38 +370,7 @@ export default function DeepViPortfolioPage() {
       </div>
 
       {/* Top bar */}
-      <header className="sticky top-0 z-20 border-b border-zinc-200 bg-white/80 backdrop-blur">
-        <Container>
-          <div className="flex h-14 items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="text-sm font-semibold text-zinc-900">DeepVi</div>
-              <div className="ml-2 hidden text-xs text-zinc-600 md:block">
-                LLM 기반 기업 분석 서비스
-              </div>
-            </div>
-            <nav className="flex items-center gap-6">
-              <a href={withBasePath("/")} className="text-sm text-zinc-600 transition hover:text-zinc-900">
-                Home
-              </a>
-              <a href={withBasePath("/projects/deepvi")} className="text-sm text-zinc-900 font-semibold transition hover:text-zinc-700">
-                DeepVi
-              </a>
-              <a
-                href={withBasePath("/projects/pricelens")}
-                className="text-sm text-zinc-600 transition hover:text-zinc-900"
-              >
-                PriceLens
-              </a>
-              <a
-                href={withBasePath("/projects/tableau")}
-                className="text-sm text-zinc-600 transition hover:text-zinc-900"
-              >
-                Tableau
-              </a>
-            </nav>
-          </div>
-        </Container>
-      </header>
+      <SiteHeader active="bootcamp" title="DeepVi" subtitle="LLM 기반 기업 분석 서비스" />
 
       {/* Hero */}
       <section id="intro" className="pt-14 md:pt-20">

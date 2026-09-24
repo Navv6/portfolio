@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Mail, Github, Linkedin, FileText, Briefcase, Code2, ArrowRight, Phone } from 'lucide-react'
+import { SiteHeader, StatusBadge, categories, projectsIn } from './site'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 const withBasePath = (path: string) => `${basePath}${path}`
@@ -38,35 +39,7 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-20 border-b border-zinc-200 bg-white/80 backdrop-blur print:hidden">
-        <div className="mx-auto max-w-5xl px-5">
-          <div className="flex h-14 items-center justify-between">
-            <Link href="/" className="text-sm font-semibold text-zinc-900 hover:text-zinc-700 transition">
-              Portfolio
-            </Link>
-            <nav className="flex items-center gap-6">
-              <Link href="/" className="text-sm text-zinc-900 font-semibold transition hover:text-zinc-700">
-                Home
-              </Link>
-              <Link href="/projects/preflight" className="text-sm text-zinc-600 transition hover:text-zinc-900">
-                Preflight
-              </Link>
-              <Link href="/projects/deepvi" className="text-sm text-zinc-600 transition hover:text-zinc-900">
-                DeepVi
-              </Link>
-              <Link href="/projects/pricelens" className="text-sm text-zinc-600 transition hover:text-zinc-900">
-                PriceLens
-              </Link>
-              <Link href="/projects/tableau" className="text-sm text-zinc-600 transition hover:text-zinc-900">
-                Tableau
-              </Link>
-              <Link href="/lab" className="text-sm text-zinc-600 transition hover:text-zinc-900">
-                끄적임
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <SiteHeader active="home" className="print:hidden" />
 
       {/* Hero Section */}
       <section id="intro" className="pt-20 md:pt-32 pb-16">
@@ -163,133 +136,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-16 border-t border-zinc-200">
-        <div className="mx-auto max-w-4xl px-5">
-          <h2 className="text-2xl font-semibold text-zinc-900 mb-8">Projects</h2>
-          
-          <div className="grid gap-6">
-            {/* Project 0: Preflight */}
-            <Link
-              href="/projects/preflight"
-              className="group block rounded-2xl border border-zinc-200 bg-white p-8 hover:bg-zinc-50 transition shadow-sm"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-zinc-900 mb-2">Preflight</h3>
-                  <p className="text-sm text-zinc-600">R&D 업무 관리 워크스페이스</p>
-                </div>
-                <ArrowRight className="h-5 w-5 text-zinc-600 group-hover:text-zinc-900 group-hover:translate-x-1 transition" />
-              </div>
-
-              <p className="text-sm text-zinc-700 leading-relaxed mb-4">
-                매일 ERP 엑셀을 내려받아 수기로 비교하고, KPI와 생산 계획을 따로 작성하던 R&D 팀 업무를
-                파일 업로드 한 번으로 현황이 정리되는 워크스페이스로 바꿨습니다. 기획부터 개발, 운영까지 혼자 맡아 팀에서 사용 중입니다.
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                {['Next.js', 'TypeScript', 'PostgreSQL', 'SheetJS', 'Vitest', 'Claude'].map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </Link>
-
-            {/* Project 1: DeepVi */}
-            <Link 
-              href="/projects/deepvi"
-              className="group block rounded-2xl border border-zinc-200 bg-white p-8 hover:bg-zinc-50 transition shadow-sm"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-zinc-900 mb-2">DeepVi</h3>
-                  <p className="text-sm text-zinc-600">LLM 기반 기업 분석 서비스</p>
-                </div>
-                <ArrowRight className="h-5 w-5 text-zinc-600 group-hover:text-zinc-900 group-hover:translate-x-1 transition" />
-              </div>
-              
-              <p className="text-sm text-zinc-700 leading-relaxed mb-4">
-                재무제표와 시장 맥락을 AI로 해석해, 투자자가 스스로 이해하고 판단할 수 있도록 돕는 서비스입니다.
-                KOSPI/KOSDAQ 444개 기업을 대상으로 데이터 수집부터 AI 분석, 대시보드 구축까지 전체 프로세스를 설계했습니다.
-              </p>
-              
-              <div className="flex flex-wrap gap-2">
-                {['Python', 'FastAPI', 'PostgreSQL', 'LangChain', 'RAG', 'LLM'].map((tech) => (
-                  <span 
-                    key={tech}
-                    className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </Link>
-
-            {/* Project 2: PriceLens */}
-            <Link
-              href="/projects/pricelens"
-              className="group block rounded-2xl border border-zinc-200 bg-white p-8 hover:bg-zinc-50 transition shadow-sm"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-zinc-900 mb-2">PriceLens</h3>
-                  <p className="text-sm text-zinc-600">Airbnb 가격 결정 요인 해석</p>
-                </div>
-                <ArrowRight className="h-5 w-5 text-zinc-600 group-hover:text-zinc-900 group-hover:translate-x-1 transition" />
-              </div>
-
-              <p className="text-sm text-zinc-700 leading-relaxed mb-4">
-                NYC Airbnb 53,659개 숙소 데이터를 기반으로 가격에 영향을 미치는 요인을 정량적으로 분석했습니다.
-                4가지 트리 모델 비교, Optuna 튜닝, SHAP 해석을 통해 가격 영향 요인을 검증하고 이를 서비스 개선 방안으로 연결했습니다.
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                {['Python', 'XGBoost', 'LightGBM', 'Optuna', 'SHAP', 'Statsmodels'].map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </Link>
-
-            {/* Project 3: Tableau */}
-            <Link
-              href="/projects/tableau"
-              className="group block rounded-2xl border border-zinc-200 bg-white p-8 hover:bg-zinc-50 transition shadow-sm"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-zinc-900 mb-2">Tableau</h3>
-                  <p className="text-sm text-zinc-600">LoL 챔피언 분석 가이드</p>
-                </div>
-                <ArrowRight className="h-5 w-5 text-zinc-600 group-hover:text-zinc-900 group-hover:translate-x-1 transition" />
-              </div>
-              <p className="text-sm text-zinc-700 leading-relaxed mb-4">
-                Riot API와 CSV 데이터를 기반으로 챔피언 스탯, 성장 패턴, 라인별 특성을 분석하고,
-                이를 Tableau 인터랙티브 대시보드로 구현한 프로젝트입니다.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {['Tableau', 'Riot API', 'Python', 'CSV Data', 'Data Storytelling'].map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Experience Section */}
       <section id="experience" className="py-16 border-t border-zinc-200">
         <div className="mx-auto max-w-4xl px-5">
@@ -308,7 +154,7 @@ export default function Home() {
               <ul className="space-y-2 text-sm text-zinc-700">
                 <li>• 고객사 CT 요청 샘플의 출고 전 사내 CT 테스트, 신제품 · 개발 샘플 시사출 후 CT 테스트 및 검토</li>
                 <li>• 샘플 생산 금형 이동 관리 및 생산 계획 수립</li>
-                <li>• 수기 · 엑셀 중심의 팀 업무를 R&D 업무 관리 워크스페이스(Preflight)로 전환 — 기획 · 개발 · 운영을 혼자 맡아 팀에서 사용 중</li>
+                <li>• 반복 현황 집계와 관리 문서 작성을 자동화한 업무 관리 워크스페이스(Preflight) 구축 — 기획 · 개발 · 운영을 혼자 맡아 팀에서 사용 중</li>
               </ul>
             </div>
 
@@ -360,6 +206,77 @@ export default function Home() {
                 <li>• 시스템 장애 발생 시 오류 코드를 기반으로 원인을 추적하고, 설정 및 복구 조치를 통한 유지 보수</li>
               </ul>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-16 border-t border-zinc-200">
+        <div className="mx-auto max-w-4xl px-5">
+          <h2 className="text-2xl font-semibold text-zinc-900 mb-8">Projects</h2>
+
+          {/* 현업 프로젝트: 대표 카드 */}
+          {categories
+            .filter((cat) => cat.key === "work")
+            .map((cat) => (
+              <div key={cat.key}>
+                <h3 className="mb-3 text-sm font-semibold text-zinc-500">{cat.label}</h3>
+                <div className="grid gap-4">
+                  {projectsIn(cat.key).map((p) => (
+                    <Link
+                      key={p.id}
+                      href={p.href}
+                      className="group block rounded-2xl border border-zinc-200 bg-white p-8 hover:bg-zinc-50 transition shadow-sm break-inside-avoid"
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <div className="flex flex-wrap items-center gap-2 mb-2">
+                            <h4 className="text-xl font-semibold text-zinc-900">{p.title}</h4>
+                            <StatusBadge status={p.status} />
+                          </div>
+                          <p className="text-sm text-zinc-600">{p.subtitle}</p>
+                        </div>
+                        <ArrowRight className="h-5 w-5 shrink-0 text-zinc-600 group-hover:text-zinc-900 group-hover:translate-x-1 transition" />
+                      </div>
+                      <p className="text-sm text-zinc-700 leading-relaxed break-keep">{p.summary}</p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {p.tags.map((tech) => (
+                          <span key={tech} className="px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-xs text-zinc-700">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+          {/* 개인 · 부트캠프 프로젝트: 한 줄 목록 */}
+          <div className="mt-10 grid gap-8 md:grid-cols-2 md:gap-6">
+            {categories
+              .filter((cat) => cat.key !== "work")
+              .map((cat) => (
+                <div key={cat.key}>
+                  <h3 className="mb-3 text-sm font-semibold text-zinc-500">{cat.label}</h3>
+                  <ul className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm break-inside-avoid">
+                    {projectsIn(cat.key).map((p) => (
+                      <li key={p.id} className="border-b border-zinc-100 last:border-b-0">
+                        <Link href={p.href} className="group flex items-center justify-between gap-3 px-5 py-4 transition hover:bg-zinc-50">
+                          <span className="min-w-0">
+                            <span className="flex flex-wrap items-center gap-2">
+                              <span className="font-semibold text-zinc-900">{p.title}</span>
+                              {p.status !== "완료" ? <StatusBadge status={p.status} /> : null}
+                            </span>
+                            <span className="mt-0.5 block text-sm text-zinc-500 break-keep">{p.subtitle}</span>
+                          </span>
+                          <ArrowRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:translate-x-1 group-hover:text-zinc-900" />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
           </div>
         </div>
       </section>
@@ -446,8 +363,8 @@ export default function Home() {
           {[
             { id: "intro", label: "소개" },
             { id: "ai", label: "AI 활용" },
-            { id: "projects", label: "프로젝트" },
             { id: "experience", label: "경력" },
+            { id: "projects", label: "프로젝트" },
             { id: "skills", label: "기술" },
           ].map((item) => (
             <a
@@ -471,13 +388,6 @@ export default function Home() {
               {item.label}
             </a>
           ))}
-          <span className="mx-1 h-4 w-px bg-zinc-200" />
-          <Link
-            href="/lab"
-            className="rounded-full bg-zinc-900 px-4 py-2 text-xs font-medium text-white transition hover:bg-zinc-700"
-          >
-            끄적임
-          </Link>
         </div>
       </nav>
     </main>

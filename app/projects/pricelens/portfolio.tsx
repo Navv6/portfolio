@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import React from "react";
+import { SiteHeader } from "../../site";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -140,32 +141,7 @@ export default function PriceLensPortfolioPage() {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-20 border-b border-slate-200/70 bg-white/80 backdrop-blur">
-        <Container>
-          <div className="flex h-14 items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="text-sm font-semibold text-slate-900">PriceLens</div>
-              <div className="ml-2 hidden text-xs text-slate-500 md:block">
-                Airbnb 숙소 가격 결정 요인 해석
-              </div>
-            </div>
-            <nav className="flex items-center gap-6">
-              <a href={withBasePath("/")} className="text-sm text-slate-600 transition hover:text-slate-900">
-                Home
-              </a>
-              <a href={withBasePath("/projects/deepvi")} className="text-sm text-slate-600 transition hover:text-slate-900">
-                DeepVi
-              </a>
-              <a href={withBasePath("/projects/pricelens")} className="text-sm font-semibold text-slate-900 transition hover:text-slate-700">
-                PriceLens
-              </a>
-              <a href={withBasePath("/projects/tableau")} className="text-sm text-slate-600 transition hover:text-slate-900">
-                Tableau
-              </a>
-            </nav>
-          </div>
-        </Container>
-      </header>
+      <SiteHeader active="bootcamp" title="PriceLens" subtitle="Airbnb 숙소 가격 결정 요인 해석" />
 
       {/* Hero */}
       <section id="intro" className="pt-16 md:pt-24">
