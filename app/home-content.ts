@@ -16,10 +16,10 @@ export const featuredProjects = [
     href: "/projects/preflight", visible: true,
   },
   {
-    id: "markcloud-ai", eyebrow: "Internship", title: "MarkCloud AI",
+    id: "markcloud", eyebrow: "Internship", title: "MarkCloud",
     description: "음성인식 모델을 비교·평가하고, 외부 LLM의 로컬 전환 타당성을 검토한 인턴 프로젝트",
     shows: "Model Evaluation", metric: "4종", metricLabel: "STT 모델 비교 · 의미 기반 평가 추가",
-    href: "/projects/markcloud-ai", visible: confirmations.markCloudPublic === true,
+    href: "/projects/markcloud", visible: confirmations.markCloudPublic === true,
   },
   {
     id: "deepvi", eyebrow: "Bootcamp", title: "DeepVi",
@@ -30,7 +30,7 @@ export const featuredProjects = [
 ];
 
 export const aiSteps = [
-  { step: "01", title: "타당성부터", description: "자동화할 수 있는 범위와 위험 요소를 먼저 점검합니다.", example: "로컬 LLM 타당성 검토", href: confirmations.markCloudPublic === true ? "/projects/markcloud-ai#local-llm" : null },
+  { step: "01", title: "타당성부터", description: "자동화할 수 있는 범위와 위험 요소를 먼저 점검합니다.", example: "로컬 LLM 타당성 검토", href: confirmations.markCloudPublic === true ? "/projects/markcloud#local-llm" : null },
   { step: "02", title: "문서로 설계", description: "요구사항과 데이터 구조, 미확정 결정을 분리합니다.", example: "Preflight 요구사항과 도입 조건", href: "/projects/preflight#problem" },
   { step: "03", title: "골격 먼저", description: "큰 구조를 세우고 기능 단위로 확장합니다.", example: "Preflight 저장 구조 변경", href: "/projects/preflight#storage-decision" },
   { step: "04", title: "실데이터로 검증", description: "AI 결과는 실제 데이터 대조와 테스트로 확인한 뒤 사용합니다.", example: "Preflight 중복 판정 반례", href: "/projects/preflight#dedup-decision" },
@@ -65,14 +65,14 @@ export const experience = [
 ];
 
 export const skills = [
-  { title: "AI Engineering", items: confirmations.markCloudPublic === true ? ["LLM Integration", "RAG", "Structured Output", "STT", "Model Evaluation"] : ["LLM Integration", "RAG"], evidence: "DeepVi · MarkCloud", href: confirmations.markCloudPublic === true ? "/projects/markcloud-ai#evaluation" : "/projects/deepvi#architecture" },
-  { title: "Models & Frameworks", items: confirmations.markCloudPublic === true ? ["OpenAI", "Qwen", "Whisper", "NeMo", "NVIDIA Riva", "vLLM", "LangChain", "Sentence Transformers"] : ["OpenAI", "LangChain"], evidence: "DeepVi · MarkCloud", href: confirmations.markCloudPublic === true ? "/projects/markcloud-ai#evaluation" : "/projects/deepvi#architecture" },
+  { title: "AI Engineering", items: confirmations.markCloudPublic === true ? ["LLM Integration", "RAG", "Structured Output", "STT", "Model Evaluation"] : ["LLM Integration", "RAG"], evidence: "DeepVi · MarkCloud", href: confirmations.markCloudPublic === true ? "/projects/markcloud#evaluation" : "/projects/deepvi#architecture" },
+  { title: "Models & Frameworks", items: confirmations.markCloudPublic === true ? ["OpenAI", "Qwen", "Whisper", "NeMo", "NVIDIA Riva", "vLLM", "LangChain", "Sentence Transformers"] : ["OpenAI", "LangChain"], evidence: "DeepVi · MarkCloud", href: confirmations.markCloudPublic === true ? "/projects/markcloud#evaluation" : "/projects/deepvi#architecture" },
   { title: "Data", items: ["Python", "SQL", "PostgreSQL", "Pandas"], evidence: "DeepVi · Preflight", href: "/projects/preflight#storage-decision" },
   { title: "Product Engineering", items: ["Next.js", "TypeScript", "FastAPI", "Vitest", "Docker"], evidence: "Preflight · DeepVi", href: "/projects/preflight#technical-details" },
 ];
 
 export const currentlyBuilding = [
   { title: "Preflight AI 확장", description: "안료 입고 사진 추출부터 시작해, CT 데이터 축적 후 검색과 예측으로 확장하는 계획", status: "설계 중", href: "/projects/preflight#ai-roadmap" },
-  { title: "ReadyFlow", description: "AI 도입 전, 흩어진 업무부터 진단하는 제조 중소기업 대상 창업 아이템. Preflight 경험을 다른 현장으로 넓히는 시도", status: "검증 준비", href: "/personal#readyflow" },
-  { title: "ThinkLayer", description: "만들기 전에 아이디어의 구조 · 빈틈 · 다음 행동 하나를 보여주는 코딩 에이전트용 스킬", status: "Concept", href: "/personal#thinklayer" },
+  { title: "ReadyFlow", description: "AI 도입 전, 흩어진 업무부터 진단하는 제조 중소기업 대상 창업 아이템. Preflight 경험을 다른 현장으로 넓히는 시도", status: "검증 준비", href: "/projects/readyflow" },
+  { title: "ThinkLayer", description: "만들기 전에 아이디어의 구조 · 빈틈 · 다음 행동 하나를 보여주는 코딩 에이전트용 스킬", status: "Concept", href: "/projects/thinklayer" },
 ];

@@ -63,7 +63,7 @@ export const projects: Project[] = [
     summary:
       "AI를 들이기 전에 요청 · 데이터 · 진행상황이 흩어진 업무부터 진단합니다. 관리자 인터뷰와 실제 요청 데이터를 대조해 개선 지점과 우선순위를 근거와 함께 제시하는 서비스를 준비하고 있습니다.",
     status: "검증 준비",
-    href: "/personal#readyflow",
+    href: "/projects/readyflow",
     tags: [],
   },
   {
@@ -74,7 +74,7 @@ export const projects: Project[] = [
     summary:
       "아이디어를 바로 코드로 옮기기 전에, 짧은 인터뷰로 구조(MAP)와 빈틈(GAP), 다음 행동 하나(PATH)를 보여주는 코딩 에이전트용 스킬입니다.",
     status: "Concept",
-    href: "/personal#thinklayer",
+    href: "/projects/thinklayer",
     tags: [],
   },
   {
@@ -136,10 +136,10 @@ export const projects: Project[] = [
 ];
 
 const markCloudProject: Project = {
-  id: "markcloud-ai", category: "work", title: "MarkCloud AI",
+  id: "markcloud", category: "work", title: "MarkCloud",
   subtitle: "STT 모델 평가 · 로컬 LLM 타당성 검토",
   summary: "음성인식 모델을 비교하고 의미 기반 평가를 보완했습니다. 로컬 LLM은 전환 타당성을 검토한 단계입니다.",
-  period: "2025.11 ~ 2025.12", status: "인턴 프로젝트", href: "/projects/markcloud-ai",
+  period: "2025.11 ~ 2025.12", status: "인턴 프로젝트", href: "/projects/markcloud",
   tags: ["STT", "Model Evaluation", "Local LLM"],
 };
 

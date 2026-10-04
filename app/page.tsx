@@ -9,7 +9,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const focus = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600";
 const section = "scroll-mt-20 border-t border-zinc-200 py-14 md:py-20";
 const card = "rounded-2xl border border-zinc-200 bg-white";
-const textureOf: Record<string, TextureKind> = { preflight: "data", "markcloud-ai": "wave", deepvi: "network" };
+const textureOf: Record<string, TextureKind> = { preflight: "data", markcloud: "wave", deepvi: "network" };
 const delay = (i: number) => ({ "--reveal-delay": `${i * 80}ms` }) as React.CSSProperties;
 
 export default function Home() {
