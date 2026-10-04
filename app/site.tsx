@@ -56,6 +56,28 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "PostgreSQL", "SheetJS", "Vitest"],
   },
   {
+    id: "readyflow",
+    category: "personal",
+    title: "ReadyFlow",
+    subtitle: "제조 중소기업 AI 도입 전 업무 진단 · 창업 준비",
+    summary:
+      "AI를 들이기 전에 요청 · 데이터 · 진행상황이 흩어진 업무부터 진단합니다. 관리자 인터뷰와 실제 요청 데이터를 대조해 개선 지점과 우선순위를 근거와 함께 제시하는 서비스를 준비하고 있습니다.",
+    status: "검증 준비",
+    href: "/personal#readyflow",
+    tags: [],
+  },
+  {
+    id: "thinklayer",
+    category: "personal",
+    title: "ThinkLayer",
+    subtitle: "만들기 전에 구조를 보는 AI 사고 레이어",
+    summary:
+      "아이디어를 바로 코드로 옮기기 전에, 짧은 인터뷰로 구조(MAP)와 빈틈(GAP), 다음 행동 하나(PATH)를 보여주는 코딩 에이전트용 스킬입니다.",
+    status: "Concept",
+    href: "/personal#thinklayer",
+    tags: [],
+  },
+  {
     id: "vibecoder",
     category: "personal",
     title: "VibeCoder",

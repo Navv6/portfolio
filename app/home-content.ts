@@ -73,6 +73,6 @@ export const skills = [
 
 export const currentlyBuilding = [
   { title: "Preflight AI 확장", description: "안료 입고 사진 추출부터 시작해, CT 데이터 축적 후 검색과 예측으로 확장하는 계획", status: "설계 중", href: "/projects/preflight#ai-roadmap" },
-  { title: "VibeCoder", description: "AI 워크플로우 커뮤니티 실험", status: null, href: confirmations.experimentLinks?.vibecoder ?? "/personal#vibecoder" },
-  { title: "DaVinci Note", description: "생각을 확장하는 노트 실험", status: null, href: confirmations.experimentLinks?.davinci ?? "/personal#davinci" },
+  { title: "ReadyFlow", description: "AI 도입 전, 흩어진 업무부터 진단하는 제조 중소기업 대상 창업 아이템. Preflight 경험을 다른 현장으로 넓히는 시도", status: "검증 준비", href: "/personal#readyflow" },
+  { title: "ThinkLayer", description: "만들기 전에 아이디어의 구조 · 빈틈 · 다음 행동 하나를 보여주는 코딩 에이전트용 스킬", status: "Concept", href: "/personal#thinklayer" },
 ];
