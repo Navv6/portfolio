@@ -2,7 +2,7 @@ import { confirmations } from "./content-confirmations";
 
 export const introduction = {
   name: "백경우",
-  role: "AI Application Engineer",
+  role: "Product Engineer · Applied AI",
   headline: ["현장에서 발견한 문제를,", "직접 만들고 운영하는 것으로 해결합니다."],
   description: "문제를 데이터로 구조화하고, 적합한 AI를 선택·검증해 실제 사용되는 시스템으로 구현합니다.",
   about: "회계·세무를 전공하며 복잡한 정보를 구조화하는 일에 관심을 갖게 되었습니다. 데이터 분석을 거쳐, 분석 결과를 실제로 쓰이는 도구로 만드는 일로 이어졌습니다.",

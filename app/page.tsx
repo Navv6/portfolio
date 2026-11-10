@@ -27,7 +27,12 @@ export default function Home() {
           <div className="min-w-0">
             <p className="text-sm font-semibold text-zinc-500">{introduction.name}</p>
             <h1 id="intro-title" className="mt-2 text-4xl font-bold tracking-tight md:text-6xl">
-              {introduction.role}
+              {introduction.role.split(" · ").map((part, i) => (
+                <span key={part} className={i > 0 ? "block text-zinc-500" : "block"}>
+                  {i > 0 ? <span className="sr-only"> · </span> : null}
+                  {part}
+                </span>
+              ))}
             </h1>
             <p className="mt-6 text-xl font-semibold leading-snug tracking-tight text-zinc-800 break-keep md:text-2xl">
               {introduction.headline.map((line) => (
