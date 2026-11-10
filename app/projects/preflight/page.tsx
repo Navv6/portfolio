@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 import { ArrowRight, ArrowUpRight, Maximize2, X, ZoomIn, ZoomOut } from "lucide-react";
 import { SiteFooter, SiteHeader } from "../../site";
 import { ProjectTexture } from "../../visuals";
-import { ArchitectureFlow, DecisionCard, ImpactCard } from "../../case-study";
+import { ArchitectureFlow, DecisionCard, ImpactCard, StepLabel } from "../../case-study";
 import { confirmations } from "../../content-confirmations";
 import { changes, timeline, constraints, validation, phases, traceabilityFlow, traceabilityConsiderations } from "./content";
 
@@ -96,10 +96,6 @@ function ImageDialog({ shot, onClose }: { shot: Shot; onClose: () => void }) {
       </div>
     </dialog>
   );
-}
-
-function StepLabel({ step, title }: { step: string; title: string }) {
-  return <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500"><span className="text-blue-700">{step}</span> · {title}</p>;
 }
 
 function Feature({ number, title, description, children }: { number: string; title: string; description: string; children: ReactNode }) {

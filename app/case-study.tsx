@@ -1,8 +1,14 @@
 import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 
-export function CaseSection({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+/** 케이스 스터디 단계 표시 (예: 01 · Business Problem). 모든 케이스 스터디가 같은 표기를 씁니다. */
+export function StepLabel({ step, title }: { step: string; title: string }) {
+  return <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500"><span className="text-blue-700">{step}</span> · {title}</p>;
+}
+
+export function CaseSection({ id, title, step, children }: { id: string; title: string; step?: { step: string; title: string }; children: ReactNode }) {
   return <section id={id} className="scroll-mt-20 border-t border-zinc-200 py-14 md:py-16">
+    {step && <div className="mb-2"><StepLabel {...step} /></div>}
     <h2 className="text-2xl font-bold tracking-tight break-keep md:text-3xl">{title}</h2>
     <div className="mt-5 text-sm leading-7 text-zinc-600 break-keep">{children}</div>
   </section>;

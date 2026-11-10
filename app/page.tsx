@@ -155,10 +155,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How I Build with AI */}
+      {/* From Problem to Deployment */}
       <section id="ai" className={section} aria-labelledby="ai-heading">
         <div className="mx-auto max-w-5xl px-5">
-          <SectionHeader id="ai-heading" eyebrow="How I Build with AI" title="AI는 빠르게, 판단과 검증은 직접" />
+          <SectionHeader id="ai-heading" eyebrow="From Problem to Deployment" title="AI는 빠르게, 판단과 검증은 직접" />
           <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {aiSteps.map((step, i) => (
               <li key={step.step} data-reveal style={delay(i)} className={`relative flex flex-col p-5 ${card}`}>

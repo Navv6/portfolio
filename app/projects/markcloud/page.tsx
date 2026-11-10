@@ -29,7 +29,7 @@ export default function MarkCloudCaseStudy() {
           </div>
         </section>
 
-        <CaseSection id="evaluation" title="모델 이름보다, 같은 기준의 결과를 먼저">
+        <CaseSection id="evaluation" step={{ step: "01", title: "Evaluation Design" }} title="모델 이름보다, 같은 기준의 결과를 먼저">
           <p id="problem" className="scroll-mt-20">한국어 음성인식에 사용할 후보를 고르기 위해 같은 데이터셋과 평가 조건으로 정확도와 처리 시간을 비교했습니다.</p>
           <div className="mt-5 rounded-2xl border border-zinc-200 bg-white p-4 sm:hidden">
             <p className="font-semibold text-zinc-900">후보 모델 비교</p>
@@ -85,7 +85,7 @@ export default function MarkCloudCaseStudy() {
           </div>
         </CaseSection>
 
-        <CaseSection id="semantic-evaluation" title="글자가 달라도, 의미는 같을 수 있었습니다.">
+        <CaseSection id="semantic-evaluation" step={{ step: "02", title: "Validation" }} title="글자가 달라도, 의미는 같을 수 있었습니다.">
           <p>WER·CER만으로는 의미가 유지된 표현 차이와 핵심 의미가 바뀐 오류를 구분하기 어려웠습니다. KR-SBERT로 정답과 인식 결과의 의미 유사도를 계산하고, 반복 샘플링으로 평가의 안정성을 확인했습니다.</p>
           <p className="mt-3 font-medium text-zinc-900">문자 오류율을 대체하는 대신, 의미 보존을 함께 살피는 보조 평가를 추가했습니다.</p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -111,11 +111,11 @@ export default function MarkCloudCaseStudy() {
           {confirmations.semanticThresholdReason && <p className="mt-3 text-xs">{confirmations.semanticThresholdReason}</p>}
         </CaseSection>
 
-        <CaseSection id="iteration" title="실패가 다음 실험의 기준이 됐습니다.">
+        <CaseSection id="iteration" step={{ step: "03", title: "Iteration" }} title="실패가 다음 실험의 기준이 됐습니다.">
           <div className="grid gap-4 md:grid-cols-3">{failures.map(item => <FailureCard key={item.problem} {...item} />)}</div>
         </CaseSection>
 
-        <CaseSection id="local-llm" title="문서 요약도, 모델 교체보다 출력 검증이 먼저">
+        <CaseSection id="local-llm" step={{ step: "04", title: "Feasibility Review" }} title="문서 요약도, 모델 교체보다 출력 검증이 먼저">
           <p>외부 GPT API 기반 요약에서 긴 문서의 타임아웃과 외부 의존 문제가 있었습니다. Qwen2.5-7B-Instruct로 요약 품질을 유지하면서 기존 시스템이 사용하는 JSON 구조를 만들 수 있는지 검토했습니다.</p>
           <div className="mt-5"><ArchitectureFlow label="검토한 처리 흐름" nodes={[
             { title: "문서 파싱", description: "긴 PDF의 텍스트 처리" },
