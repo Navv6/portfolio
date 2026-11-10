@@ -72,7 +72,18 @@ export const skills = [
 ];
 
 export const currentlyBuilding = [
-  { title: "Preflight AI 확장", description: "안료 입고 사진 추출부터 시작해, CT 데이터 축적 후 검색과 예측으로 확장하는 계획", status: "설계 중", href: "/projects/preflight#ai-roadmap" },
+  { title: "Preflight 이력 관리 확장", description: "금형 · 시사출 회차 · 사출조건 · 평가 결과를 연결해 변경과 결과를 추적하는 구조로 확장 구상", status: "확장 검토", href: "/projects/preflight#ai-roadmap" },
   { title: "ReadyFlow", description: "AI 도입 전, 흩어진 업무부터 진단하는 제조 중소기업 대상 창업 아이템. Preflight 경험을 다른 현장으로 넓히는 시도", status: "검증 준비", href: "/projects/readyflow" },
   { title: "ThinkLayer", description: "만들기 전에 아이디어의 구조 · 빈틈 · 다음 행동 하나를 보여주는 코딩 에이전트용 스킬", status: "Concept", href: "/projects/thinklayer" },
+];
+
+// 대회 참가 경험. 과제 내용은 대회 규정상 비공개라 형식과 결과만 적습니다.
+export const activities = [
+  {
+    title: "SK하이닉스 AI 해커톤 2026",
+    kind: "대외활동 · AI 문제 해결 챌린지",
+    result: ["1차 예선 통과", "2차 예선 참가", "본선 미진출"],
+    description: "SK하이닉스 사내 문제 예제를 제한 시간 안에 AI로 해결하는 형식의 해커톤입니다. 과제 내용은 대회 규정상 공개하지 않습니다.",
+    learned: "해결 방식을 고른 근거를 설명하는 것과, 구현 결과를 검증하는 과정이 더 필요하다는 점을 확인했습니다.",
+  },
 ];

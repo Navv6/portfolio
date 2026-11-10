@@ -1,9 +1,56 @@
-export const roadmap = [
-  { number: "02", title: "텍스트 요청 구조화", status: "계획", description: "회의록과 메신저로 들어오는 요청을 담당자·기한·품목이 정리된 할 일이나 의뢰서 초안으로 변환할 계획입니다." },
-  { number: "03", title: "CT 결과 데이터 표준화", status: "계획", description: "NG 유형 코드와 재질·내용물·시험 조건을 정의해 결과를 구조화된 데이터로 기록합니다. 유사 이력 검색과 결과 예측의 전제 조건입니다." },
-  { number: "04", title: "유사 제품 NG 이력 검색", status: "데이터 축적 후", description: "임베딩 기반 검색으로 재질과 내용물이 비슷한 과거 제품의 NG 사례를 찾아 CT 검토 전에 참고하도록 할 계획입니다." },
-  { number: "05", title: "CT 결과 예측", status: "데이터 축적 후", description: "해석 가능한 모델로 NG 가능성이 높은 샘플의 검토 우선순위를 제시할 계획입니다." },
+// From Workflow Tracking to Manufacturing Traceability. Phase 1만 운영 중이고 나머지는 확장 구상입니다.
+export const phases: { phase: string; title: string; status: string; live: boolean; items: { title: string; status?: string; description?: string }[] }[] = [
+  {
+    phase: "Phase 1", title: "엑셀 연동 · 시사출 업무 · KPI 관리", status: "운영 중", live: true,
+    items: [
+      { title: "현재 워크스페이스", description: "ERP 엑셀 업로드, 현황 · KPI · 주간 관리 파일, 샘플 요청 · 승인" },
+      { title: "안료 입고 사진을 의뢰서와 연결", status: "설계 중", description: "AI로 안료 코드 · 색상명 · LOT · 수량을 읽고, 규칙으로 대조한 뒤 담당자가 확정" },
+      { title: "텍스트 요청 구조화", status: "계획", description: "회의록 · 메신저 요청을 담당자 · 기한 · 품목이 정리된 할 일 초안으로 변환" },
+    ],
+  },
+  {
+    phase: "Phase 2", title: "제품 · 금형 · 시사출 회차 · 사출조건 이력", status: "확장 검토", live: false,
+    items: [
+      { title: "이력 엔터티 설계", description: "product · mold · mold_revision · trial_run · process_condition · sample · evaluation_result" },
+      { title: "입력 · 변경 이력 화면", description: "사출설비, 원재료 Lot, 온도, 보압, 냉각시간, 변경 사유" },
+    ],
+  },
+  {
+    phase: "Phase 3", title: "변경 전후 비교 · 평가 결과 연결", status: "계획", live: false,
+    items: [
+      { title: "CT 결과 데이터 표준화", description: "NG 유형 코드와 재질 · 내용물 · 시험 조건을 구조화된 데이터로 기록" },
+      { title: "변경 전후 비교와 평가 증빙 연결", description: "개발 단계별 평가 결과를 금형 · 조건 변경 이력과 연결" },
+    ],
+  },
+  {
+    phase: "Phase 4", title: "유사 불량 검색 · 검토 우선순위 보조", status: "장기 구상", live: false,
+    items: [
+      { title: "유사 제품 NG 이력 검색", description: "재질 · 내용물이 비슷한 과거 제품의 NG 사례를 CT 검토 전에 참고" },
+      { title: "CT 결과 예측", description: "해석 가능한 모델로 NG 가능성이 높은 샘플의 검토 순서 제시" },
+    ],
+  },
 ];
+
+export const traceabilityFlow = [
+  { title: "제품 · 금형" },
+  { title: "금형 Revision" },
+  { title: "시사출 회차" },
+  { title: "사출조건 · 샘플" },
+  { title: "측정 · 평가 결과" },
+];
+
+export const traceabilityConsiderations = ["설정값과 실제 계측값 분리", "이전 버전 보존", "입력자 · 변경자 기록"];
+
+export const validation = [
+  { title: "검증", body: "계산 규칙과 중복 판정은 가상 데이터로 테스트하고, 실제 회사 파일의 수치는 저장소에 넣지 않는 로컬 스크립트로 대조했습니다." },
+  { title: "업무 규칙", body: "의뢰 1건과 여러 공정 라인을 분리해 관리합니다. 지연 기준과 관리 단위는 설정으로 분리하고, 잠정값은 화면에도 표시합니다." },
+  { title: "권한 · 영속화", body: "로그인과 3단계 권한, PostgreSQL 기반 데이터 영속화를 구현했습니다." },
+];
+
+export const outcome = {
+  confirmed: ["팀 전원(조립 인원 제외)이 실무에 사용", "주간 관리 파일 3종을 같은 기준일로 자동 생성", "샘플조달 · 시사출 · CT 테스트 · 회의록 업무로 확장"],
+  unmeasured: ["도입 전후 취합 · 보고 작성 시간", "입력 오류 · 누락 감소 정도"],
+};
 
 export const impacts = [
   { title: "팀 실사용", metric: "팀 전원", description: "조립 인원 제외" },

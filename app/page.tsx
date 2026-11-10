@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import { SectionHeader, SiteFooter, SiteHeader, StatusBadge } from "./site";
-import { introduction, featuredProjects, aiSteps, responsibilities, experience, skills, currentlyBuilding } from "./home-content";
+import { introduction, featuredProjects, aiSteps, responsibilities, experience, skills, currentlyBuilding, activities } from "./home-content";
 import { HeroVisual } from "./motion";
 import { ProjectTexture, type TextureKind } from "./visuals";
 
@@ -125,6 +125,31 @@ export default function Home() {
                   </span>
                 </div>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Challenges & Activities */}
+      <section id="activities" className={section} aria-labelledby="activities-heading">
+        <div className="mx-auto max-w-5xl px-5">
+          <SectionHeader id="activities-heading" eyebrow="Challenges & Activities" title="대외활동" />
+          <div className="grid gap-4">
+            {activities.map((item) => (
+              <article key={item.title} data-reveal className={`p-5 md:p-6 ${card}`}>
+                <p className="text-xs text-zinc-500">{item.kind}</p>
+                <h3 className="mt-1 text-lg font-semibold">{item.title}</h3>
+                <ol className="mt-3 flex flex-wrap items-center gap-2" aria-label="결과">
+                  {item.result.map((step, i) => (
+                    <li key={step} className="flex items-center gap-2">
+                      {i > 0 ? <ArrowRight className="h-3.5 w-3.5 text-zinc-400" aria-hidden /> : null}
+                      <span className={`rounded-full border px-2.5 py-0.5 text-xs ${i === item.result.length - 1 ? "border-zinc-200 bg-zinc-50 text-zinc-600" : "border-blue-200 bg-blue-50 text-blue-800"}`}>{step}</span>
+                    </li>
+                  ))}
+                </ol>
+                <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-600 break-keep">{item.description}</p>
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-700 break-keep"><span className="font-medium">배운 점 · </span>{item.learned}</p>
+              </article>
             ))}
           </div>
         </div>
