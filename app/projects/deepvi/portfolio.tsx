@@ -477,6 +477,7 @@ export default function DeepViPortfolioPage() {
           <div id="data-role" className="mt-5 scroll-mt-20 rounded-2xl border border-zinc-200 bg-white p-5 text-sm leading-7 text-zinc-600">
             <p><strong className="text-zinc-900">데이터.</strong> KOSPI·KOSDAQ 444개 기업의 재무·주가·뉴스·거시경제 데이터를 연결했습니다.</p>
             <p className="mt-3"><strong className="text-zinc-900">담당 범위.</strong> 뉴스 분석과 재무건전성 평가는 팀원이 담당했고, 기획·데이터 수집·백엔드/DB·LLM·대시보드·배포 흐름을 주도했습니다.</p>
+            <p className="mt-3"><strong className="text-zinc-900">운영 범위.</strong> 시연과 주변 사용자 테스트까지 진행했습니다. 상시 운영할 배포 서버 여건이 되지 않아 공개 서비스로는 열지 않았습니다.</p>
           </div>
         </Container>
       </section>
