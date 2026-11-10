@@ -15,7 +15,7 @@ import React from "react";
 import { TypeReturnBar } from "../../componets";
 import { SiteFooter, SiteHeader } from "../../site";
 import { ProjectTexture } from "../../visuals";
-import { ArchitectureFlow } from "../../case-study";
+import { ArchitectureFlow, DecisionCard } from "../../case-study";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -481,6 +481,34 @@ export default function DeepViPortfolioPage() {
         </Container>
       </section>
 
+      {/* Decision */}
+      <section id="data-decision" className="scroll-mt-20 mt-16 md:mt-24">
+        <Container>
+          <SectionTitle
+            eyebrow="Decision"
+            title="모든 계정을 맞추려다, 필요한 계정만 골랐습니다"
+            desc="기업마다 다른 XBRL 재무 계정명을 어떻게 정리할지가 데이터 설계의 첫 판단이었습니다."
+            wide
+          />
+          <DecisionCard
+            decision="전체 계정 표준화 → 분석에 필요한 계정만 매핑"
+            reason="처음에는 전체 기업의 계정명을 매핑 엔진으로 표준 계정명에 맞춰 정리하려 했습니다. 하지만 계정명 종류가 너무 많았고, 같은 항목도 해석에 따라 다른 계정으로 볼 수 있는 회계의 특성 때문에 일관된 기준으로 매핑하기 어려웠습니다."
+            tradeoff="분석과 답변에 쓸 수 있는 재무 정보가 선택한 계정 범위로 제한됩니다."
+            result="분석에 필요한 계정만 골라 매핑을 진행했습니다.">
+            <figure className="mt-5 grid gap-3 rounded-xl border border-zinc-200 bg-white p-4 text-sm sm:grid-cols-2" aria-label="계정 매핑 방식 변경">
+              <div className="rounded-lg bg-zinc-50 p-3">
+                <p className="text-xs font-medium text-zinc-500">처음 시도</p>
+                <p className="mt-1 text-zinc-600 break-keep">전체 기업의 모든 계정명 → 매핑 엔진 → 표준 계정명</p>
+              </div>
+              <div className="rounded-lg bg-blue-50 p-3">
+                <p className="text-xs font-medium text-blue-700">바꾼 방식</p>
+                <p className="mt-1 font-medium text-zinc-900 break-keep">분석에 필요한 계정 선정 → 해당 계정만 매핑</p>
+              </div>
+            </figure>
+          </DecisionCard>
+        </Container>
+      </section>
+
       {/* Classification */}
       <section id="classification" className="scroll-mt-20 mt-16 md:mt-24">
         <Container>
@@ -602,6 +630,7 @@ export default function DeepViPortfolioPage() {
             { id: "intro", label: "소개" },
             { id: "problem", label: "배경" },
             { id: "architecture", label: "구조" },
+            { id: "data-decision", label: "판단" },
             { id: "classification", label: "분류" },
             { id: "achievements", label: "성과" },
             { id: "features", label: "기능" },
