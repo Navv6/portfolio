@@ -6,7 +6,7 @@ import { SiteFooter, SiteHeader } from "../../site";
 import { ProjectTexture } from "../../visuals";
 import { ArchitectureFlow, DecisionCard, ImpactCard } from "../../case-study";
 import { confirmations } from "../../content-confirmations";
-import { impacts, timeline, constraints, validation, outcome, phases, traceabilityFlow, traceabilityConsiderations } from "./content";
+import { changes, timeline, constraints, validation, phases, traceabilityFlow, traceabilityConsiderations } from "./content";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const imagePath = (name: string) => basePath + "/preflight/" + name;
@@ -218,7 +218,7 @@ export default function PreflightPage() {
           <Feature number="01" title="빠진 데이터의 이유까지 확인" description="어떤 행이 제외됐는지, 컬럼 값이 어디서 충돌했는지 표시합니다. 목록이 예상과 다를 때 원본 파일을 다시 열기 전에 원인을 확인할 수 있습니다.">
             <Screenshot shot={shots.report} onOpen={setSelected} />
           </Feature>
-          <Feature number="02" title="수기로 만들던 KPI를 업로드 한 번으로 집계" description="업무별 현황과 준수율을 집계하고, 주간 관리 파일 3종을 같은 기준일로 내보냅니다. 준수율의 계산 기준과 판정에서 제외한 항목도 화면에 명시했습니다.">
+          <Feature number="02" title="수기로 만들던 KPI를 업로드 한 번으로 집계" description="업무별 현황과 준수율을 집계하고, 주간 관리 파일을 같은 기준일로 내보냅니다. 준수율의 계산 기준과 판정에서 제외한 항목도 화면에 명시했습니다.">
             <Screenshot shot={shots.kpi} onOpen={setSelected} className="preflight-print-kpi" />
           </Feature>
           <Feature number="03" title="엑셀의 색상도 업무 상태로 읽기" description="금형번호 셀의 채우기 색을 엑셀 테마 색과 tint 값까지 해석해 사출완료·계획예정·금형보관 등의 상태로 변환하고, 상태별 조회와 납기 집계에 사용합니다.">
@@ -261,36 +261,34 @@ export default function PreflightPage() {
             </ul>
             <p className="mt-3 font-mono text-xs text-zinc-500">Next.js · React · TypeScript · PostgreSQL · SheetJS · Vitest · PowerShell</p>
           </div>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 print:grid-cols-2">
-            {impacts.map(impact => <ImpactCard key={impact.title} {...impact} />)}
-            {confirmations.timeComparison && <ImpactCard title="도입 전후 소요 시간" metric={confirmations.timeComparison.after} description={"도입 전 " + confirmations.timeComparison.before + " · " + confirmations.timeComparison.method} />}
+          <div className="mt-10">
+            <h3 className="text-lg font-semibold break-keep md:text-xl">팀에서 쓰면서 달라진 점</h3>
+            <ul className="mt-4 space-y-3">
+              {changes.map(item => (
+                <li key={item.after} className="grid gap-2 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:items-stretch">
+                  <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+                    <p className="text-xs font-medium text-zinc-500">이전</p>
+                    <p className="mt-1 text-sm leading-6 text-zinc-600 break-keep">{item.before}</p>
+                  </div>
+                  <ArrowRight className="h-4 w-4 shrink-0 self-center justify-self-center rotate-90 text-blue-600 md:rotate-0" aria-hidden />
+                  <div className="rounded-2xl border border-blue-200 bg-blue-50/60 p-4">
+                    <p className="text-xs font-medium text-blue-700">지금</p>
+                    <p className="mt-1 text-sm font-medium leading-6 text-zinc-900 break-keep">{item.after}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            {confirmations.timeComparison && <div className="mt-4 max-w-sm"><ImpactCard title="도입 전후 소요 시간" metric={confirmations.timeComparison.after} description={"도입 전 " + confirmations.timeComparison.before + " · " + confirmations.timeComparison.method} /></div>}
           </div>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">샘플조달·시사출·CT 테스트·회의록 업무에 사용하고 있습니다.</p>
         </div>
       </section>
 
-      <section id="ai-roadmap" className="preflight-sheet scroll-mt-20 border-t border-zinc-200 py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="outcome-heading">
+      <section id="ai-roadmap" className="preflight-sheet scroll-mt-20 border-t border-zinc-200 py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="roadmap-heading">
         <div className="mx-auto max-w-5xl px-5 print:px-0">
-          <StepLabel step="06" title="Outcome & Next Steps" />
-          <h2 id="outcome-heading" className="mt-2 text-2xl font-bold tracking-tight md:text-3xl print:text-xl">확인된 것과 아직 확인하지 않은 것</h2>
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-2xl border border-emerald-200 bg-white p-5">
-              <p className="text-xs font-semibold text-emerald-700">확인된 것</p>
-              <ul className="mt-3 space-y-1.5 text-sm text-zinc-700">
-                {outcome.confirmed.map(item => <li key={item} className="break-keep">• {item}</li>)}
-              </ul>
-            </div>
-            <div className="rounded-2xl border border-zinc-200 bg-white p-5">
-              <p className="text-xs font-semibold text-zinc-500">아직 측정하지 않은 것</p>
-              <ul className="mt-3 space-y-1.5 text-sm text-zinc-700">
-                {outcome.unmeasured.map(item => <li key={item} className="break-keep">• {item}</li>)}
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-14 border-t border-zinc-200 pt-12 print:mt-6 print:pt-5">
+          <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">Roadmap · 확장 구상</p>
-            <h3 className="mt-2 max-w-3xl text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">From Workflow Tracking to Manufacturing Traceability</h3>
+            <h2 id="roadmap-heading" className="mt-2 max-w-3xl text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">From Workflow Tracking to Manufacturing Traceability</h2>
             <p className="mt-2 text-sm font-medium text-zinc-700 break-keep">금형 · 시사출 · 사출조건 · 평가 결과를 연결하는 이력 관리</p>
             <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">지금의 Preflight는 흩어진 ERP·업무 데이터를 모아 진행 현황을 관리합니다. 다음은 금형 수정 이력, 시사출 회차, 사출조건, 평가 결과를 연결해 변경과 그 결과를 추적·비교할 수 있는 구조입니다. 운영 중인 Phase 1을 제외한 내용은 구현된 기능이 아니라 확장 구상입니다.</p>
 
