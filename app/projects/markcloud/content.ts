@@ -21,7 +21,7 @@ export const failures = [
   },
   {
     problem: "일부 음성의 출력이 중간에 끊겼습니다.",
-    action: "Riva Offline 평가에서 출력 cutoff를 확인했습니다.",
+    action: "Riva Offline 평가에서 출력이 중간에 잘리는 문제를 확인했습니다.",
     result: "Streaming 방식으로 평가 파이프라인을 변경했습니다.",
   },
   {

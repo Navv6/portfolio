@@ -495,13 +495,13 @@ export default function DeepViPortfolioPage() {
             decision="전체 계정 표준화 → 분석에 필요한 계정만 매핑"
             reason="처음에는 전체 기업의 계정명을 표준 계정명으로 정리하는 매핑 엔진을 만들었습니다. 계정명을 학습시킨 파인튜닝 LLM으로 유사도 기반 매핑을 하다가, 이후 규칙 기반을 함께 쓰는 방식으로 보완했습니다. 하지만 계정명 종류가 너무 많았고, 같은 항목도 해석에 따라 다른 계정으로 볼 수 있는 회계의 특성 때문에 일관된 기준으로 매핑하기 어려웠습니다."
             tradeoff="분석과 답변에 쓸 수 있는 재무 정보가 선택한 계정 범위로 제한됩니다."
-            result="네이버 증권 · 토스증권처럼 재무분석 화면에 공개되는 계정을 기준으로 분석에 필요한 계정을 추리고, 그 범위만 매핑했습니다.">
+            result="네이버 증권·토스증권처럼 재무분석 화면에 공개되는 계정을 기준으로 분석에 필요한 계정을 추리고, 그 범위만 매핑했습니다.">
             <figure className="mt-5 rounded-xl border border-zinc-200 bg-white p-4 text-sm" aria-label="계정 매핑 방식 변경">
               <ol className="grid gap-3 sm:grid-cols-3">
                 {[
                   { step: "1차", title: "파인튜닝 LLM · 유사도 매핑", body: "계정명을 학습시킨 LLM으로 전체 계정명을 표준 계정명에 매핑" },
                   { step: "2차", title: "규칙 기반 혼합", body: "유사도 매핑에 규칙 기반을 더해 보완" },
-                  { step: "최종", title: "필요한 계정만 매핑", body: "네이버 증권 · 토스증권 등 재무분석 화면에 공개되는 계정을 기준으로 추려 매핑", final: true },
+                  { step: "최종", title: "필요한 계정만 매핑", body: "네이버 증권·토스증권 등 재무분석 화면에 공개되는 계정을 기준으로 추려 매핑", final: true },
                 ].map((item) => (
                   <li key={item.step} className={`rounded-lg p-3 ${item.final ? "bg-blue-50" : "bg-zinc-50"}`}>
                     <p className={`text-xs font-medium ${item.final ? "text-blue-700" : "text-zinc-500"}`}>{item.step}</p>

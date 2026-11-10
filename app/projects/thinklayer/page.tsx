@@ -41,7 +41,7 @@ export default function ThinkLayerPage() {
         <dl className="my-8 grid gap-4 border-y border-zinc-200 py-5 text-sm sm:grid-cols-3">
           <div><dt className="text-xs text-zinc-500">역할</dt><dd className="mt-1 font-semibold">기획 · 설계 1인</dd></div>
           <div><dt className="text-xs text-zinc-500">형태</dt><dd className="mt-1 font-semibold">코딩 에이전트 스킬 · 모델 미내장</dd></div>
-          <div><dt className="text-xs text-zinc-500">단계</dt><dd className="mt-1 font-semibold">v0.1 Concept</dd></div>
+          <div><dt className="text-xs text-zinc-500">단계</dt><dd className="mt-1 font-semibold">v0.1 · 구상 단계</dd></div>
         </dl>
         <figure>
           {/* eslint-disable-next-line @next/next/no-img-element */}

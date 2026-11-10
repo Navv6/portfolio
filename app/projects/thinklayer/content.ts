@@ -27,7 +27,7 @@ export const example = {
 
 export const principles = [
   { title: "결과보다 구조 먼저", description: "문제가 명확해지기 전에 답하지 않습니다." },
-  { title: "모르는 것은 모른다고", description: "추측 대신 Unknown · Assumption으로 표시합니다." },
+  { title: "모르는 것은 모른다고", description: "추측 대신 Unknown·Assumption으로 표시합니다." },
   { title: "다음 행동은 하나", description: "조언 스무 개가 아니라 지금 할 한 가지." },
   { title: "사람이 확정", description: "사용자가 확정한 내용은 모델이 덮어쓰지 않습니다." },
 ];

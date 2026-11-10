@@ -21,7 +21,7 @@ export default function MarkCloudCaseStudy() {
           <dl className="my-8 grid gap-4 border-y border-zinc-200 py-5 text-sm sm:grid-cols-3">
             <div><dt className="text-xs text-zinc-500">역할 · 기간</dt><dd className="mt-1 font-semibold">데이터/AI 인턴 · 2025.11 ~ 12</dd></div>
             <div><dt className="text-xs text-zinc-500">담당 업무</dt><dd className="mt-1 font-semibold break-keep">평가 파이프라인 · 모델 비교 · 후처리 정책 · 구조화 출력</dd></div>
-            <div><dt className="text-xs text-zinc-500">결과 단계</dt><dd className="mt-1 font-semibold break-keep">STT 평가 수행 · 로컬 LLM 타당성 검토</dd></div>
+            <div><dt className="text-xs text-zinc-500">진행 범위</dt><dd className="mt-1 font-semibold break-keep">STT 평가 · 로컬 LLM 타당성 검토</dd></div>
           </dl>
           <div className="grid gap-4 sm:grid-cols-2">
             <MetricCard value="4종" label="STT 모델 비교" description="WER · CER · RTF와 의미 보존을 함께 검토" />
@@ -32,7 +32,7 @@ export default function MarkCloudCaseStudy() {
         <CaseSection id="evaluation" step={{ step: "01", title: "Evaluation Design" }} title="모델 이름보다, 같은 기준의 결과를 먼저">
           <div id="problem" className="scroll-mt-20 mb-5 rounded-2xl border border-blue-200 bg-white p-5">
             <p className="text-xs font-semibold text-blue-700">왜 STT였나</p>
-            <p className="mt-2 text-zinc-700">고령 응답자가 늘어나는 리서치 환경에서, 응답 과정을 AI로 전환해 응답률을 높이고 반복 업무에 드는 인력 낭비를 줄이는 것이 목적이었습니다. 그 출발점이 응답 음성을 텍스트로 바꾸는 STT였습니다.</p>
+            <p className="mt-2 text-zinc-700">고령 응답자가 늘어나는 리서치 환경에서, 응답 과정을 AI로 전환해 응답률을 높이고 반복 업무에 드는 인력 부담을 줄이는 것이 목적이었습니다. 그 출발점이 응답 음성을 텍스트로 바꾸는 STT였습니다.</p>
           </div>
           <p>한국어 음성인식에 사용할 후보를 고르기 위해 같은 데이터셋과 평가 조건으로 정확도와 처리 시간을 비교했습니다.</p>
           <div className="mt-5 rounded-2xl border border-zinc-200 bg-white p-4 sm:hidden">
@@ -77,7 +77,7 @@ export default function MarkCloudCaseStudy() {
               </tbody>
             </table>
           </div>
-          <p className="mt-3 text-xs leading-6 text-zinc-500">실험 기록의 비교값입니다. 표의 eval_clean / eval_other 집계 범위는 미명시이며, 기존 운영 모델 대비 개선율이나 KPI 달성 여부를 뜻하지 않습니다.</p>
+          <p className="mt-3 text-xs leading-6 text-zinc-500">실험 기록의 비교값으로, 기존 모델 대비 개선율을 뜻하지는 않습니다.</p>
           {baseline && <p className="mt-3 text-xs leading-6 text-zinc-600">기존 모델 기준선: WER {baseline.wer} · CER {baseline.cer} · RTF {baseline.rtf ?? "미측정"} / KPI: {baseline.kpi}</p>}
           <dl className="mt-5 space-y-3">
             {evaluationConditions.map(item => <div key={item.label} className="grid gap-1 sm:grid-cols-[110px_1fr]"><dt className="font-medium text-zinc-900">{item.label}</dt><dd>{item.value}</dd></div>)}
@@ -138,7 +138,7 @@ export default function MarkCloudCaseStudy() {
               <p className="mt-4">긴 문서에는 한 번에 생성하는 방식 외에도, 구간별 추출 후 통합하거나 두 단계로 요약하는 방식을 검토했습니다.</p>
             </div>
           </details>
-          {confirmations.localLlmOutcome === "feasibility" && <p className="mt-6 border-l-2 border-blue-300 pl-4 font-medium text-zinc-800">타당성 검토까지 수행했으며, 인턴 기간 종료로 실제 전환·운영까지 진행하지 않았습니다.</p>}
+          {confirmations.localLlmOutcome === "feasibility" && <p className="mt-6 border-l-2 border-blue-300 pl-4 font-medium text-zinc-800">타당성 검토까지 진행했고, 실제 전환은 인턴 기간이 끝나 이어가지 못했습니다.</p>}
         </CaseSection>
       </div>
       <SiteFooter />

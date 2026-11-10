@@ -3,16 +3,16 @@ import { confirmations } from "./content-confirmations";
 export const introduction = {
   name: "백경우",
   role: "Product Engineer · Applied AI",
-  headline: ["현장에서 발견한 문제를,", "직접 만들고 운영하는 것으로 해결합니다."],
+  headline: ["현장에서 발견한 문제를,", "직접 만들고 운영하며 해결합니다."],
   description: "문제 정의부터 설계·개발·배포까지 한 흐름으로 맡고, AI는 실제 데이터로 검증한 곳에 적용합니다.",
-  about: "회계·세무를 전공하며 복잡한 정보를 구조화하는 일에 관심을 갖게 되었습니다. 데이터 분석을 거쳐, 분석 결과를 실제로 쓰이는 도구로 만드는 일로 이어졌습니다.",
+  about: "회계·세무를 전공하며 복잡한 정보를 구조화하는 일에 관심을 갖게 되었고, 그 관심이 데이터 분석을 거쳐 실제로 쓰이는 도구를 만드는 일로 이어졌습니다.",
 };
 
 export const featuredProjects = [
   {
     id: "preflight", eyebrow: "Production · Internal Use", title: "Preflight",
     description: "샘플조달·시사출·CT 테스트 업무의 지연과 조달 현황을 한 화면에서 관리하는 Pre-Production R&D 워크스페이스",
-    shows: "Productization", metric: "사내망 전용", metricLabel: "실사용",
+    shows: "Productization", metric: "팀 전원", metricLabel: "실무 사용 · 사내망 운영",
     href: "/projects/preflight", visible: true,
   },
   {
@@ -60,7 +60,7 @@ export const experience = [
   },
   {
     id: "navy", company: null, title: "해군부사관",
-    period: "2015.06 ~ 2019.08", items: ["다중 센서 정보를 해석하고 시스템을 운용했습니다.", "오류 코드와 출력 패턴으로 원인을 추적하고 설정·복구 조치를 수행했습니다."], visible: true,
+    period: "2015.06 ~ 2019.08", items: ["다중 센서 정보 해석과 시스템 운용", "오류 코드·출력 패턴 기반 원인 추적과 설정·복구 조치"], visible: true,
   },
 ];
 
@@ -74,7 +74,7 @@ export const skills = [
 export const currentlyBuilding = [
   { title: "Preflight 이력 관리 확장", description: "금형 · 시사출 회차 · 사출조건 · 평가 결과를 연결해 변경과 결과를 추적하는 구조로 확장 구상", status: "확장 검토", href: "/projects/preflight#ai-roadmap" },
   { title: "ReadyFlow", description: "AI 도입 전, 흩어진 업무부터 진단하는 제조 중소기업 대상 창업 아이템. Preflight 경험을 다른 현장으로 넓히는 시도", status: "검증 준비", href: "/projects/readyflow" },
-  { title: "ThinkLayer", description: "만들기 전에 아이디어의 구조 · 빈틈 · 다음 행동 하나를 보여주는 코딩 에이전트용 스킬", status: "Concept", href: "/projects/thinklayer" },
+  { title: "ThinkLayer", description: "만들기 전에 아이디어의 구조 · 빈틈 · 다음 행동 하나를 보여주는 코딩 에이전트용 스킬", status: "구상 단계", href: "/projects/thinklayer" },
 ];
 
 // 대회 참가 경험. 과제 내용은 대회 규정상 비공개라 형식과 결과만 적습니다.
@@ -84,6 +84,6 @@ export const activities = [
     kind: "대외활동 · AI 문제 해결 챌린지",
     result: ["1차 예선 통과", "2차 예선 참가", "본선 미진출"],
     description: "SK하이닉스 사내 문제 예제를 제한 시간 안에 AI로 해결하는 형식의 해커톤입니다. 과제 내용은 대회 규정상 공개하지 않습니다.",
-    learned: "해결 방식을 고른 근거를 설명하는 것과, 구현 결과를 검증하는 과정이 더 필요하다는 점을 확인했습니다.",
+    learned: "해결 방식을 고른 근거를 설명하고, 결과를 검증하는 힘을 더 길러야 한다는 점을 배웠습니다.",
   },
 ];

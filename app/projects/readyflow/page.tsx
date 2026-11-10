@@ -75,7 +75,7 @@ export default function ReadyFlowPage() {
           <Link href="/projects/preflight#problem" className="group mt-6 flex items-center justify-between gap-4 rounded-2xl border border-zinc-200 bg-zinc-50 p-5 transition hover:border-zinc-400">
             <div>
               <p className="text-sm font-semibold">Preflight · 현업 프로젝트</p>
-              <p className="mt-1 text-sm leading-6 text-zinc-600 break-keep">ERP 엑셀 · 개별 파일 · 메신저에 흩어진 현황을 한 화면으로 구조화한 뒤에야 AI 확장을 설계할 수 있었습니다.</p>
+              <p className="mt-1 text-sm leading-6 text-zinc-600 break-keep">ERP 엑셀·개별 파일·메신저에 흩어진 현황을 한 화면으로 구조화한 뒤에야 AI 확장을 설계할 수 있었습니다.</p>
             </div>
             <ArrowUpRight className="h-5 w-5 shrink-0 text-zinc-500 transition group-hover:text-zinc-900" aria-hidden />
           </Link>

@@ -18,7 +18,7 @@ export const categories: { key: CategoryKey; label: string; short: string; href:
     label: "개인 프로젝트",
     short: "개인",
     href: "/personal",
-    desc: "개인적인 아이디어를 직접 구현하고 있는 프로젝트입니다. 문제 정의부터 화면 설계, 구현, 배포까지 빠르게 반복하며 다듬고 있습니다.",
+    desc: "직접 기획하고 만들어 보는 프로젝트와 창업 아이템입니다. 문제 정의부터 화면 설계, 구현, 배포까지 빠르게 반복하며 다듬고 있습니다.",
   },
   {
     key: "bootcamp",
@@ -49,7 +49,7 @@ export const projects: Project[] = [
     title: "Preflight",
     subtitle: "Pre-Production R&D 업무 관리 워크스페이스",
     summary:
-      "샘플조달 · 시사출 업무의 지연과 조달 현황을 확인하는 데 드는 반복 작업을 자동화했습니다. ERP 엑셀을 올리면 현황 · KPI · 주간 관리 파일이 만들어지고, 담당자별 할 일과 지연 사유를 함께 관리합니다. 기획부터 개발 · 운영까지 혼자 맡아, 팀 전체가 실무에 사용하고 있습니다.",
+      "샘플조달·시사출 업무의 지연과 조달 현황을 확인하는 데 드는 반복 작업을 자동화했습니다. ERP 엑셀을 올리면 현황·KPI·주간 관리 파일이 만들어지고, 담당자별 할 일과 지연 사유를 함께 관리합니다. 기획부터 개발·운영까지 혼자 맡아, 팀원 모두가 실무에 사용하고 있습니다.",
     period: "2026.08 ~",
     status: "운영 중",
     href: "/projects/preflight",
@@ -61,7 +61,7 @@ export const projects: Project[] = [
     title: "ReadyFlow",
     subtitle: "제조 중소기업 AI 도입 전 업무 진단 · 창업 준비",
     summary:
-      "AI를 들이기 전에 요청 · 데이터 · 진행상황이 흩어진 업무부터 진단합니다. 관리자 인터뷰와 실제 요청 데이터를 대조해 개선 지점과 우선순위를 근거와 함께 제시하는 서비스를 준비하고 있습니다.",
+      "AI를 들이기 전에 요청·데이터·진행상황이 흩어진 업무부터 진단합니다. 관리자 인터뷰와 실제 요청 데이터를 대조해 개선 지점과 우선순위를 근거와 함께 제시하는 서비스를 준비하고 있습니다.",
     status: "검증 준비",
     href: "/projects/readyflow",
     tags: [],
@@ -73,7 +73,7 @@ export const projects: Project[] = [
     subtitle: "만들기 전에 구조를 보는 AI 사고 레이어",
     summary:
       "아이디어를 바로 코드로 옮기기 전에, 짧은 인터뷰로 구조(MAP)와 빈틈(GAP), 다음 행동 하나(PATH)를 보여주는 코딩 에이전트용 스킬입니다.",
-    status: "Concept",
+    status: "구상 단계",
     href: "/projects/thinklayer",
     tags: [],
   },
@@ -83,7 +83,7 @@ export const projects: Project[] = [
     title: "VibeCoder",
     subtitle: "AI 워크플로우 커뮤니티",
     summary:
-      "비개발자도 AI로 직접 만들 수 있게 돕는 워크플로우 커뮤니티 서비스로, AI 뉴스 · 영상 · 플레이북 · 빌드 로그를 한 곳에서 탐색할 수 있도록 구성하고 있습니다.",
+      "비개발자도 AI로 직접 만들 수 있게 돕는 워크플로우 커뮤니티 서비스로, AI 뉴스·영상·플레이북·빌드 로그를 한 곳에서 탐색할 수 있도록 구성하고 있습니다.",
     status: "진행 중",
     href: "/personal#vibecoder",
     tags: [],
@@ -138,7 +138,7 @@ export const projects: Project[] = [
 const markCloudProject: Project = {
   id: "markcloud", category: "work", title: "MarkCloud",
   subtitle: "STT 모델 평가 · 로컬 LLM 타당성 검토",
-  summary: "음성인식 모델을 비교하고 의미 기반 평가를 보완했습니다. 로컬 LLM은 전환 타당성을 검토한 단계입니다.",
+  summary: "음성인식 모델을 비교하고 의미 기반 평가를 보완했습니다. 로컬 LLM 전환은 타당성을 검토했습니다.",
   period: "2025.11 ~ 2025.12", status: "인턴 프로젝트", href: "/projects/markcloud",
   tags: ["STT", "Model Evaluation", "Local LLM"],
 };

@@ -127,7 +127,7 @@ export default function PreflightPage() {
         <p className="mt-3 max-w-3xl text-base leading-7 text-zinc-600 break-keep print:text-sm">ERP 엑셀의 반복 집계를 자동화하고, 담당 업무와 지연 사유를 함께 관리하는 R&D 워크스페이스입니다.</p>
         <dl className="my-8 grid gap-4 border-y border-zinc-200 py-5 text-sm sm:grid-cols-3 print:my-4 print:grid-cols-3">
           <div><dt className="text-xs text-zinc-500">역할</dt><dd className="mt-1 font-semibold">기획부터 개발·운영까지 1인</dd></div>
-          <div><dt className="text-xs text-zinc-500">사용</dt><dd className="mt-1 font-semibold">팀 전원 (조립 인원 제외)</dd></div>
+          <div><dt className="text-xs text-zinc-500">사용</dt><dd className="mt-1 font-semibold">팀 전원</dd></div>
           <div><dt className="text-xs text-zinc-500">초기 구축</dt><dd className="mt-1 font-semibold">2026.08.12–08.27 · 이후 개선</dd></div>
         </dl>
         <figure>
@@ -165,7 +165,7 @@ export default function PreflightPage() {
               <p className="mb-2 font-mono text-xs text-blue-700">ADR-01 · 일부 필드 저장 → 원본 보존</p>
               <DecisionCard id="storage-decision"
                 decision="화면에 필요한 값만 저장했더니, 다음 기능을 만들 수 없었습니다."
-                reason="처음에는 12개 필드만 남겼지만, 펜딩리스트와 준수율 집계에는 제외했던 정보가 필요했습니다."
+                reason="처음에는 12개 필드만 남겼지만, 미결 업무 목록과 준수율 집계에는 제외했던 정보가 필요했습니다."
                 tradeoff="전체 원본을 보관할 저장 공간과 JSONB·집계 컬럼을 함께 관리할 복잡도가 늘어납니다."
                 result="전체 행·컬럼을 보관하고, 저장된 원본에서 화면과 보고서에 필요한 값을 가공하도록 변경했습니다.">
                 <figure className="mt-5 rounded-xl border border-zinc-200 bg-zinc-50 p-4 print:mt-3 print:break-inside-avoid" aria-labelledby="storage-caption">
@@ -245,7 +245,7 @@ export default function PreflightPage() {
       <section id="adoption" className="preflight-sheet scroll-mt-20 border-t border-zinc-200 bg-white py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="adoption-heading">
         <div className="mx-auto max-w-5xl px-5 print:px-0">
           <StepLabel step="05" title="Operation & Adoption" />
-          <h2 id="adoption-heading" className="mt-2 text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">개발과 운영을 나눠, 팀이 실무에 쓰는 도구로 운영하고 있습니다.</h2>
+          <h2 id="adoption-heading" className="mt-2 text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">개발 서버와 운영 서버를 나눠, 팀이 실무에서 쓰고 있습니다.</h2>
           <div id="technical-details" className="scroll-mt-20 mt-6">
             <ul className="grid gap-3 sm:grid-cols-3">
               {validation.map(item => (
