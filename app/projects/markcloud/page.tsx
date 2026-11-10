@@ -30,7 +30,11 @@ export default function MarkCloudCaseStudy() {
         </section>
 
         <CaseSection id="evaluation" step={{ step: "01", title: "Evaluation Design" }} title="모델 이름보다, 같은 기준의 결과를 먼저">
-          <p id="problem" className="scroll-mt-20">한국어 음성인식에 사용할 후보를 고르기 위해 같은 데이터셋과 평가 조건으로 정확도와 처리 시간을 비교했습니다.</p>
+          <div id="problem" className="scroll-mt-20 mb-5 rounded-2xl border border-blue-200 bg-white p-5">
+            <p className="text-xs font-semibold text-blue-700">왜 STT였나</p>
+            <p className="mt-2 text-zinc-700">고령 응답자가 늘어나는 리서치 환경에서, 응답 과정을 AI로 전환해 응답률을 높이고 반복 업무에 드는 인력 낭비를 줄이는 것이 목적이었습니다. 그 출발점이 응답 음성을 텍스트로 바꾸는 STT였습니다.</p>
+          </div>
+          <p>한국어 음성인식에 사용할 후보를 고르기 위해 같은 데이터셋과 평가 조건으로 정확도와 처리 시간을 비교했습니다.</p>
           <div className="mt-5 rounded-2xl border border-zinc-200 bg-white p-4 sm:hidden">
             <p className="font-semibold text-zinc-900">후보 모델 비교</p>
             <p className="mt-1 text-xs text-zinc-600">WER·CER·RTF 모두 낮을수록 좋음 · 비율 표기</p>
