@@ -248,8 +248,8 @@ export default function PreflightPage() {
 
       <section id="adoption" className="preflight-sheet scroll-mt-20 border-t border-zinc-200 bg-white py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="adoption-heading">
         <div className="mx-auto max-w-5xl px-5 print:px-0">
-          <StepLabel step="05" title="Validation & Adoption" />
-          <h2 id="adoption-heading" className="mt-2 text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">테스트와 실제 파일 대조로 확인하고, 팀에서 사용하고 있습니다.</h2>
+          <StepLabel step="05" title="Operation & Adoption" />
+          <h2 id="adoption-heading" className="mt-2 text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">개발과 운영을 나눠, 팀이 실무에 쓰는 도구로 운영하고 있습니다.</h2>
           <div id="technical-details" className="scroll-mt-20 mt-6">
             <ul className="grid gap-3 sm:grid-cols-3">
               {validation.map(item => (

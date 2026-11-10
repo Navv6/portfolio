@@ -42,7 +42,7 @@ export const traceabilityFlow = [
 export const traceabilityConsiderations = ["설정값과 실제 계측값 분리", "이전 버전 보존", "입력자 · 변경자 기록"];
 
 export const validation = [
-  { title: "검증", body: "계산 규칙과 중복 판정은 가상 데이터로 테스트하고, 실제 회사 파일의 수치는 저장소에 넣지 않는 로컬 스크립트로 대조했습니다." },
+  { title: "개발 · 운영 서버 분리", body: "개발 서버와 운영 서버를 나눠 운영합니다. 팀이 쓰는 운영 환경에 영향을 주지 않고 개발 서버에서 변경 사항을 만들고 확인합니다." },
   { title: "업무 규칙", body: "의뢰 1건과 여러 공정 라인을 분리해 관리합니다. 지연 기준과 관리 단위는 설정으로 분리하고, 잠정값은 화면에도 표시합니다." },
   { title: "권한 · 영속화", body: "로그인과 3단계 권한, PostgreSQL 기반 데이터 영속화를 구현했습니다." },
 ];
@@ -65,7 +65,7 @@ export const timeline = [
 
 // 현장에서 지켜야 했던 도입 조건
 export const constraints = [
-  { title: "클라우드 없이 서버 PC 한 대", description: "사내 서버 PC에서 데이터를 보관·운영하고, 설치·백업·복원을 PowerShell 스크립트로 정리했습니다." },
+  { title: "클라우드 없이 사내 서버로", description: "사내 서버에서 데이터를 보관·운영하고, 설치·백업·복원을 PowerShell 스크립트로 정리했습니다." },
   { title: "원본 파일은 밖으로 보내지 않기", description: "엑셀 파일은 브라우저에서 파싱하고, 파싱한 값만 저장합니다." },
   { title: "파서가 못 읽는 ERP 파일", description: "ExcelJS·SheetJS가 모두 실패한 비표준 xlsx를 보정하는 정규화 모듈을 만들었습니다." },
   { title: "기존 관리 방식 유지", description: "셀 색상으로 적던 상태와 기존 엑셀 양식을 바꾸지 않고 그대로 읽습니다." },
