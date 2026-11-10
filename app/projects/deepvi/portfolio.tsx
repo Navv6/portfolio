@@ -514,6 +514,34 @@ export default function DeepViPortfolioPage() {
         </Container>
       </section>
 
+      {/* RAG & Validation */}
+      <section id="rag-validation" className="scroll-mt-20 mt-16 md:mt-24">
+        <Container>
+          <SectionTitle
+            eyebrow="RAG & Validation"
+            title="답변이 우리 데이터를 근거로 나오는지 확인했습니다"
+            desc="검색한 기업의 데이터를 대화 맥락으로 넣고, 테스트 프롬프트로 실제 답변의 근거를 점검했습니다."
+            wide
+          />
+          <ArchitectureFlow label="기업 데이터가 답변에 쓰이는 흐름" nodes={[
+            { title: "기업 검색", description: "사용자가 기업을 조회" },
+            { title: "백엔드 API", description: "기업 데이터와 RAG용 데이터를 함께 반환" },
+            { title: "대화", description: "LLM이 받은 기업 데이터를 참고해 답변" },
+            { title: "테스트 프롬프트", description: "답변이 보유 데이터를 근거로 하는지 확인" },
+          ]} />
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-zinc-200 bg-white p-5">
+              <h3 className="text-sm font-semibold text-zinc-900">기업 데이터를 대화 맥락으로</h3>
+              <p className="mt-2 text-sm leading-7 text-zinc-600 break-keep">기업을 검색하면 받아오는 백엔드 API 응답에 RAG용 기업 데이터를 함께 담았습니다. 대화할 때 LLM이 이 데이터를 참고해 답하도록 구성했습니다.</p>
+            </div>
+            <div className="rounded-2xl border border-zinc-200 bg-white p-5">
+              <h3 className="text-sm font-semibold text-zinc-900">테스트 프롬프트로 근거 확인</h3>
+              <p className="mt-2 text-sm leading-7 text-zinc-600 break-keep">테스트용 프롬프트를 만들어, 실제 답변이 우리가 가진 기업 데이터를 근거로 나오는지 확인했습니다.</p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* Classification */}
       <section id="classification" className="scroll-mt-20 mt-16 md:mt-24">
         <Container>
@@ -636,6 +664,7 @@ export default function DeepViPortfolioPage() {
             { id: "problem", label: "배경" },
             { id: "architecture", label: "구조" },
             { id: "data-decision", label: "판단" },
+            { id: "rag-validation", label: "검증" },
             { id: "classification", label: "분류" },
             { id: "achievements", label: "성과" },
             { id: "features", label: "기능" },
