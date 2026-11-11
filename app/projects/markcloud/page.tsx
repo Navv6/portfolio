@@ -1,16 +1,17 @@
 import { notFound } from "next/navigation";
 import { SiteFooter, SiteHeader } from "../../site";
-import { CaseSection, MetricCard, FailureCard, ArchitectureFlow } from "../../case-study";
+import { CaseSection, CaseGlance, FailureCard, ArchitectureFlow, NextCase } from "../../case-study";
+import { CaseStepNav } from "../../case-nav";
 import { confirmations } from "../../content-confirmations";
 import { ProjectTexture } from "../../visuals";
-import { sttModels, evaluationConditions, failures, localCriteria, outputFields, semanticResults } from "./content";
+import { sttModels, evaluationConditions, failures, localCriteria, outputFields, semanticResults, glance, caseSteps } from "./content";
 
 export default function MarkCloudCaseStudy() {
   if (confirmations.markCloudPublic !== true) notFound();
   const baseline = confirmations.sttBaseline;
 
   return (
-    <main className="min-h-screen bg-gray-50 text-zinc-900">
+    <main className="min-h-screen bg-zinc-50 text-zinc-900">
       <SiteHeader active="work" title="MarkCloud" className="print:hidden" />
       <div className="mx-auto max-w-5xl px-5">
         <section className="relative pb-14 pt-12 md:pb-20 md:pt-16">
@@ -18,17 +19,11 @@ export default function MarkCloudCaseStudy() {
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">Internship · MarkCloud</p>
           <h1 className="mt-2 max-w-4xl text-4xl font-bold leading-tight tracking-tight break-keep md:text-5xl">한국어 STT 모델 평가와<br className="hidden sm:block" /> 로컬 LLM 타당성 검토</h1>
           <p className="mt-5 max-w-3xl text-base leading-7 text-zinc-600 break-keep">음성인식 모델의 오류율·처리 속도·의미 보존을 비교하고, 긴 문서 요약을 로컬 LLM으로 옮길 수 있는지 검토했습니다.</p>
-          <dl className="my-8 grid gap-4 border-y border-zinc-200 py-5 text-sm sm:grid-cols-3">
-            <div><dt className="text-xs text-zinc-500">역할 · 기간</dt><dd className="mt-1 font-semibold">데이터/AI 인턴 · 2025.11 ~ 12</dd></div>
-            <div><dt className="text-xs text-zinc-500">담당 업무</dt><dd className="mt-1 font-semibold break-keep">평가 파이프라인 · 모델 비교 · 후처리 정책 · 구조화 출력</dd></div>
-            <div><dt className="text-xs text-zinc-500">진행 범위</dt><dd className="mt-1 font-semibold break-keep">STT 평가 · 로컬 LLM 타당성 검토</dd></div>
-          </dl>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <MetricCard value="4종" label="STT 모델 비교" description="WER · CER · RTF와 의미 보존을 함께 검토" />
-            <MetricCard value={confirmations.evaluationSamples === null ? null : `약 ${confirmations.evaluationSamples.toLocaleString("ko-KR")}개`} label="평가 대상 음성 샘플" description="KsponSpeech eval_clean / eval_other" />
-          </div>
+          <div className="mt-8"><CaseGlance {...glance} /></div>
         </section>
-
+      </div>
+      <CaseStepNav steps={caseSteps} />
+      <div className="mx-auto max-w-5xl px-5">
         <CaseSection id="evaluation" step={{ step: "01", title: "Evaluation Design" }} title="모델 이름보다, 같은 기준의 결과를 먼저">
           <div id="problem" className="scroll-mt-20 mb-5 rounded-2xl border border-blue-200 bg-white p-5">
             <p className="text-xs font-semibold text-blue-700">왜 STT였나</p>
@@ -141,6 +136,7 @@ export default function MarkCloudCaseStudy() {
           {confirmations.localLlmOutcome === "feasibility" && <p className="mt-6 border-l-2 border-blue-300 pl-4 font-medium text-zinc-800">타당성 검토까지 진행했고, 실제 전환은 인턴 기간이 끝나 이어가지 못했습니다.</p>}
         </CaseSection>
       </div>
+      <NextCase href="/projects/deepvi" title="DeepVi" desc="재무제표와 뉴스를 LLM·RAG로 해석해 주는 기업 분석 서비스" />
       <SiteFooter />
     </main>
   );

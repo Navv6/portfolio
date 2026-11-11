@@ -26,7 +26,7 @@ export default function ReadyFlowPage() {
           {cards.map(card => (
             <figure key={card.src}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={basePath + card.src} alt={card.alt} width={1080} height={1350} className="block h-auto w-full rounded-xl border border-zinc-200 shadow-sm" />
+              <img loading="lazy" decoding="async" src={basePath + card.src} alt={card.alt} width={1080} height={1350} className="block h-auto w-full rounded-xl border border-zinc-200 shadow-sm" />
               <figcaption className="mt-2 text-xs text-zinc-500">{card.caption}</figcaption>
             </figure>
           ))}

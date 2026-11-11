@@ -82,22 +82,17 @@ export default function Home() {
             <Link href={lead.href} data-reveal className={`card-lift group isolate grid overflow-hidden md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] ${card} ${focus}`}>
               <div className="relative flex flex-col p-6 md:p-8">
                 <ProjectTexture kind={textureOf[lead.id] ?? "data"} className="card-texture pointer-events-none absolute right-5 top-5 -z-10 w-36 opacity-50" />
-                <p className="relative text-xs font-semibold text-zinc-500">{lead.eyebrow}</p>
+                <p className="relative flex flex-wrap items-center gap-2 text-xs font-semibold text-zinc-500">{lead.eyebrow}<StatusBadge status={lead.status} /></p>
                 <h3 className="mt-3 text-3xl font-bold tracking-tight">{lead.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-zinc-600 break-keep">{lead.description}</p>
-                <p className="mt-4 text-xs text-zinc-500">
-                  Shows <span className="ml-1.5 font-medium text-blue-700">{lead.shows}</span>
-                </p>
-                <div className="mt-8 flex items-end justify-between gap-4 border-t border-zinc-100 pt-5 md:mt-auto">
-                  <div>
-                    <p className="text-3xl font-bold tracking-tight tabular-nums">{lead.metric}</p>
-                    <p className="mt-1 text-xs text-zinc-500">{lead.metricLabel}</p>
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-900">
-                    Case Study
-                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
-                  </span>
-                </div>
+                <dl className="mt-5 space-y-3 text-sm">
+                  <div><dt className="text-xs font-semibold text-zinc-500">문제</dt><dd className="mt-1 leading-6 text-zinc-700 break-keep">{lead.problem}</dd></div>
+                  <div><dt className="text-xs font-semibold text-zinc-500">역할</dt><dd className="mt-1 leading-6 text-zinc-700 break-keep">{lead.role}</dd></div>
+                  <div><dt className="text-xs font-semibold text-blue-700">결과</dt><dd className="mt-1 font-semibold leading-6 text-zinc-900 break-keep">{lead.result}</dd></div>
+                </dl>
+                <span className="mt-6 inline-flex items-center gap-1.5 pt-1 text-sm font-semibold text-zinc-900 md:mt-auto">
+                  Case Study
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+                </span>
               </div>
               <div className="relative hidden min-h-[22rem] border-l border-zinc-100 bg-zinc-100 md:block">
                 <img
@@ -113,22 +108,17 @@ export default function Home() {
             {others.map((project, i) => (
               <Link key={project.id} href={project.href} data-reveal style={delay(i + 1)} className={`card-lift group relative isolate flex flex-col overflow-hidden p-6 md:p-7 ${card} ${focus}`}>
                 <ProjectTexture kind={textureOf[project.id] ?? "network"} className="card-texture pointer-events-none absolute right-5 top-5 -z-10 w-32 opacity-50" />
-                <p className="text-xs font-semibold text-zinc-500">{project.eyebrow}</p>
+                <p className="relative flex flex-wrap items-center gap-2 text-xs font-semibold text-zinc-500">{project.eyebrow}<StatusBadge status={project.status} /></p>
                 <h3 className="mt-3 text-2xl font-bold tracking-tight">{project.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-zinc-600 break-keep">{project.description}</p>
-                <p className="mt-4 text-xs text-zinc-500">
-                  Shows <span className="ml-1.5 font-medium text-blue-700">{project.shows}</span>
-                </p>
-                <div className="mt-8 flex items-end justify-between gap-4 border-t border-zinc-100 pt-5 md:mt-auto">
-                  <div>
-                    <p className="text-2xl font-bold tracking-tight tabular-nums">{project.metric}</p>
-                    <p className="mt-1 text-xs text-zinc-500">{project.metricLabel}</p>
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-900">
-                    Case Study
-                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
-                  </span>
-                </div>
+                <dl className="mt-5 space-y-3 text-sm">
+                  <div><dt className="text-xs font-semibold text-zinc-500">문제</dt><dd className="mt-1 leading-6 text-zinc-700 break-keep">{project.problem}</dd></div>
+                  <div><dt className="text-xs font-semibold text-zinc-500">역할</dt><dd className="mt-1 leading-6 text-zinc-700 break-keep">{project.role}</dd></div>
+                  <div><dt className="text-xs font-semibold text-blue-700">결과</dt><dd className="mt-1 font-semibold leading-6 text-zinc-900 break-keep">{project.result}</dd></div>
+                </dl>
+                <span className="mt-6 inline-flex items-center gap-1.5 pt-1 text-sm font-semibold text-zinc-900 md:mt-auto">
+                  Case Study
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+                </span>
               </Link>
             ))}
           </div>

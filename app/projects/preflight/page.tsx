@@ -26,7 +26,7 @@ function Screenshot({ shot, onOpen, className = "" }: { shot: Shot; onOpen: (sho
     <button type="button" onClick={() => onOpen(shot)}
       className={"group relative block w-full overflow-hidden rounded-xl border border-zinc-200 bg-white text-left shadow-sm transition hover:border-zinc-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600 " + className}
       aria-label={shot.alt + " 확대해서 보기"}>
-      <img src={imagePath(shot.src)} alt={shot.alt} width={shot.width} height={shot.height} className="block h-auto w-full" />
+      <img loading="lazy" decoding="async" src={imagePath(shot.src)} alt={shot.alt} width={shot.width} height={shot.height} className="block h-auto w-full" />
       <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-zinc-900/80 px-3 py-1.5 text-xs text-white print:hidden">
         <Maximize2 className="h-3.5 w-3.5" aria-hidden />확대
       </span>

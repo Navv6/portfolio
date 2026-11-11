@@ -34,10 +34,10 @@ function SectionTitle({
 }) {
   return (
     <div className="mb-10">
-      <div className="text-xs uppercase tracking-[0.2em] text-slate-500">{eyebrow}</div>
-      <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900 md:text-3xl">{title}</h2>
+      <div className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">{eyebrow}</div>
+      <h2 className="mt-2 text-2xl font-bold tracking-tight text-zinc-900 break-keep md:text-3xl">{title}</h2>
       {desc && (
-        <p className={`mt-3 text-sm leading-6 text-slate-700 md:text-base break-keep ${wide ? "max-w-4xl" : "max-w-2xl"}`}>
+        <p className={`mt-3 text-sm leading-6 text-zinc-700 md:text-base break-keep ${wide ? "max-w-4xl" : "max-w-2xl"}`}>
           {desc}
         </p>
       )}
@@ -47,12 +47,12 @@ function SectionTitle({
 
 function Card({ title, icon, children, className = "" }: { title: string; icon?: React.ReactNode; children: React.ReactNode; className?: string }) {
   return (
-    <div className={`rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-sm ${className}`}>
+    <div className={`rounded-2xl border border-zinc-200/70 bg-white/80 p-6 shadow-sm ${className}`}>
       <div className="flex items-center gap-2 mb-4">
         {icon}
-        <div className="text-sm font-semibold text-slate-900">{title}</div>
+        <div className="text-sm font-semibold text-zinc-900">{title}</div>
       </div>
-      <div className="text-sm leading-6 text-slate-700">{children}</div>
+      <div className="text-sm leading-6 text-zinc-700">{children}</div>
     </div>
   );
 }
@@ -166,11 +166,7 @@ export default function TableauPortfolioPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#eef3ff] text-slate-900">
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute left-1/2 top-[-220px] h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-[#7dd3fc]/35 blur-3xl" />
-        <div className="absolute right-[-220px] top-[140px] h-[520px] w-[520px] rounded-full bg-[#a5b4fc]/35 blur-3xl" />
-      </div>
+    <main className="min-h-screen bg-zinc-50 text-zinc-900">
 
       <SiteHeader active="bootcamp" title="Tableau" subtitle="전투사관학교 챔피언 가이드북" />
 
@@ -178,19 +174,19 @@ export default function TableauPortfolioPage() {
       <section className="pt-16 md:pt-24">
         <Container>
           <motion.div initial="hidden" animate="show" variants={fadeUp}>
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/70 px-3 py-1 text-xs text-slate-700 shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200/70 bg-white/70 px-3 py-1 text-xs text-zinc-700 shadow-sm">
               Tableau · Riot API · Data Storytelling
             </div>
-            <h1 className="mt-6 text-4xl font-semibold tracking-tight text-slate-900 md:text-6xl">
+            <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-zinc-900 break-keep md:text-5xl">
               전투사관학교
               <br className="hidden md:block" /> 챔피언 분석 가이드
             </h1>
-            <p className="mt-6 max-w-4xl text-sm leading-6 text-slate-700">
+            <p className="mt-6 max-w-4xl text-sm leading-6 text-zinc-700">
               Riot API와 CSV 데이터를 기반으로 챔피언 스탯, 성장 패턴, 라인별 특성을 분석하고, 이를 탐색할 수 있는 Tableau 인터랙티브 대시보드로 구현했습니다.
             </p>
             <div className="mt-8 flex flex-wrap gap-2 text-xs">
               {["챔피언 분석", "챔피언 비교", "추천 아이템", "인터랙티브 대시보드", "Tableau 스토리텔링"].map((t) => (
-                <span key={t} className="rounded-full border border-slate-200/70 bg-white/70 px-3 py-1 shadow-sm text-slate-700">
+                <span key={t} className="rounded-full border border-zinc-200/70 bg-white/70 px-3 py-1 shadow-sm text-zinc-700">
                   {t}
                 </span>
               ))}
@@ -216,27 +212,27 @@ export default function TableauPortfolioPage() {
             >
               {frames.map((frame) => (
                 <div key={`carousel-${frame.id}`} data-slide="true" className="relative w-full flex-none snap-center">
-                  <div className="overflow-hidden rounded-2xl border border-slate-200/70 bg-white/80 shadow-sm">
+                  <div className="overflow-hidden rounded-2xl border border-zinc-200/70 bg-white/80 shadow-sm">
                     <button
                       type="button"
                       onClick={() => setActiveFrame(frame.id)}
                       className="group/img relative block w-full overflow-hidden bg-[#0d1117]"
                     >
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={withBasePath(frame.image)}
                         alt={frame.title}
                         className="w-full object-cover transition duration-300 group-hover/img:scale-[1.02]"
                         style={{ minHeight: "460px", maxHeight: "560px", objectFit: "cover" }}
                       />
-                      <div className="absolute inset-0 flex items-center justify-center bg-slate-900/0 transition duration-300 group-hover/img:bg-slate-900/25">
-                        <span className="rounded-full bg-white/0 px-4 py-1.5 text-xs font-medium text-transparent transition duration-300 group-hover/img:bg-white/90 group-hover/img:text-slate-700">
+                      <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/0 transition duration-300 group-hover/img:bg-zinc-900/25">
+                        <span className="rounded-full bg-white/0 px-4 py-1.5 text-xs font-medium text-transparent transition duration-300 group-hover/img:bg-white/90 group-hover/img:text-zinc-700">
                           크게 보기
                         </span>
                       </div>
                     </button>
                     <div className="p-5">
-                      <div className="text-base font-semibold text-slate-900">{frame.title}</div>
-                      <p className="mt-2 text-sm leading-6 text-slate-600">{frame.desc}</p>
+                      <div className="text-base font-semibold text-zinc-900">{frame.title}</div>
+                      <p className="mt-2 text-sm leading-6 text-zinc-600">{frame.desc}</p>
                     </div>
                   </div>
                 </div>
@@ -246,7 +242,7 @@ export default function TableauPortfolioPage() {
               <button
                 type="button"
                 onClick={() => scrollByOne("prev")}
-                className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-900 opacity-0 backdrop-blur transition group-hover:opacity-100 hover:bg-slate-100"
+                className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white/90 text-zinc-900 opacity-0 backdrop-blur transition group-hover:opacity-100 hover:bg-zinc-100"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -255,7 +251,7 @@ export default function TableauPortfolioPage() {
               <button
                 type="button"
                 onClick={() => scrollByOne("next")}
-                className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-900 opacity-0 backdrop-blur transition group-hover:opacity-100 hover:bg-slate-100"
+                className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-zinc-200 bg-white/90 text-zinc-900 opacity-0 backdrop-blur transition group-hover:opacity-100 hover:bg-zinc-100"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
@@ -309,9 +305,9 @@ export default function TableauPortfolioPage() {
                 <div className={`rounded-2xl border ${item.border} bg-white/80 p-5 shadow-sm h-full`}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className={`h-2 w-2 rounded-full ${item.dot}`} />
-                    <span className="text-sm font-semibold text-slate-900">{item.q}</span>
+                    <span className="text-sm font-semibold text-zinc-900">{item.q}</span>
                   </div>
-                  <p className="text-xs text-slate-500 leading-5 mb-3">{item.desc}</p>
+                  <p className="text-xs text-zinc-500 leading-5 mb-3">{item.desc}</p>
                   <div className={`rounded-lg ${item.bg} px-3 py-2 text-[11px] ${item.text} leading-5`}>
                     {item.answer}
                   </div>
@@ -367,15 +363,15 @@ export default function TableauPortfolioPage() {
                       ],
                     },
                   ].map((item) => (
-                    <div key={item.n} className="rounded-lg border border-slate-100 bg-slate-50/60 px-3 py-2.5">
+                    <div key={item.n} className="rounded-lg border border-zinc-100 bg-zinc-50/60 px-3 py-2.5">
                       <div className="mb-1.5 flex items-center gap-1.5">
                         <span className={`text-[10px] font-bold ${item.color}`}>{item.n}</span>
-                        <span className="text-xs font-semibold text-slate-800">{item.title}</span>
+                        <span className="text-xs font-semibold text-zinc-800">{item.title}</span>
                       </div>
                       {item.points.map((p) => (
                         <div key={p} className="mt-0.5 flex items-start gap-1.5">
-                          <div className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-slate-300" />
-                          <p className="text-[10px] leading-5 text-slate-500">{p}</p>
+                          <div className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-zinc-300" />
+                          <p className="text-[10px] leading-5 text-zinc-500">{p}</p>
                         </div>
                       ))}
                     </div>
@@ -390,21 +386,21 @@ export default function TableauPortfolioPage() {
                   <button
                     type="button"
                     onClick={() => setActiveAnalysis(item)}
-                    className="group/analysis relative block w-full overflow-hidden rounded-xl border border-slate-200/80 bg-[#0d1117]"
+                    className="group/analysis relative block w-full overflow-hidden rounded-xl border border-zinc-200/80 bg-[#0d1117]"
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={withBasePath(item.image)}
                       alt={item.title}
                       className="aspect-[16/10] w-full object-cover transition duration-300 group-hover/analysis:scale-[1.02]"
                     />
-                    <div className="absolute inset-0 flex items-center justify-center bg-slate-900/0 transition duration-200 group-hover/analysis:bg-slate-900/30">
-                      <span className="rounded-full bg-white/0 px-3 py-1 text-[10px] font-medium text-transparent transition duration-200 group-hover/analysis:bg-white/90 group-hover/analysis:text-slate-700">
+                    <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/0 transition duration-200 group-hover/analysis:bg-zinc-900/30">
+                      <span className="rounded-full bg-white/0 px-3 py-1 text-[10px] font-medium text-transparent transition duration-200 group-hover/analysis:bg-white/90 group-hover/analysis:text-zinc-700">
                         원본 크기로 보기
                       </span>
                     </div>
                   </button>
-                  <p className="mt-3 text-[11px] leading-5 text-slate-600">{item.summary}</p>
-                  <p className="mt-1 text-[11px] leading-5 text-slate-400">{item.detail}</p>
+                  <p className="mt-3 text-[11px] leading-5 text-zinc-600">{item.summary}</p>
+                  <p className="mt-1 text-[11px] leading-5 text-zinc-400">{item.detail}</p>
                 </Card>
               </motion.div>
             ))}
@@ -433,7 +429,7 @@ export default function TableauPortfolioPage() {
                   variants={fadeUp}
                   custom={i}
                 >
-                  <div className="rounded-2xl border border-slate-200/70 bg-white/80 shadow-sm overflow-hidden">
+                  <div className="rounded-2xl border border-zinc-200/70 bg-white/80 shadow-sm overflow-hidden">
                     <div className="flex flex-col md:flex-row">
                       <button
                         type="button"
@@ -441,14 +437,14 @@ export default function TableauPortfolioPage() {
                         className="group/thumb relative shrink-0 overflow-hidden bg-[#0d1117] md:w-64"
                         style={{ minHeight: "180px" }}
                       >
-                        <img
+                        <img loading="lazy" decoding="async"
                           src={withBasePath(frame.image)}
                           alt={frame.title}
                           className="h-full w-full object-cover transition duration-300 group-hover/thumb:scale-105"
                           style={{ minHeight: "180px" }}
                         />
-                        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/0 transition duration-200 group-hover/thumb:bg-slate-900/35">
-                          <span className="rounded-full bg-white/0 px-3 py-1 text-[10px] font-medium text-transparent transition duration-200 group-hover/thumb:bg-white/90 group-hover/thumb:text-slate-700">
+                        <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/0 transition duration-200 group-hover/thumb:bg-zinc-900/35">
+                          <span className="rounded-full bg-white/0 px-3 py-1 text-[10px] font-medium text-transparent transition duration-200 group-hover/thumb:bg-white/90 group-hover/thumb:text-zinc-700">
                             크게 보기
                           </span>
                         </div>
@@ -457,13 +453,13 @@ export default function TableauPortfolioPage() {
                         <div className="flex items-center gap-2 mb-3">
                           <div className={`h-2 w-2 rounded-full ${item.dot}`} />
                           <span className={`text-[11px] font-semibold rounded-full px-2 py-0.5 ${item.badgeColor}`}>{item.badge}</span>
-                          <span className="text-sm font-semibold text-slate-900">{frame.title}</span>
+                          <span className="text-sm font-semibold text-zinc-900">{frame.title}</span>
                         </div>
                         <div className="space-y-1.5">
                           {item.steps.map((step, si) => (
                             <div key={si} className="flex items-start gap-2">
-                              <span className="mt-0.5 text-[10px] font-bold text-slate-300 shrink-0 w-4">{si + 1}</span>
-                              <span className="text-xs text-slate-600 leading-5">{step}</span>
+                              <span className="mt-0.5 text-[10px] font-bold text-zinc-300 shrink-0 w-4">{si + 1}</span>
+                              <span className="text-xs text-zinc-600 leading-5">{step}</span>
                             </div>
                           ))}
                         </div>
@@ -489,9 +485,9 @@ export default function TableauPortfolioPage() {
               { name: "Python", desc: "데이터 수집 · 정규화 · CSV 정제" },
             ].map((tech, i) => (
               <motion.div key={tech.name} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={fadeUp} custom={i}>
-                <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-4 shadow-sm text-center">
-                  <div className="text-sm font-semibold text-slate-900">{tech.name}</div>
-                  <div className="mt-1 text-[11px] text-slate-400">{tech.desc}</div>
+                <div className="rounded-2xl border border-zinc-200/70 bg-white/80 p-4 shadow-sm text-center">
+                  <div className="text-sm font-semibold text-zinc-900">{tech.name}</div>
+                  <div className="mt-1 text-[11px] text-zinc-400">{tech.desc}</div>
                 </div>
               </motion.div>
             ))}
@@ -502,14 +498,14 @@ export default function TableauPortfolioPage() {
       {/* 다운로드 */}
       <section className="mt-16 md:mt-24">
         <Container>
-          <div className="flex flex-col gap-3 rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-sm md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-3 rounded-2xl border border-zinc-200/70 bg-white/80 p-6 shadow-sm md:flex-row md:items-center md:justify-between">
             <div>
-              <div className="text-sm font-semibold text-slate-900">전투사관학교 챔피언 가이드북</div>
-              <div className="mt-1 text-xs text-slate-400">Tableau Workbook (.twbx)</div>
+              <div className="text-sm font-semibold text-zinc-900">전투사관학교 챔피언 가이드북</div>
+              <div className="mt-1 text-xs text-zinc-400">Tableau Workbook (.twbx)</div>
             </div>
             <a
               href="https://drive.google.com/uc?export=download&id=1GjNCKsnuh3I3qAcGnK1xTDCOn36lCpqw"
-              className="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
+              className="inline-flex items-center justify-center rounded-full bg-zinc-900 px-5 py-2 text-sm font-semibold text-white transition hover:bg-zinc-700"
               download
             >
               Tableau 파일 다운로드
@@ -523,7 +519,7 @@ export default function TableauPortfolioPage() {
       {/* 모달 */}
       {activeFrame !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-900/60 p-6"
           onClick={() => setActiveFrame(null)}
         >
           <div
@@ -533,18 +529,18 @@ export default function TableauPortfolioPage() {
             <button
               type="button"
               onClick={() => setActiveFrame(null)}
-              className="absolute right-4 top-4 z-10 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 transition hover:bg-slate-100"
+              className="absolute right-4 top-4 z-10 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-600 transition hover:bg-zinc-100"
             >
               닫기
             </button>
-            <img
+            <img loading="lazy" decoding="async"
               src={withBasePath(frames[activeFrame]?.image ?? "")}
               alt={frames[activeFrame]?.title}
               className="w-full rounded-xl object-contain max-h-[80vh]"
             />
             <div className="mt-3">
-              <div className="text-sm font-semibold text-slate-900 mb-1">{frames[activeFrame]?.title}</div>
-              <div className="text-xs leading-5 text-slate-500">{frames[activeFrame]?.desc}</div>
+              <div className="text-sm font-semibold text-zinc-900 mb-1">{frames[activeFrame]?.title}</div>
+              <div className="text-xs leading-5 text-zinc-500">{frames[activeFrame]?.desc}</div>
             </div>
           </div>
         </div>
@@ -552,7 +548,7 @@ export default function TableauPortfolioPage() {
 
       {activeAnalysis !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-900/60 p-6"
           onClick={() => setActiveAnalysis(null)}
         >
           <div
@@ -562,19 +558,19 @@ export default function TableauPortfolioPage() {
             <button
               type="button"
               onClick={() => setActiveAnalysis(null)}
-              className="absolute right-4 top-4 z-10 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 transition hover:bg-slate-100"
+              className="absolute right-4 top-4 z-10 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-600 transition hover:bg-zinc-100"
             >
               닫기
             </button>
-            <img
+            <img loading="lazy" decoding="async"
               src={withBasePath(activeAnalysis.image)}
               alt={activeAnalysis.title}
               className="w-full rounded-xl object-contain max-h-[80vh]"
             />
             <div className="mt-3">
-              <div className="mb-1 text-sm font-semibold text-slate-900">{activeAnalysis.title}</div>
-              <div className="text-xs leading-5 text-slate-500">{activeAnalysis.summary}</div>
-              <div className="mt-1 text-xs leading-5 text-slate-400">{activeAnalysis.detail}</div>
+              <div className="mb-1 text-sm font-semibold text-zinc-900">{activeAnalysis.title}</div>
+              <div className="text-xs leading-5 text-zinc-500">{activeAnalysis.summary}</div>
+              <div className="mt-1 text-xs leading-5 text-zinc-400">{activeAnalysis.detail}</div>
             </div>
           </div>
         </div>

@@ -15,7 +15,8 @@ import React from "react";
 import { TypeReturnBar } from "../../componets";
 import { SiteFooter, SiteHeader } from "../../site";
 import { ProjectTexture } from "../../visuals";
-import { ArchitectureFlow, DecisionCard } from "../../case-study";
+import { ArchitectureFlow, CaseGlance, DecisionCard, StepLabel } from "../../case-study";
+import { CaseStepNav } from "../../case-nav";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -48,8 +49,8 @@ function SectionTitle({
 }) {
   return (
     <div className="mb-8">
-      <div className="text-sm text-zinc-600">{eyebrow}</div>
-      <h2 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-900 md:text-3xl">
+      {eyebrow.includes(" · ") ? <StepLabel step={eyebrow.split(" · ")[0]} title={eyebrow.split(" · ").slice(1).join(" · ")} /> : <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">{eyebrow}</p>}
+      <h2 className="mt-2 text-2xl font-bold tracking-tight text-zinc-900 break-keep md:text-3xl">
         {title}
       </h2>
       {desc ? (
@@ -233,14 +234,14 @@ function FeatureCarousel({
                   // 2장일 때
                   <div className="grid h-full w-full grid-cols-1 gap-2 p-3 sm:grid-cols-2">
                     <div className="overflow-hidden rounded-lg bg-white">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={it.imgSrc[0]}
                         alt={`${it.title} view 1`}
                         className="h-full w-full object-contain"
                       />
                     </div>
                     <div className="overflow-hidden rounded-lg bg-white">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={it.imgSrc[1]}
                         alt={`${it.title} view 2`}
                         className="h-full w-full object-contain"
@@ -249,7 +250,7 @@ function FeatureCarousel({
                   </div>
                 ) : (
                   // 1장일 때
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={it.imgSrc}
                     alt={it.title}
                     className="h-full w-full object-contain"
@@ -352,14 +353,7 @@ export default function DeepViPortfolioPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#eef0f4] text-zinc-900">
-      {/* Background */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute left-1/2 top-[-200px] h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-blue-500/20 blur-3xl" />
-        <div className="absolute right-[-160px] top-[160px] h-[420px] w-[420px] rounded-full bg-violet-500/20 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.08),transparent_45%)]" />
-      </div>
-
+    <main className="min-h-screen bg-zinc-50 text-zinc-900">
       {/* Top bar */}
       <SiteHeader active="bootcamp" title="DeepVi" subtitle="LLM 기반 기업 분석 서비스" />
 
@@ -370,11 +364,8 @@ export default function DeepViPortfolioPage() {
             <ProjectTexture kind="network" className="pointer-events-none absolute right-0 top-10 hidden w-56 opacity-70 lg:block" />
           </div>
           <motion.div initial="hidden" animate="show" variants={fadeUp}>
-            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-700 shadow-sm">
-              Python · FastAPI · PostgreSQL · LLM · LangChain · RAG
-            </div>
-
-            <h1 className="mt-5 text-4xl font-semibold tracking-tight text-zinc-900 md:text-6xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">Bootcamp · Team Project</p>
+            <h1 className="mt-2 text-4xl font-bold leading-tight tracking-tight text-zinc-900 break-keep md:text-5xl">
               데이터를 넘어,
               <br className="hidden md:block" /> 기업의 본질을 설명합니다
             </h1>
@@ -384,32 +375,44 @@ export default function DeepViPortfolioPage() {
             기업을 ‘투자 판단 이전 단계에서 이해’하도록 돕는 LLM 기반 기업 분석 서비스입니다.
             </p>
             
-            {/* Quick chips */}
-            <div className="mt-5 flex flex-wrap gap-2 text-xs text-zinc-700">
-              {[
-                "기간: 25.05.28 - 25.07.02",
-                "5가지 기업 유형",
-                "재무 건전성 평가",
-                "뉴스 감정 분석",
-                "RAG 기반 Q&A",
-              ].map((t) => (
-                <span
-                  key={t}
-                  className="rounded-full border border-zinc-200 bg-white px-3 py-1 shadow-sm"
-                >
-                  {t}
-                </span>
-              ))}
+            <div className="mt-8">
+              <CaseGlance
+                cells={[
+                  { label: "문제", lines: ["일반 투자자가 재무제표와 뉴스를 스스로 해석하기 어렵습니다."] },
+                  { label: "내 역할 · 범위", lines: ["기획·데이터 수집·백엔드/DB·LLM·대시보드 주도"], sub: "팀 프로젝트 · 뉴스 분석과 재무건전성 평가는 팀원 담당" },
+                  { label: "핵심 판단", lines: ["① 전체 계정 표준화 → 필요한 계정만 매핑", "② 검색한 기업의 데이터를 대화 맥락으로"] },
+                  { label: "결과", lines: ["KOSPI·KOSDAQ 444개 기업 분석"], sub: "시연과 주변 사용자 테스트까지", highlight: true },
+                ]}
+                spec={[
+                  { label: "기간", value: "2025.05.28 ~ 2025.07.02" },
+                  { label: "기능", value: "5가지 기업 유형 분류 · 재무 건전성 평가 · 뉴스 감정 분석 · RAG 기반 Q&A" },
+                  { label: "스택", value: "Python · FastAPI · PostgreSQL · LangChain · LLM · RAG", mono: true },
+                ]}
+                flow={["데이터 수집", "ML 지표·유형 분류", "PostgreSQL·FastAPI", "RAG Context", "LLM"]}
+              />
             </div>
           </motion.div>
         </Container>
       </section>
 
+      <div className="mt-12 md:mt-16">
+        <CaseStepNav steps={[
+          { id: "problem", label: "문제" },
+          { id: "architecture", label: "구조" },
+          { id: "data-decision", label: "설계 판단" },
+          { id: "rag-validation", label: "RAG·검증" },
+          { id: "classification", label: "분류" },
+          { id: "achievements", label: "성과 관찰" },
+          { id: "features", label: "기능" },
+          { id: "demo", label: "데모" },
+        ]} />
+      </div>
+
       {/* Problem / Solution */}
-      <section id="problem" className="scroll-mt-20 mt-12 md:mt-16">
+      <section id="problem" className="scroll-mt-28 mt-12 md:mt-16">
         <Container>
           <SectionTitle
-            eyebrow="Background"
+            eyebrow="01 · Problem"
             title="왜 DeepVi가 필요한가?"
             desc="정보는 넘쳐나지만, 기업의 성격과 위험을 한눈에 설명해주는 해석은 부족합니다."
             wide
@@ -459,10 +462,10 @@ export default function DeepViPortfolioPage() {
         </Container>
       </section>
 
-      <section id="architecture" className="scroll-mt-20 mt-16 md:mt-24">
+      <section id="architecture" className="scroll-mt-28 mt-16 md:mt-24">
         <Container>
           <SectionTitle
-            eyebrow="Architecture"
+            eyebrow="02 · Architecture"
             title="기업 데이터를 답변의 근거로 연결"
             desc="수집한 데이터를 점수화·분류해 저장하고, 질문이 들어오면 해당 기업의 데이터를 근거로 묶어 LLM이 설명합니다."
             wide
@@ -483,10 +486,10 @@ export default function DeepViPortfolioPage() {
       </section>
 
       {/* Decision */}
-      <section id="data-decision" className="scroll-mt-20 mt-16 md:mt-24">
+      <section id="data-decision" className="scroll-mt-28 mt-16 md:mt-24">
         <Container>
           <SectionTitle
-            eyebrow="Decision"
+            eyebrow="03 · Engineering Decision"
             title="모든 계정을 맞추려다, 필요한 계정만 골랐습니다"
             desc="기업마다 다른 XBRL 재무 계정명을 어떻게 정리할지가 데이터 설계의 첫 판단이었습니다."
             wide
@@ -516,10 +519,10 @@ export default function DeepViPortfolioPage() {
       </section>
 
       {/* RAG & Validation */}
-      <section id="rag-validation" className="scroll-mt-20 mt-16 md:mt-24">
+      <section id="rag-validation" className="scroll-mt-28 mt-16 md:mt-24">
         <Container>
           <SectionTitle
-            eyebrow="RAG & Validation"
+            eyebrow="04 · RAG & Validation"
             title="답변이 우리 데이터를 근거로 나오는지 확인했습니다"
             desc="검색한 기업의 데이터를 대화 맥락으로 넣고, 테스트 프롬프트로 실제 답변의 근거를 점검했습니다."
             wide
@@ -544,10 +547,10 @@ export default function DeepViPortfolioPage() {
       </section>
 
       {/* Classification */}
-      <section id="classification" className="scroll-mt-20 mt-16 md:mt-24">
+      <section id="classification" className="scroll-mt-28 mt-16 md:mt-24">
         <Container>
           <SectionTitle
-            eyebrow="Classification"
+            eyebrow="05 · Classification"
             title="재무지표로 5가지 기업 유형 분류"
             desc="워렌 버핏(가치·안정)과 피터 린치(성장) 관점의 재무 점수를 조합해, 기업의 성격을 다섯 유형으로 나눴습니다."
             wide
@@ -557,10 +560,10 @@ export default function DeepViPortfolioPage() {
       </section>
 
       {/* Post-evaluation */}
-      <section id="achievements" className="scroll-mt-20 mt-16 md:mt-24">
+      <section id="achievements" className="scroll-mt-28 mt-16 md:mt-24">
         <Container>
           <SectionTitle
-            eyebrow="Post-evaluation"
+            eyebrow="06 · Post-evaluation"
             title="기업 유형별 시장 성과 관찰"
             desc="분류한 유형별로 수익률과 변동성을 사후 비교했습니다. 투자 성과를 주장하는 결과가 아니며, RAG 답변 품질 평가와도 별개의 분석입니다."
             wide
@@ -611,10 +614,10 @@ export default function DeepViPortfolioPage() {
       </section>
 
         {/* Features */}
-        <section id="features" className="mt-16 md:mt-24">
+        <section id="features" className="scroll-mt-28 mt-16 md:mt-24">
         <Container>
             <SectionTitle
-            eyebrow="Core"
+            eyebrow="07 · Features"
             title="핵심 기능"
             desc="기능별 화면을 크게 보고, 좌우로 넘기며 흐름을 이해할 수 있게 구성했습니다."
             />
@@ -625,10 +628,10 @@ export default function DeepViPortfolioPage() {
         </section>
 
       {/* Demo Video (큰 증거) */}
-      <section id="demo" className="mt-16 md:mt-24">
+      <section id="demo" className="scroll-mt-28 mt-16 md:mt-24">
         <Container>
           <SectionTitle
-            eyebrow="Demo"
+            eyebrow="08 · Demo"
             title="AI 답변 생성"
             desc="기업에 대해 LLM이 실시간으로 답변을 생성하는 과정을 담았습니다."
           />
@@ -657,45 +660,6 @@ export default function DeepViPortfolioPage() {
 
       <SiteFooter className="mt-16 md:mt-24" />
 
-      {/* Floating Navigation */}
-      <nav className="fixed bottom-8 left-1/2 z-30 hidden -translate-x-1/2 lg:block">
-        <div className="flex items-center gap-1 rounded-full border border-zinc-200 bg-white/90 px-2 py-2 shadow-lg backdrop-blur">
-          {[
-            { id: "intro", label: "소개" },
-            { id: "problem", label: "배경" },
-            { id: "architecture", label: "구조" },
-            { id: "data-decision", label: "판단" },
-            { id: "rag-validation", label: "검증" },
-            { id: "classification", label: "분류" },
-            { id: "achievements", label: "성과" },
-            { id: "features", label: "기능" },
-            { id: "demo", label: "데모" },
-          ].map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                const element = document.getElementById(item.id);
-                if (element) {
-                  const details = element.closest("details");
-                  if (details) details.open = true;
-                  const headerOffset = 80;
-                  const elementPosition = element.getBoundingClientRect().top;
-                  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                  window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                  });
-                }
-              }}
-              className="rounded-full px-4 py-2 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-900"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </nav>
     </main>
   );
 }

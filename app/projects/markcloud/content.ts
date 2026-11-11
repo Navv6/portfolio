@@ -66,3 +66,27 @@ export const semanticResults = [
     ],
   },
 ];
+
+// 케이스 스터디 첫 화면 요약 (한눈에 보기 + 기술 요약)
+export const glance = {
+  cells: [
+    { label: "문제", lines: ["고령 응답자 리서치를 AI로 전환하기 위해, 한국어 STT 후보를 같은 기준으로 골라야 했습니다."] },
+    { label: "내 역할 · 범위", lines: ["데이터/AI 인턴"], sub: "평가 파이프라인 · 모델 비교 · 후처리 정책 · 구조화 출력" },
+    { label: "핵심 판단", lines: ["① 글자 오류율에 의미 기반 평가 추가", "② 정확도용과 실시간용 후보를 구분"] },
+    { label: "결과", lines: ["STT 4종을 같은 조건으로 비교"], sub: "로컬 LLM 전환은 타당성 검토까지", highlight: true },
+  ],
+  spec: [
+    { label: "기간", value: "2025.11 ~ 2025.12" },
+    { label: "평가 데이터", value: "KsponSpeech eval_clean 3,000개 · eval_other 3,000개" },
+    { label: "지표", value: "WER · CER · RTF · Semantic Similarity · SemWER", mono: true },
+    { label: "모델", value: "NeMo Conformer CTC · Whisper · NVIDIA Riva · KR-SBERT · Qwen2.5-7B-Instruct", mono: true },
+  ],
+  flow: ["음성 샘플", "STT 4종", "정답 전처리", "WER·CER·RTF", "의미 평가"],
+};
+
+export const caseSteps = [
+  { id: "evaluation", label: "평가 설계" },
+  { id: "semantic-evaluation", label: "검증" },
+  { id: "iteration", label: "개선" },
+  { id: "local-llm", label: "타당성 검토" },
+];

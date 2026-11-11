@@ -35,15 +35,15 @@ function SectionTitle({
 }) {
   return (
     <div className="mb-10">
-      <div className="text-xs uppercase tracking-[0.2em] text-slate-500">
+      <div className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">
         {eyebrow}
       </div>
-      <h2 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900 md:text-3xl">
+      <h2 className="mt-2 text-2xl font-bold tracking-tight text-zinc-900 break-keep md:text-3xl">
         {title}
       </h2>
       {desc ? (
         <p
-          className={`mt-3 text-sm leading-6 text-slate-700 md:text-base break-keep ${
+          className={`mt-3 text-sm leading-6 text-zinc-700 md:text-base break-keep ${
             wide ? "max-w-4xl" : "max-w-2xl"
           }`}
         >
@@ -51,7 +51,7 @@ function SectionTitle({
         </p>
       ) : null}
       {caption ? (
-        <p className="mt-2 text-xs text-slate-500">{caption}</p>
+        <p className="mt-2 text-xs text-zinc-500">{caption}</p>
       ) : null}
     </div>
   );
@@ -67,12 +67,12 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-sm backdrop-blur">
+    <div className="flex h-full flex-col rounded-2xl border border-zinc-200/70 bg-white/80 p-6 shadow-sm backdrop-blur">
       <div className="flex items-center gap-2 mb-4">
         {icon}
-        <div className="text-sm font-semibold text-slate-900">{title}</div>
+        <div className="text-sm font-semibold text-zinc-900">{title}</div>
       </div>
-      <div className="flex-1 text-sm leading-6 text-slate-700">{children}</div>
+      <div className="flex-1 text-sm leading-6 text-zinc-700">{children}</div>
     </div>
   );
 }
@@ -87,10 +87,10 @@ function StatCard({
   sub?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-sm text-center backdrop-blur">
-      <div className="text-3xl font-bold text-slate-900 tracking-tight">{value}</div>
-      <div className="mt-1 text-sm font-medium text-slate-700">{label}</div>
-      {sub && <div className="mt-1 text-xs text-slate-500">{sub}</div>}
+    <div className="rounded-2xl border border-zinc-200/70 bg-white/80 p-6 shadow-sm text-center backdrop-blur">
+      <div className="text-3xl font-bold text-zinc-900 tracking-tight">{value}</div>
+      <div className="mt-1 text-sm font-medium text-zinc-700">{label}</div>
+      {sub && <div className="mt-1 text-xs text-zinc-500">{sub}</div>}
     </div>
   );
 }
@@ -112,9 +112,9 @@ function ZoomableImage({
       onClick={onOpen}
       className="group/zoom relative block w-full overflow-hidden"
     >
-      <img src={src} alt={alt} className={className} />
-      <div className="absolute inset-0 flex items-center justify-center bg-slate-900/0 transition duration-200 group-hover/zoom:bg-slate-900/25">
-        <span className="rounded-full bg-white/0 px-3 py-1 text-[10px] font-medium text-transparent transition duration-200 group-hover/zoom:bg-white/90 group-hover/zoom:text-slate-700">
+      <img loading="lazy" decoding="async" src={src} alt={alt} className={className} />
+      <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/0 transition duration-200 group-hover/zoom:bg-zinc-900/25">
+        <span className="rounded-full bg-white/0 px-3 py-1 text-[10px] font-medium text-transparent transition duration-200 group-hover/zoom:bg-white/90 group-hover/zoom:text-zinc-700">
           크게 보기
         </span>
       </div>
@@ -131,14 +131,7 @@ export default function PriceLensPortfolioPage() {
   } | null>(null);
 
   return (
-    <main className="min-h-screen bg-[#fff8f0] text-slate-900">
-      {/* Background */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute left-1/2 top-[-180px] h-[540px] w-[540px] -translate-x-1/2 rounded-full bg-[#ffb347]/30 blur-3xl" />
-        <div className="absolute right-[-180px] top-[160px] h-[520px] w-[520px] rounded-full bg-[#ffcc80]/40 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.6),transparent_45%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.5),rgba(255,255,255,0))]" />
-      </div>
+    <main className="min-h-screen bg-zinc-50 text-zinc-900">
 
       {/* Header */}
       <SiteHeader active="bootcamp" title="PriceLens" subtitle="Airbnb 숙소 가격 결정 요인 해석" />
@@ -147,22 +140,22 @@ export default function PriceLensPortfolioPage() {
       <section id="intro" className="pt-16 md:pt-24">
         <Container>
           <motion.div initial="hidden" animate="show" variants={fadeUp}>
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/70 px-3 py-1 text-xs text-slate-600 shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200/70 bg-white/70 px-3 py-1 text-xs text-zinc-600 shadow-sm">
               Python · XGBoost · SHAP · Optuna
             </div>
 
-            <h1 className="mt-6 text-4xl font-semibold tracking-tight text-slate-900 md:text-6xl">
+            <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-zinc-900 break-keep md:text-5xl">
               가격 요인을 읽고
               <br className="hidden md:block" /> 서비스 개선으로 잇다
             </h1>
 
-            <p className="mt-6 max-w-3xl text-base leading-7 text-slate-700 break-keep">
+            <p className="mt-6 max-w-3xl text-base leading-7 text-zinc-700 break-keep">
               NYC Airbnb 53,659개 숙소 데이터를 기반으로 숙소 특성이 가격에 미치는 영향을 정량적으로 분석했습니다.
               예측모델을 통해 어떤 요인이 가격에 영향을 미치는지 검증하고, 그 결과를 플랫폼·호스트·사용자를 위한
-              <span className="font-semibold text-slate-900"> 서비스 개선 방안</span>과 실제 기능 제안, 전략 도출로 확장하였습니다.
+              <span className="font-semibold text-zinc-900"> 서비스 개선 방안</span>과 실제 기능 제안, 전략 도출로 확장하였습니다.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-2 text-xs text-slate-700">
+            <div className="mt-8 flex flex-wrap gap-2 text-xs text-zinc-700">
               {[
                 "53,659개 숙소 데이터",
                 "4가지 모델 비교",
@@ -172,7 +165,7 @@ export default function PriceLensPortfolioPage() {
                 "Stacking 앙상블",
                 "통계 검정",
               ].map((t) => (
-                <span key={t} className="rounded-full border border-slate-200/70 bg-white/70 px-3 py-1 shadow-sm">
+                <span key={t} className="rounded-full border border-zinc-200/70 bg-white/70 px-3 py-1 shadow-sm">
                   {t}
                 </span>
               ))}
@@ -222,7 +215,7 @@ export default function PriceLensPortfolioPage() {
               variants={fadeUp}
               custom={0}
             >
-              <Card title="호스트를 위한 전략" icon={<div className="h-2 w-2 rounded-full bg-amber-400" />}>
+              <Card title="호스트를 위한 전략" icon={<div className="h-2 w-2 rounded-full bg-blue-400" />}>
                 <div className="space-y-4">
                   {[
                     {
@@ -242,12 +235,12 @@ export default function PriceLensPortfolioPage() {
                     },
                   ].map((s) => (
                     <div key={s.n} className="flex gap-3">
-                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-100 text-[11px] font-bold text-amber-700">
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-100 text-[11px] font-bold text-blue-700">
                         {s.n}
                       </div>
                       <div>
-                        <div className="text-sm font-semibold text-slate-800">{s.title}</div>
-                        <div className="mt-0.5 text-xs leading-5 text-slate-600">{s.desc}</div>
+                        <div className="text-sm font-semibold text-zinc-800">{s.title}</div>
+                        <div className="mt-0.5 text-xs leading-5 text-zinc-600">{s.desc}</div>
                       </div>
                     </div>
                   ))}
@@ -267,17 +260,17 @@ export default function PriceLensPortfolioPage() {
                   예측 가격과 실제 가격 간의 차이를 사용자에게 알리는 기능을 제안합니다.
                 </p>
 
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 mb-4">
-                  <div className="text-xs font-semibold text-slate-600 mb-2">예시 알림 메시지</div>
-                  <div className="rounded-lg bg-white border border-amber-200 p-3 text-xs text-slate-700">
-                    <span className="font-semibold text-amber-600">⚠ 가격 안내</span>
+                <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 mb-4">
+                  <div className="text-xs font-semibold text-zinc-600 mb-2">예시 알림 메시지</div>
+                  <div className="rounded-lg bg-white border border-blue-200 p-3 text-xs text-zinc-700">
+                    <span className="font-semibold text-blue-600">⚠ 가격 안내</span>
                     <br />
                     이 숙소는 예측 가격보다 약 <strong>27%</strong> 더 비쌉니다.
                     주변 숙소와 비교해보세요.
                   </div>
                 </div>
 
-                <div className="space-y-2 text-xs text-slate-600">
+                <div className="space-y-2 text-xs text-zinc-600">
                   <div className="flex items-start gap-2">
                     <span className="mt-0.5 shrink-0 h-1.5 w-1.5 rounded-full bg-rose-400 mt-1.5" />
                     <span>예측가 대비 <strong>25~30% 이상</strong> 고가 숙소에 주의 메시지 표시</span>
@@ -336,13 +329,13 @@ export default function PriceLensPortfolioPage() {
                 viewport={{ once: true, amount: 0.3 }}
                 variants={fadeUp}
                 custom={i}
-                className="rounded-2xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur"
+                className="rounded-2xl border border-zinc-200/70 bg-white/80 p-5 shadow-sm backdrop-blur"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100 text-sm font-bold text-amber-700 mb-4">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700 mb-4">
                   {item.n}
                 </div>
-                <div className="text-sm font-semibold text-slate-900 mb-2">{item.step}</div>
-                <div className="text-xs leading-5 text-slate-600">{item.desc}</div>
+                <div className="text-sm font-semibold text-zinc-900 mb-2">{item.step}</div>
+                <div className="text-xs leading-5 text-zinc-600">{item.desc}</div>
               </motion.div>
             ))}
           </div>
@@ -372,24 +365,24 @@ export default function PriceLensPortfolioPage() {
             >
               <Card
                 title="선별 칼럼 — 5개 카테고리 31개"
-                icon={<div className="h-2 w-2 rounded-full bg-amber-400" />}
+                icon={<div className="h-2 w-2 rounded-full bg-blue-400" />}
               >
                 <div className="space-y-3">
-                  <div className="rounded-lg border border-amber-300 bg-amber-50 p-3">
+                  <div className="rounded-lg border border-blue-300 bg-blue-50 p-3">
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex items-center gap-1.5">
-                        <div className="mt-0.5 h-2 w-2 rounded-full shrink-0 bg-amber-500" />
-                        <span className="font-semibold text-slate-900 text-xs">종속 변수 (예측 대상)</span>
+                        <div className="mt-0.5 h-2 w-2 rounded-full shrink-0 bg-blue-500" />
+                        <span className="font-semibold text-zinc-900 text-xs">종속 변수 (예측 대상)</span>
                       </div>
-                      <span className="shrink-0 rounded-full bg-amber-200 px-2 py-0.5 text-[10px] text-amber-800 font-semibold">price</span>
+                      <span className="shrink-0 rounded-full bg-blue-200 px-2 py-0.5 text-[10px] text-blue-800 font-semibold">price</span>
                     </div>
-                    <p className="mt-1 text-[11px] text-slate-500">숙소 1박 요금 — $1,000 이상인 숙소가 2% 미만이므로 이를 제외한 98%의 데이터 사용</p>
+                    <p className="mt-1 text-[11px] text-zinc-500">숙소 1박 요금 — $1,000 이상인 숙소가 2% 미만이므로 이를 제외한 98%의 데이터 사용</p>
                   </div>
                   {[
                     {
                       group: "위치",
-                      dot: "bg-amber-400",
-                      badge: "bg-amber-100 text-amber-700",
+                      dot: "bg-blue-400",
+                      badge: "bg-blue-100 text-blue-700",
                       items: ["지역구"],
                       note: "neighbourhood(세부 지역)는 결측치 과다·세분화 과잉으로 5개 자치구(지역구)로 통일",
                     },
@@ -419,30 +412,30 @@ export default function PriceLensPortfolioPage() {
                       items: ["총 리뷰 수", "월평균 리뷰 수", "종합점수", "정확성", "청결도", "체크인", "커뮤니케이션", "위치평가", "가격대비만족도"],
                     },
                   ].map((grp) => (
-                    <div key={grp.group} className="rounded-lg border border-slate-100 bg-slate-50/60 p-3">
+                    <div key={grp.group} className="rounded-lg border border-zinc-100 bg-zinc-50/60 p-3">
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex items-center gap-1.5">
                           <div className={`mt-0.5 h-2 w-2 rounded-full shrink-0 ${grp.dot}`} />
-                          <span className="font-medium text-slate-800 text-xs">{grp.group}</span>
+                          <span className="font-medium text-zinc-800 text-xs">{grp.group}</span>
                         </div>
                         <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium ${grp.badge}`}>
                           {grp.items.length}개
                         </span>
                       </div>
-                      <p className="mt-1.5 text-[11px] text-slate-500 leading-5">
+                      <p className="mt-1.5 text-[11px] text-zinc-500 leading-5">
                         {grp.items.join(" · ")}
                       </p>
                       {"note" in grp && grp.note && (
-                        <p className="mt-1 text-[10px] text-slate-400 leading-4">{grp.note}</p>
+                        <p className="mt-1 text-[10px] text-zinc-400 leading-4">{grp.note}</p>
                       )}
                     </div>
                   ))}
                   <div className="rounded-lg border border-rose-100 bg-rose-50/60 p-3">
                     <div className="flex items-start justify-between gap-2">
-                      <span className="font-medium text-slate-800 text-xs">파생 변수</span>
+                      <span className="font-medium text-zinc-800 text-xs">파생 변수</span>
                       <span className="shrink-0 rounded-full bg-rose-100 px-2 py-0.5 text-[10px] text-rose-700 font-medium">직접 생성</span>
                     </div>
-                    <p className="mt-1 text-[11px] text-slate-500">지역구 평균가격 — 지역별 시장 수준을 피처로 반영</p>
+                    <p className="mt-1 text-[11px] text-zinc-500">지역구 평균가격 — 지역별 시장 수준을 피처로 반영</p>
                   </div>
                 </div>
               </Card>
@@ -459,7 +452,7 @@ export default function PriceLensPortfolioPage() {
             >
               <Card
                 title="결측치 처리 전략"
-                icon={<div className="h-2 w-2 rounded-full bg-amber-400" />}
+                icon={<div className="h-2 w-2 rounded-full bg-blue-400" />}
               >
                 <div className="space-y-3">
                   {[
@@ -467,19 +460,19 @@ export default function PriceLensPortfolioPage() {
                       col: "식별자 · URL · 텍스트 (~17개)",
                       action: "칼럼 제외",
                       why: "id, listing_url, description, picture_url 등 — 분석 영향이 없는 정보 및 결측치 과다",
-                      badge: "bg-slate-100 text-slate-600",
+                      badge: "bg-zinc-100 text-zinc-600",
                     },
                     {
                       col: "중복 · 세분화 과잉 (~16개)",
                       action: "칼럼 제외",
                       why: "가격변동범위 x6, 예약가능일 x3, 리뷰기간별 x3 등 — 대표 칼럼 1개로 통일",
-                      badge: "bg-slate-100 text-slate-600",
+                      badge: "bg-zinc-100 text-zinc-600",
                     },
                     {
                       col: "개인정보 · 기타 (~9개)",
                       action: "칼럼 제외",
                       why: "host_about, thumbnail_url, licence, 위치좌표(지역구로 대체) 등 — 가격 예측에 불필요",
-                      badge: "bg-slate-100 text-slate-600",
+                      badge: "bg-zinc-100 text-zinc-600",
                     },
                     {
                       col: "침실 · 침대 · 욕실",
@@ -507,14 +500,14 @@ export default function PriceLensPortfolioPage() {
                       why: "응답시간 및 슈퍼호스트는 정보 부재를 최소 신뢰 상태로 보수적 처리",
                     },
                   ].map((row) => (
-                    <div key={row.col} className="rounded-lg border border-slate-100 bg-slate-50/60 p-3">
+                    <div key={row.col} className="rounded-lg border border-zinc-100 bg-zinc-50/60 p-3">
                       <div className="flex items-start justify-between gap-2">
-                        <span className="font-medium text-slate-800 text-xs">{row.col}</span>
-                        <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium ${"badge" in row && row.badge ? row.badge : "bg-amber-100 text-amber-700"}`}>
+                        <span className="font-medium text-zinc-800 text-xs">{row.col}</span>
+                        <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium ${"badge" in row && row.badge ? row.badge : "bg-blue-100 text-blue-700"}`}>
                           {row.action}
                         </span>
                       </div>
-                      <p className="mt-1 text-[11px] text-slate-500">{row.why}</p>
+                      <p className="mt-1 text-[11px] text-zinc-500">{row.why}</p>
                     </div>
                   ))}
                 </div>
@@ -547,12 +540,12 @@ export default function PriceLensPortfolioPage() {
                 icon={<div className="h-2 w-2 rounded-full bg-rose-400" />}
               >
                 <p className="mb-3">
-                  각 숙소의 어메니티는 <span className="font-medium text-slate-800">"삼성 TV, 냉장고, 세탁기..."</span> 형태의 텍스트 나열로, 숙소마다 항목 수와 종류가 달라 그대로 피처로 쓸 수 없었습니다.
+                  각 숙소의 어메니티는 <span className="font-medium text-zinc-800">"삼성 TV, 냉장고, 세탁기..."</span> 형태의 텍스트 나열로, 숙소마다 항목 수와 종류가 달라 그대로 피처로 쓸 수 없었습니다.
                   그래서 의미 기반으로 어메니티를 5개의 큰 카테고리로 나누고, 그 안에 키워드를 하드코딩해 숙소별 어메니티를 수치화하는 방식이 더 적절하다고 판단했습니다.
                 </p>
-                <div className="rounded-lg border border-slate-100 bg-slate-50/60 p-3 text-xs text-slate-600 space-y-1.5">
+                <div className="rounded-lg border border-zinc-100 bg-zinc-50/60 p-3 text-xs text-zinc-600 space-y-1.5">
                   <div><span className="font-semibold text-rose-600">원본 한계:</span> 숙소마다 어메니티 항목 수와 표현 방식이 제각각</div>
-                  <div><span className="font-semibold text-amber-600">PCA의 한계:</span> 범주형 데이터를 연속적인 숫자 관계처럼 축소해 의미가 흐려질 수 있음</div>
+                  <div><span className="font-semibold text-blue-600">PCA의 한계:</span> 범주형 데이터를 연속적인 숫자 관계처럼 축소해 의미가 흐려질 수 있음</div>
                   <div><span className="font-semibold text-emerald-600">선택 이유:</span> 카테고리별 어메니티를 벡터화하면 어떤 요소가 가격에 얼마나 영향을 주는지 모델링할 수 있음</div>
                 </div>
               </Card>
@@ -565,31 +558,31 @@ export default function PriceLensPortfolioPage() {
               variants={fadeUp}
               custom={1}
             >
-              <div className="rounded-xl border border-amber-200 bg-amber-50/70 p-4">
-                <div className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-700">How It Works</div>
+              <div className="rounded-xl border border-blue-200 bg-blue-50/70 p-4">
+                <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-700">How It Works</div>
                 <div className="mt-3 grid gap-3">
                   <div className="rounded-lg bg-white p-3">
-                    <div className="text-xs font-semibold text-slate-500">1. 원본 텍스트</div>
-                    <div className="mt-2 rounded-md bg-slate-50 px-3 py-2 text-xs leading-5 text-slate-700">
+                    <div className="text-xs font-semibold text-zinc-500">1. 원본 텍스트</div>
+                    <div className="mt-2 rounded-md bg-zinc-50 px-3 py-2 text-xs leading-5 text-zinc-700">
                       "TV, Wifi, Hair dryer, Shampoo, Kitchen, Microwave, Smoke alarm ..."
                     </div>
                   </div>
                   <div className="rounded-lg bg-white p-3">
-                    <div className="text-xs font-semibold text-slate-500">2. 키워드 정리</div>
-                    <div className="mt-2 rounded-md bg-slate-50 px-3 py-2 text-xs leading-5 text-slate-700">
+                    <div className="text-xs font-semibold text-zinc-500">2. 키워드 정리</div>
+                    <div className="mt-2 rounded-md bg-zinc-50 px-3 py-2 text-xs leading-5 text-zinc-700">
                       TV / Wifi / Hair dryer / Shampoo / Kitchen / Microwave / Smoke alarm
                     </div>
                   </div>
                   <div className="rounded-lg bg-white p-3">
-                    <div className="text-xs font-semibold text-slate-500">3. 5개 큰 카테고리로 분류</div>
-                    <div className="mt-2 rounded-md bg-slate-50 px-3 py-2 text-xs leading-5 text-slate-700">
+                    <div className="text-xs font-semibold text-zinc-500">3. 5개 큰 카테고리로 분류</div>
+                    <div className="mt-2 rounded-md bg-zinc-50 px-3 py-2 text-xs leading-5 text-zinc-700">
                       TV / Wifi / Hair dryer / Shampoo / Kitchen / Smoke alarm
                       <br />
                       → Wifi / 위생 및 샤워용품 / Entertainment / 조리시설 / 숙소관련시설로 분류
                     </div>
                   </div>
                   <div className="rounded-lg bg-white p-3">
-                    <div className="text-xs font-semibold text-slate-500">4. 키워드 하드코딩 및 인덱스 지정</div>
+                    <div className="text-xs font-semibold text-zinc-500">4. 키워드 하드코딩 및 인덱스 지정</div>
                     <div className="mt-2 flex flex-wrap gap-2 text-[11px]">
                       {[
                         "Wifi = 0",
@@ -598,18 +591,18 @@ export default function PriceLensPortfolioPage() {
                         "조리시설 = 3",
                         "숙소관련시설 = 5",
                       ].map((item) => (
-                        <span key={item} className="rounded-full border border-amber-200 bg-amber-50 px-2 py-1 text-amber-700">
+                        <span key={item} className="rounded-full border border-blue-200 bg-blue-50 px-2 py-1 text-blue-700">
                           {item}
                         </span>
                       ))}
                     </div>
-                    <p className="mt-2 text-[11px] leading-5 text-slate-500">
+                    <p className="mt-2 text-[11px] leading-5 text-zinc-500">
                       예: <code>TV -&gt; Entertainment</code>, <code>Shampoo -&gt; 위생 및 샤워용품</code>, <code>Kitchen -&gt; 조리시설</code>, <code>Smoke alarm -&gt; 숙소관련시설</code>
                     </p>
                   </div>
                   <div className="rounded-lg bg-white p-3">
-                    <div className="text-xs font-semibold text-slate-500">5. 숙소별 어메니티 벡터화</div>
-                    <div className="mt-2 rounded-md bg-slate-900 px-3 py-2 font-mono text-xs text-slate-100">
+                    <div className="text-xs font-semibold text-zinc-500">5. 숙소별 어메니티 벡터화</div>
+                    <div className="mt-2 rounded-md bg-zinc-900 px-3 py-2 font-mono text-xs text-zinc-100">
                       숙소 1 = [Wifi = 0, 위생 및 샤워용품 = 1, Entertainment = 3, 조리시설 = 2, 숙소관련시설 = 5]
                       <br />
                       숙소 2 = [Wifi = 0, 위생 및 샤워용품 = 1, Entertainment = 3, 조리시설 = 3, Entertainment = 3]
@@ -639,14 +632,14 @@ export default function PriceLensPortfolioPage() {
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeUp}
               custom={0}
-              className="order-1 rounded-2xl border border-slate-200/70 bg-white/80 overflow-hidden shadow-sm"
+              className="order-1 rounded-2xl border border-zinc-200/70 bg-white/80 overflow-hidden shadow-sm"
             >
               <div className="px-5 pt-5 pb-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <div className="h-2 w-2 rounded-full bg-amber-400" />
-                  <div className="text-sm font-semibold text-slate-900">가격 분포</div>
+                  <div className="h-2 w-2 rounded-full bg-blue-400" />
+                  <div className="text-sm font-semibold text-zinc-900">가격 분포</div>
                 </div>
-                <p className="text-xs text-slate-500">$50~200 구간 약 75%, $1,000 이상 2% 미만 → 필터링 근거</p>
+                <p className="text-xs text-zinc-500">$50~200 구간 약 75%, $1,000 이상 2% 미만 → 필터링 근거</p>
               </div>
               <ZoomableImage
                 src={withBasePath("/pricelens/price-distribution.png")}
@@ -669,14 +662,14 @@ export default function PriceLensPortfolioPage() {
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeUp}
               custom={1}
-              className="order-2 rounded-2xl border border-slate-200/70 bg-white/80 overflow-hidden shadow-sm"
+              className="order-2 rounded-2xl border border-zinc-200/70 bg-white/80 overflow-hidden shadow-sm"
             >
               <div className="px-5 pt-5 pb-3">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="h-2 w-2 rounded-full bg-rose-400" />
-                  <div className="text-sm font-semibold text-slate-900">지역별 평균 가격</div>
+                  <div className="text-sm font-semibold text-zinc-900">지역별 평균 가격</div>
                 </div>
-                <p className="text-xs text-slate-500">Manhattan 평균 $285 — 2위 Brooklyn($170)과 큰 격차</p>
+                <p className="text-xs text-zinc-500">Manhattan 평균 $285 — 2위 Brooklyn($170)과 큰 격차</p>
               </div>
               <ZoomableImage
                 src={withBasePath("/pricelens/region-price.png")}
@@ -699,14 +692,14 @@ export default function PriceLensPortfolioPage() {
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeUp}
               custom={2}
-              className="order-4 rounded-2xl border border-slate-200/70 bg-white/80 overflow-hidden shadow-sm"
+              className="order-4 rounded-2xl border border-zinc-200/70 bg-white/80 overflow-hidden shadow-sm"
             >
               <div className="px-5 pt-5 pb-3">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="h-2 w-2 rounded-full bg-emerald-400" />
-                  <div className="text-sm font-semibold text-slate-900">지역별 숙소 유형 분포</div>
+                  <div className="text-sm font-semibold text-zinc-900">지역별 숙소 유형 분포</div>
                 </div>
-                <p className="text-xs text-slate-500">Manhattan은 독채 비율이 압도적 — 높은 평균가의 구조적 원인</p>
+                <p className="text-xs text-zinc-500">Manhattan은 독채 비율이 압도적 — 높은 평균가의 구조적 원인</p>
               </div>
               <ZoomableImage
                 src={withBasePath("/pricelens/region-type.png")}
@@ -729,14 +722,14 @@ export default function PriceLensPortfolioPage() {
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeUp}
               custom={3}
-              className="order-3 rounded-2xl border border-slate-200/70 bg-white/80 overflow-hidden shadow-sm"
+              className="order-3 rounded-2xl border border-zinc-200/70 bg-white/80 overflow-hidden shadow-sm"
             >
               <div className="px-5 pt-5 pb-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <div className="h-2 w-2 rounded-full bg-slate-400" />
-                  <div className="text-sm font-semibold text-slate-900">지역별 Location Score</div>
+                  <div className="h-2 w-2 rounded-full bg-zinc-400" />
+                  <div className="text-sm font-semibold text-zinc-900">지역별 Location Score</div>
                 </div>
-                <p className="text-xs text-slate-500">Manhattan·Brooklyn이 위치 점수 최고 — 수요와 가격의 구조적 연결</p>
+                <p className="text-xs text-zinc-500">Manhattan·Brooklyn이 위치 점수 최고 — 수요와 가격의 구조적 연결</p>
               </div>
               <div className="px-4 pb-5">
                 <ZoomableImage
@@ -766,15 +759,15 @@ export default function PriceLensPortfolioPage() {
               <Card title="리뷰 데이터 편향" icon={<div className="h-2 w-2 rounded-full bg-violet-400" />}>
                 <p>전체 리뷰 점수가 <strong>4.5점대에 집중</strong>되어 데이터 편향이 존재합니다.</p>
                 <p className="mt-2">리뷰 수·평점은 가격과 약한 상관을 보였으나, 지역 선호도 파악에는 유효했습니다.</p>
-                <p className="mt-3 text-xs text-slate-500">Manhattan·Brooklyn이 선호 지역으로 확인 → 높은 평균가의 수요 측면 근거</p>
+                <p className="mt-3 text-xs text-zinc-500">Manhattan·Brooklyn이 선호 지역으로 확인 → 높은 평균가의 수요 측면 근거</p>
                 <div className="mt-4 grid grid-cols-2 gap-2 text-center text-xs">
-                  <div className="rounded-lg bg-slate-50 p-3">
-                    <div className="font-bold text-slate-800">4.5점대</div>
-                    <div className="text-slate-500 mt-0.5">리뷰 집중 구간</div>
+                  <div className="rounded-lg bg-zinc-50 p-3">
+                    <div className="font-bold text-zinc-800">4.5점대</div>
+                    <div className="text-zinc-500 mt-0.5">리뷰 집중 구간</div>
                   </div>
-                  <div className="rounded-lg bg-slate-50 p-3">
-                    <div className="font-bold text-slate-800">약한 상관</div>
-                    <div className="text-slate-500 mt-0.5">리뷰 수 vs 가격</div>
+                  <div className="rounded-lg bg-zinc-50 p-3">
+                    <div className="font-bold text-zinc-800">약한 상관</div>
+                    <div className="text-zinc-500 mt-0.5">리뷰 수 vs 가격</div>
                   </div>
                 </div>
               </Card>
@@ -786,14 +779,14 @@ export default function PriceLensPortfolioPage() {
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeUp}
               custom={5}
-              className="order-5 rounded-2xl border border-slate-200/70 bg-white/80 overflow-hidden shadow-sm"
+              className="order-5 rounded-2xl border border-zinc-200/70 bg-white/80 overflow-hidden shadow-sm"
             >
               <div className="px-5 pt-5 pb-3">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="h-2 w-2 rounded-full bg-violet-400" />
-                  <div className="text-sm font-semibold text-slate-900">평점과 가격 산점도</div>
+                  <div className="text-sm font-semibold text-zinc-900">평점과 가격 산점도</div>
                 </div>
-                <p className="text-xs text-slate-500">고평점 구간에 데이터가 밀집되어 있고, 평점만으로는 고가 숙소를 충분히 설명하지 못함</p>
+                <p className="text-xs text-zinc-500">고평점 구간에 데이터가 밀집되어 있고, 평점만으로는 고가 숙소를 충분히 설명하지 못함</p>
               </div>
               <div className="px-4 pb-5">
                 <ZoomableImage
@@ -831,51 +824,51 @@ export default function PriceLensPortfolioPage() {
             viewport={{ once: true, amount: 0.2 }}
             variants={fadeUp}
             custom={0}
-            className="rounded-2xl border border-slate-200/70 bg-white/80 p-6 shadow-sm"
+            className="rounded-2xl border border-zinc-200/70 bg-white/80 p-6 shadow-sm"
           >
             <div className="flex items-center gap-2 mb-5">
-              <div className="h-2 w-2 rounded-full bg-amber-400" />
-              <div className="text-sm font-semibold text-slate-900">모델 튜닝 전후 성능 비교</div>
+              <div className="h-2 w-2 rounded-full bg-blue-400" />
+              <div className="text-sm font-semibold text-zinc-900">모델 튜닝 전후 성능 비교</div>
             </div>
-            <p className="mb-4 text-xs text-slate-600">
-              <span className="font-semibold text-amber-600">XGBoost가 최우수인 이유</span>
+            <p className="mb-4 text-xs text-zinc-600">
+              <span className="font-semibold text-blue-600">XGBoost가 최우수인 이유</span>
               {" "}— 튜닝 후 RMSE 94.2로 전체 최저, R² 0.64로 전체 최고. 두 지표 모두에서 동시에 1위를 달성한 유일한 모델입니다.
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-xs">
                 <thead>
-                  <tr className="border-b border-slate-100">
-                    <th className="pb-2 text-left font-semibold text-slate-500">모델</th>
-                    <th className="pb-2 text-right font-semibold text-slate-500">RMSE (전)</th>
-                    <th className="pb-2 text-right font-semibold text-slate-500">RMSE (후)</th>
-                    <th className="pb-2 text-right font-semibold text-slate-500">개선</th>
-                    <th className="pb-2 text-right font-semibold text-slate-500">R² (전)</th>
-                    <th className="pb-2 text-right font-semibold text-slate-500">R² (후)</th>
+                  <tr className="border-b border-zinc-100">
+                    <th className="pb-2 text-left font-semibold text-zinc-500">모델</th>
+                    <th className="pb-2 text-right font-semibold text-zinc-500">RMSE (전)</th>
+                    <th className="pb-2 text-right font-semibold text-zinc-500">RMSE (후)</th>
+                    <th className="pb-2 text-right font-semibold text-zinc-500">개선</th>
+                    <th className="pb-2 text-right font-semibold text-zinc-500">R² (전)</th>
+                    <th className="pb-2 text-right font-semibold text-zinc-500">R² (후)</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-zinc-50">
                   {[
                     { model: "Random Forest",     rBefore: 96.3,  rAfter: 96.7, r2Before: 0.59, r2After: 0.60 },
                     { model: "Gradient Boosting", rBefore: 106.5, rAfter: 94.6, r2Before: 0.50, r2After: 0.58 },
                     { model: "XGBoost",           rBefore: 99.3,  rAfter: 94.2, r2Before: 0.56, r2After: 0.64, best: true },
                     { model: "LightGBM",          rBefore: 98.5,  rAfter: 96.4, r2Before: 0.56, r2After: 0.60 },
                   ].map((row) => (
-                    <tr key={row.model} className={row.best ? "bg-amber-50/60" : ""}>
+                    <tr key={row.model} className={row.best ? "bg-blue-50/60" : ""}>
                       <td className="py-2.5 text-left">
-                        <span className={`font-medium ${row.best ? "text-amber-700" : "text-slate-700"}`}>
+                        <span className={`font-medium ${row.best ? "text-blue-700" : "text-zinc-700"}`}>
                           {row.model}
                         </span>
-                        {row.best && <span className="ml-2 text-[10px] font-semibold text-amber-500">✓ 최우수</span>}
+                        {row.best && <span className="ml-2 text-[10px] font-semibold text-blue-500">✓ 최우수</span>}
                       </td>
-                      <td className="py-2.5 text-right text-slate-400">{row.rBefore}</td>
-                      <td className={`py-2.5 text-right font-semibold ${row.best ? "text-amber-600" : "text-slate-700"}`}>
+                      <td className="py-2.5 text-right text-zinc-400">{row.rBefore}</td>
+                      <td className={`py-2.5 text-right font-semibold ${row.best ? "text-blue-600" : "text-zinc-700"}`}>
                         {row.rAfter}
                       </td>
                       <td className="py-2.5 text-right text-emerald-600 font-medium">
-                        {row.rBefore > row.rAfter ? `▼ ${(row.rBefore - row.rAfter).toFixed(1)}` : <span className="text-slate-400">—</span>}
+                        {row.rBefore > row.rAfter ? `▼ ${(row.rBefore - row.rAfter).toFixed(1)}` : <span className="text-zinc-400">—</span>}
                       </td>
-                      <td className="py-2.5 text-right text-slate-400">{row.r2Before}</td>
-                      <td className={`py-2.5 text-right font-semibold ${row.best ? "text-amber-600" : "text-slate-700"}`}>
+                      <td className="py-2.5 text-right text-zinc-400">{row.r2Before}</td>
+                      <td className={`py-2.5 text-right font-semibold ${row.best ? "text-blue-600" : "text-zinc-700"}`}>
                         {row.r2After}
                       </td>
                     </tr>
@@ -892,14 +885,14 @@ export default function PriceLensPortfolioPage() {
             viewport={{ once: true, amount: 0.2 }}
             variants={fadeUp}
             custom={1}
-            className="mt-4 rounded-2xl border border-slate-200/70 bg-white/80 overflow-hidden shadow-sm"
+            className="mt-4 rounded-2xl border border-zinc-200/70 bg-white/80 overflow-hidden shadow-sm"
           >
             <div className="px-5 pt-5 pb-3">
               <div className="flex items-center gap-2 mb-1">
                 <div className="h-2 w-2 rounded-full bg-rose-400" />
-                <div className="text-sm font-semibold text-slate-900">K-Fold 20회 교차검증 — RMSE · R² 비교</div>
+                <div className="text-sm font-semibold text-zinc-900">K-Fold 20회 교차검증 — RMSE · R² 비교</div>
               </div>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-zinc-500">
                 Stacking = Optuna로 튜닝한 RF · GB · LGBM 기반 스태킹 앙상블, 메타 모델은 Linear Regression
               </p>
             </div>
@@ -925,14 +918,14 @@ export default function PriceLensPortfolioPage() {
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeUp}
               custom={3}
-              className="rounded-2xl border border-slate-200/70 bg-white/80 overflow-hidden shadow-sm"
+              className="rounded-2xl border border-zinc-200/70 bg-white/80 overflow-hidden shadow-sm"
             >
               <div className="px-5 pt-5 pb-3">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="h-2 w-2 rounded-full bg-rose-400" />
-                  <div className="text-sm font-semibold text-slate-900">실제값 vs 예측값</div>
+                  <div className="text-sm font-semibold text-zinc-900">실제값 vs 예측값</div>
                 </div>
-                <p className="text-xs text-slate-500">대각선 근처 분포 — 전반적으로 잘 작동, 고가 구간에서 과소 예측 발생</p>
+                <p className="text-xs text-zinc-500">대각선 근처 분포 — 전반적으로 잘 작동, 고가 구간에서 과소 예측 발생</p>
               </div>
               <ZoomableImage
                 src={withBasePath("/pricelens/actual-pred.png")}
@@ -953,14 +946,14 @@ export default function PriceLensPortfolioPage() {
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeUp}
               custom={4}
-              className="rounded-2xl border border-slate-200/70 bg-white/80 overflow-hidden shadow-sm"
+              className="rounded-2xl border border-zinc-200/70 bg-white/80 overflow-hidden shadow-sm"
             >
               <div className="px-5 pt-5 pb-3">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="h-2 w-2 rounded-full bg-emerald-400" />
-                  <div className="text-sm font-semibold text-slate-900">잔차 분포</div>
+                  <div className="text-sm font-semibold text-zinc-900">잔차 분포</div>
                 </div>
-                <p className="text-xs text-slate-500">대부분 0 근처(-200~200) 집중 — 고가 이상치에서 우측 꼬리 발생</p>
+                <p className="text-xs text-zinc-500">대부분 0 근처(-200~200) 집중 — 고가 이상치에서 우측 꼬리 발생</p>
               </div>
               <ZoomableImage
                 src={withBasePath("/pricelens/residual.png")}
@@ -996,12 +989,12 @@ export default function PriceLensPortfolioPage() {
             viewport={{ once: true, amount: 0.2 }}
             variants={fadeUp}
             custom={0}
-            className="mt-4 rounded-2xl border border-slate-200/70 bg-white/80 overflow-hidden shadow-sm"
+            className="mt-4 rounded-2xl border border-zinc-200/70 bg-white/80 overflow-hidden shadow-sm"
           >
             <div className="px-5 pt-5 pb-3">
               <div className="flex items-center gap-2 mb-1">
                 <div className="h-2 w-2 rounded-full bg-violet-400" />
-                <div className="text-sm font-semibold text-slate-900">Feature Importance vs SHAP 비교</div>
+                <div className="text-sm font-semibold text-zinc-900">Feature Importance vs SHAP 비교</div>
               </div>
             </div>
             <ZoomableImage
@@ -1026,8 +1019,8 @@ export default function PriceLensPortfolioPage() {
               variants={fadeUp}
               custom={1}
             >
-              <Card title="Feature Importance 상위" icon={<div className="h-2 w-2 rounded-full bg-slate-400" />}>
-                <p className="mb-3 text-xs text-slate-500">트리 분기 빈도 기반 — 자주 사용된 변수가 높게 측정됨</p>
+              <Card title="Feature Importance 상위" icon={<div className="h-2 w-2 rounded-full bg-zinc-400" />}>
+                <p className="mb-3 text-xs text-zinc-500">트리 분기 빈도 기반 — 자주 사용된 변수가 높게 측정됨</p>
                 <div className="space-y-2">
                   {[
                     "연간 예약 가능일",
@@ -1037,8 +1030,8 @@ export default function PriceLensPortfolioPage() {
                     "조리시설",
                   ].map((item, i) => (
                     <div key={item} className="flex items-center gap-3">
-                      <span className="text-xs text-slate-400 w-4">{i + 1}</span>
-                      <div className="flex-1 rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700">{item}</div>
+                      <span className="text-xs text-zinc-400 w-4">{i + 1}</span>
+                      <div className="flex-1 rounded-full bg-zinc-100 px-3 py-1 text-xs text-zinc-700">{item}</div>
                     </div>
                   ))}
                 </div>
@@ -1052,8 +1045,8 @@ export default function PriceLensPortfolioPage() {
               variants={fadeUp}
               custom={2}
             >
-              <Card title="SHAP 상위 — 실질 가격 결정 요인" icon={<div className="h-2 w-2 rounded-full bg-amber-400" />}>
-                <p className="mb-3 text-xs text-slate-500">예측값에 대한 실질적 기여도 반영</p>
+              <Card title="SHAP 상위 — 실질 가격 결정 요인" icon={<div className="h-2 w-2 rounded-full bg-blue-400" />}>
+                <p className="mb-3 text-xs text-zinc-500">예측값에 대한 실질적 기여도 반영</p>
                 <div className="space-y-2">
                   {[
                     "숙소 유형 (독채 vs 개인실)",
@@ -1063,8 +1056,8 @@ export default function PriceLensPortfolioPage() {
                     "위생·샤워용품",
                   ].map((item, i) => (
                     <div key={item} className="flex items-center gap-3">
-                      <span className="text-xs text-amber-500 w-4">{i + 1}</span>
-                      <div className="flex-1 rounded-full bg-amber-50 border border-amber-100 px-3 py-1 text-xs text-amber-800">{item}</div>
+                      <span className="text-xs text-blue-500 w-4">{i + 1}</span>
+                      <div className="flex-1 rounded-full bg-blue-50 border border-blue-100 px-3 py-1 text-xs text-blue-800">{item}</div>
                     </div>
                   ))}
                 </div>
@@ -1078,10 +1071,10 @@ export default function PriceLensPortfolioPage() {
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeUp}
             custom={3}
-            className="mt-4 rounded-2xl border border-amber-200/70 bg-amber-50/60 p-5"
+            className="mt-4 rounded-2xl border border-blue-200/70 bg-blue-50/60 p-5"
           >
-            <div className="text-sm font-semibold text-amber-800 mb-2">해석</div>
-            <p className="text-sm text-slate-700 leading-6">
+            <div className="text-sm font-semibold text-blue-800 mb-2">해석</div>
+            <p className="text-sm text-zinc-700 leading-6">
               Feature Importance는 분기 빈도 기반이므로 <strong>예약 가능일·리뷰 수</strong>처럼 데이터가 많은 변수가 높게 나타납니다.
               반면 SHAP은 각 예측값에 대한 실질 기여도를 측정하므로, <strong>숙소 유형·지역 평균 가격·침실 수</strong>가 실제 가격을 결정하는 핵심 요인임을 보여줍니다.
             </p>
@@ -1112,7 +1105,7 @@ export default function PriceLensPortfolioPage() {
                 viewport={{ once: true, amount: 0.3 }}
                 variants={fadeUp}
                 custom={i}
-                className="rounded-2xl border border-slate-200/70 bg-white/80 p-3 text-center text-xs font-semibold text-slate-900 shadow-sm"
+                className="rounded-2xl border border-zinc-200/70 bg-white/80 p-3 text-center text-xs font-semibold text-zinc-900 shadow-sm"
               >
                 {tech}
               </motion.div>
@@ -1125,7 +1118,7 @@ export default function PriceLensPortfolioPage() {
 
       {activeImage !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-900/60 p-6"
           onClick={() => setActiveImage(null)}
         >
           <div
@@ -1135,18 +1128,18 @@ export default function PriceLensPortfolioPage() {
             <button
               type="button"
               onClick={() => setActiveImage(null)}
-              className="absolute right-4 top-4 z-10 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 transition hover:bg-slate-100"
+              className="absolute right-4 top-4 z-10 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-600 transition hover:bg-zinc-100"
             >
               닫기
             </button>
-            <img
+            <img loading="lazy" decoding="async"
               src={activeImage.src}
               alt={activeImage.alt}
               className="max-h-[80vh] w-full rounded-xl object-contain"
             />
             <div className="mt-3">
-              <div className="mb-1 text-sm font-semibold text-slate-900">{activeImage.title}</div>
-              <div className="text-xs leading-5 text-slate-500">{activeImage.alt}</div>
+              <div className="mb-1 text-sm font-semibold text-zinc-900">{activeImage.title}</div>
+              <div className="text-xs leading-5 text-zinc-500">{activeImage.alt}</div>
             </div>
           </div>
         </div>

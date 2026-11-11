@@ -10,21 +10,24 @@ export const introduction = {
 
 export const featuredProjects = [
   {
-    id: "preflight", eyebrow: "Production · Internal Use", title: "Preflight",
-    description: "샘플조달·시사출·CT 테스트 업무의 지연과 조달 현황을 한 화면에서 관리하는 Pre-Production R&D 워크스페이스",
-    shows: "Productization", metric: "팀 전원", metricLabel: "실무 사용 · 사내망 운영",
+    id: "preflight", eyebrow: "Production · Internal Use", status: "운영 중", title: "Preflight",
+    problem: "업무 현황이 ERP 엑셀·개별 파일·메신저에 흩어져, 지연을 확인하려면 파일부터 모아야 했습니다.",
+    role: "기획·개발·운영 1인",
+    result: "팀 전원이 실무에 사용 · 사내망 운영",
     href: "/projects/preflight", visible: true,
   },
   {
-    id: "markcloud", eyebrow: "Internship", title: "MarkCloud",
-    description: "음성인식 모델을 비교·평가하고, 외부 LLM의 로컬 전환 타당성을 검토한 인턴 프로젝트",
-    shows: "Model Evaluation", metric: "4종", metricLabel: "STT 모델 비교 · 의미 기반 평가 추가",
+    id: "markcloud", eyebrow: "Internship", status: "인턴 프로젝트", title: "MarkCloud",
+    problem: "고령 응답자 리서치를 AI로 전환하기 위해, 한국어 STT 후보를 같은 기준으로 골라야 했습니다.",
+    role: "데이터/AI 인턴 · 평가 파이프라인",
+    result: "STT 4종 비교 · 의미 기반 평가 추가",
     href: "/projects/markcloud", visible: confirmations.markCloudPublic === true,
   },
   {
-    id: "deepvi", eyebrow: "Bootcamp", title: "DeepVi",
-    description: "기업 데이터를 수집하고 LLM·RAG로 연결해 기업 분석과 질의응답을 제공한 서비스",
-    shows: "AI Application · LLM + RAG", metric: "444개", metricLabel: "분석 대상 KOSPI·KOSDAQ 기업",
+    id: "deepvi", eyebrow: "Bootcamp", status: "완료", title: "DeepVi",
+    problem: "일반 투자자가 재무제표와 뉴스를 스스로 해석하기 어렵습니다.",
+    role: "기획·데이터 수집·백엔드/DB·LLM 주도 (팀 프로젝트)",
+    result: "444개 기업 분석 · 시연과 사용자 테스트",
     href: "/projects/deepvi", visible: true,
   },
 ];

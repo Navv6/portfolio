@@ -8,7 +8,7 @@ export function StepLabel({ step, title }: { step: string; title: string }) {
 }
 
 export function CaseSection({ id, title, step, children }: { id: string; title: string; step?: { step: string; title: string }; children: ReactNode }) {
-  return <section id={id} className="scroll-mt-20 border-t border-zinc-200 py-14 md:py-16">
+  return <section id={id} className="scroll-mt-28 border-t border-zinc-200 py-14 first:border-t-0 md:py-16">
     {step && <div className="mb-2"><StepLabel {...step} /></div>}
     <h2 className="text-2xl font-bold tracking-tight break-keep md:text-3xl">{title}</h2>
     <div className="mt-5 text-sm leading-7 text-zinc-600 break-keep">{children}</div>
