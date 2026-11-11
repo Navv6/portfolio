@@ -70,3 +70,33 @@ export const constraints = [
   { title: "파서가 못 읽는 ERP 파일", description: "ExcelJS·SheetJS가 모두 실패한 비표준 xlsx를 보정하는 정규화 모듈을 만들었습니다." },
   { title: "기존 관리 방식 유지", description: "셀 색상으로 적던 상태와 기존 엑셀 양식을 바꾸지 않고 그대로 읽습니다." },
 ];
+
+// 케이스 스터디 첫 화면 요약 (한눈에 보기 + 기술 요약)
+export const glance = {
+  cells: [
+    { label: "문제", lines: ["현황이 ERP 엑셀·개별 파일·메신저에 흩어져, 지연을 확인하려면 파일부터 모아야 했습니다."] },
+    { label: "내 역할 · 범위", lines: ["기획·개발·운영 1인"], sub: "요구사항 정리부터 배포·운영까지" },
+    { label: "핵심 판단", lines: ["① 일부 필드 저장 → 원본 보존", "② 중복 판정 키에 워크센터 추가"] },
+    { label: "결과", lines: ["팀 전원이 공통 화면에서 현황을 바로 파악"], sub: "현황 확인·계획 확정 미팅 단계 생략", highlight: true },
+  ],
+  spec: [
+    { label: "기간", value: "2026.08.12–08.27 초기 구축 · 이후 개선" },
+    { label: "운영 환경", value: "사내 서버 · 개발/운영 서버 분리 · 원본 파일은 외부로 보내지 않음" },
+    { label: "스택", value: "Next.js · React · TypeScript · PostgreSQL · SheetJS · Vitest · PowerShell", mono: true },
+  ],
+  flow: ["ERP 엑셀", "브라우저 파싱", "import_batches", "erp_raw_rows", "조회·집계", "화면·KPI·주간 파일"],
+};
+
+export const decisionRows = [
+  { id: "ADR-01", anchor: "storage-decision", before: "화면에 필요한 12개 필드만 저장", problem: "미결 업무 목록·준수율 집계에 제외한 정보가 필요", after: "전체 원본을 보존하고 필요한 값을 가공" },
+  { id: "ADR-02", anchor: "dedup-decision", before: "품목 기준으로 중복 제거", problem: "두 사출처에 나눠 맡긴 정상 데이터가 사라짐", after: "판정 키에 워크센터 포함 · 반례 테스트 추가" },
+];
+
+export const caseSteps = [
+  { id: "problem", label: "문제" },
+  { id: "constraints", label: "제약" },
+  { id: "decisions", label: "설계 판단" },
+  { id: "delivery", label: "구현" },
+  { id: "adoption", label: "운영" },
+  { id: "ai-roadmap", label: "로드맵" },
+];

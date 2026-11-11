@@ -4,9 +4,10 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 import { ArrowRight, ArrowUpRight, Maximize2, X, ZoomIn, ZoomOut } from "lucide-react";
 import { SiteFooter, SiteHeader } from "../../site";
 import { ProjectTexture } from "../../visuals";
-import { ArchitectureFlow, DecisionCard, ImpactCard, StepLabel } from "../../case-study";
+import { ArchitectureFlow, CaseGlance, DecisionCard, DecisionTable, ImpactCard, NextCase, StepLabel } from "../../case-study";
+import { CaseStepNav } from "../../case-nav";
 import { confirmations } from "../../content-confirmations";
-import { changes, timeline, constraints, validation, phases, traceabilityFlow, traceabilityConsiderations } from "./content";
+import { changes, timeline, constraints, validation, phases, glance, decisionRows, caseSteps, traceabilityFlow, traceabilityConsiderations } from "./content";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const imagePath = (name: string) => basePath + "/preflight/" + name;
@@ -125,24 +126,23 @@ export default function PreflightPage() {
         <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-6xl print:text-3xl">Preflight</h1>
         <p className="mt-5 text-xl font-semibold leading-snug tracking-tight text-zinc-800 break-keep md:text-2xl print:text-lg">흩어진 팀 업무를, 함께 확인하는 한 화면으로.</p>
         <p className="mt-3 max-w-3xl text-base leading-7 text-zinc-600 break-keep print:text-sm">ERP 엑셀의 반복 집계를 자동화하고, 담당 업무와 지연 사유를 함께 관리하는 R&D 워크스페이스입니다.</p>
-        <dl className="my-8 grid gap-4 border-y border-zinc-200 py-5 text-sm sm:grid-cols-3 print:my-4 print:grid-cols-3">
-          <div><dt className="text-xs text-zinc-500">역할</dt><dd className="mt-1 font-semibold">기획부터 개발·운영까지 1인</dd></div>
-          <div><dt className="text-xs text-zinc-500">사용</dt><dd className="mt-1 font-semibold">팀 전원</dd></div>
-          <div><dt className="text-xs text-zinc-500">초기 구축</dt><dd className="mt-1 font-semibold">2026.08.12–08.27 · 이후 개선</dd></div>
-        </dl>
+        <div className="my-8 print:my-4"><CaseGlance {...glance} /></div>
         <figure>
           <Screenshot shot={shots.home} onOpen={setSelected} />
           <figcaption className="mt-3 text-xs leading-5 text-zinc-500">회의록의 할 일을 담당자와 기한별로 모으고, 미배정 업무와 지연 사유도 함께 확인합니다.</figcaption>
         </figure>
         <p className="mt-2 text-xs leading-5 text-zinc-500">화면은 가상 데이터로 재현했습니다. 인물·업체명과 화면 속 수치는 실제 운영 성과가 아닙니다.</p>
-        <div id="problem" className="scroll-mt-20 mt-12 print:mt-4">
+      </section>
+      <CaseStepNav steps={caseSteps} />
+      <section className="mx-auto max-w-5xl px-5 pb-14 pt-12 md:pb-20 print:p-0">
+        <div id="problem" className="scroll-mt-32 print:mt-4">
           <StepLabel step="01" title="Business Problem" />
           <div className="mt-3 border-l-2 border-blue-300 pl-5">
             <h2 className="text-lg font-semibold break-keep md:text-xl">지연된 업무를 확인하려면, 먼저 파일부터 모아야 했습니다.</h2>
             <p className="mt-2 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">샘플조달과 시사출 현황이 ERP 엑셀·개별 파일·메신저에 흩어져 있었습니다. 무엇이 늦어지는지 보려면 매번 파일을 다시 모아 정리해야 했고, 그 정리 작업 자체에 시간이 들었습니다.</p>
           </div>
         </div>
-        <div id="constraints" className="scroll-mt-20 mt-10 print:mt-4">
+        <div id="constraints" className="scroll-mt-32 mt-10 print:mt-4">
           <StepLabel step="02" title="Discovery & Constraints" />
           <h2 className="mt-2 text-lg font-semibold break-keep md:text-xl">현장에서 지켜야 했던 조건</h2>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 print:grid-cols-4">
@@ -156,11 +156,12 @@ export default function PreflightPage() {
         </div>
       </section>
 
-      <section className="preflight-sheet border-t border-zinc-200 bg-white py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="decisions-heading">
+      <section id="decisions" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 bg-white py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="decisions-heading">
         <div className="mx-auto max-w-5xl px-5 print:px-0">
           <StepLabel step="03" title="Engineering Decisions" />
           <h2 id="decisions-heading" className="mt-2 text-2xl font-bold tracking-tight md:text-3xl print:text-xl">만들면서 바꾼 두 가지 판단</h2>
-          <div className="mt-6 space-y-8 print:space-y-4">
+          <div className="mt-6"><DecisionTable rows={decisionRows} /></div>
+          <div className="mt-10 space-y-8 print:space-y-4">
             <div>
               <p className="mb-2 font-mono text-xs text-blue-700">ADR-01 · 일부 필드 저장 → 원본 보존</p>
               <DecisionCard id="storage-decision"
@@ -205,7 +206,7 @@ export default function PreflightPage() {
         </div>
       </section>
 
-      <section className="preflight-sheet border-t border-zinc-200 py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="delivery-heading">
+      <section id="delivery" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="delivery-heading">
         <div className="mx-auto max-w-5xl space-y-12 px-5 print:space-y-5 print:px-0">
           <div>
             <StepLabel step="04" title="Delivery & Iteration" />
@@ -242,7 +243,7 @@ export default function PreflightPage() {
         </div>
       </section>
 
-      <section id="adoption" className="preflight-sheet scroll-mt-20 border-t border-zinc-200 bg-white py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="adoption-heading">
+      <section id="adoption" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 bg-white py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="adoption-heading">
         <div className="mx-auto max-w-5xl px-5 print:px-0">
           <StepLabel step="05" title="Operation & Adoption" />
           <h2 id="adoption-heading" className="mt-2 text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">개발 서버와 운영 서버를 나눠, 팀이 실무에서 쓰고 있습니다.</h2>
@@ -255,7 +256,6 @@ export default function PreflightPage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-3 font-mono text-xs text-zinc-500">Next.js · React · TypeScript · PostgreSQL · SheetJS · Vitest · PowerShell</p>
           </div>
           <div className="mt-10">
             <h3 className="text-lg font-semibold break-keep md:text-xl">팀에서 쓰면서 달라진 점</h3>
@@ -280,7 +280,7 @@ export default function PreflightPage() {
         </div>
       </section>
 
-      <section id="ai-roadmap" className="preflight-sheet scroll-mt-20 border-t border-zinc-200 py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="roadmap-heading">
+      <section id="ai-roadmap" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="roadmap-heading">
         <div className="mx-auto max-w-5xl px-5 print:px-0">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">Roadmap · 확장 구상</p>
@@ -325,6 +325,7 @@ export default function PreflightPage() {
           </div>
         </div>
       </section>
+      <NextCase href="/projects/markcloud" title="MarkCloud" desc="고령 응답자 리서치의 AI 전환을 위한 한국어 STT 평가와 로컬 LLM 타당성 검토" />
       <SiteFooter className="print:hidden" />
       {selected && <ImageDialog shot={selected} onClose={closeImage} />}
       <style>{printStyles}</style>
