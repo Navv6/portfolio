@@ -75,7 +75,7 @@ export const constraints = [
 export const glance = {
   cells: [
     { label: "문제", lines: ["현황이 ERP 엑셀·개별 파일·메신저에 흩어져, 지연을 확인하려면 파일부터 모아야 했습니다."] },
-    { label: "내 역할 · 범위", lines: ["기획·개발·운영 1인"], sub: "요구사항 정리부터 배포·운영까지" },
+    { label: "내 역할 · 범위", lines: ["기획·개발·운영 1인"] },
     { label: "핵심 판단", lines: ["① 일부 필드 저장 → 원본 보존", "② 중복 판정 키에 워크센터 추가"] },
     { label: "결과", lines: ["팀 전원이 공통 화면에서 현황을 바로 파악"], sub: "현황 확인·계획 확정 미팅 단계 생략", highlight: true },
   ],
