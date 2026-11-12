@@ -72,9 +72,9 @@ export function CaseGlance({ cells, spec, flow }: {
 }) {
   return <section aria-label="한눈에 보기" className="overflow-hidden rounded-2xl border border-zinc-200 bg-white">
     <p className="border-b border-zinc-200 bg-zinc-50 px-5 py-2.5 text-xs text-zinc-500"><span className="font-semibold text-zinc-900">한눈에 보기</span> · 30초 요약</p>
-    <dl className="grid sm:grid-cols-2 lg:grid-cols-4">
+    <dl className={`grid ${cells.length === 3 ? "md:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-4"}`}>
       {cells.map(cell => (
-        <div key={cell.label} className={`border-zinc-200 p-5 [&:not(:first-child)]:border-t sm:[&:nth-child(2)]:border-t-0 sm:[&:nth-child(even)]:border-l lg:border-t-0 lg:[&:not(:first-child)]:border-l ${cell.highlight ? "bg-blue-50/70" : ""}`}>
+        <div key={cell.label} className={`border-zinc-200 p-5 [&:not(:first-child)]:border-t ${cells.length === 3 ? "md:border-t-0 md:[&:not(:first-child)]:border-l" : "sm:[&:nth-child(2)]:border-t-0 sm:[&:nth-child(even)]:border-l lg:border-t-0 lg:[&:not(:first-child)]:border-l"} ${cell.highlight ? "bg-blue-50/70" : ""}`}>
           <dt className={`text-xs font-semibold ${cell.highlight ? "text-blue-700" : "text-zinc-500"}`}>{cell.label}</dt>
           {cell.lines.map(line => <dd key={line} className={`mt-1.5 text-sm leading-6 break-keep ${cell.highlight ? "font-semibold text-zinc-900" : "text-zinc-700"}`}>{line}</dd>)}
           {cell.sub && <dd className="mt-1 text-xs leading-5 text-zinc-500 break-keep">{cell.sub}</dd>}

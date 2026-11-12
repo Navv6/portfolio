@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { SiteFooter, SiteHeader } from "../../site";
-import { ArchitectureFlow } from "../../case-study";
+import { ArchitectureFlow, CaseGlance } from "../../case-study";
 import { ProjectTexture } from "../../visuals";
 import { built, currentStage, example, flow, principles, stages } from "./content";
 
@@ -38,11 +38,21 @@ export default function ThinkLayerPage() {
         <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-6xl">ThinkLayer</h1>
         <p className="mt-5 text-xl font-semibold leading-snug tracking-tight text-zinc-800 break-keep md:text-2xl">만들기 전에, 먼저 구조를 봅니다.</p>
         <p className="mt-3 max-w-3xl text-base leading-7 text-zinc-600 break-keep">이걸 만들어야 하는가, 만든다면 가장 작은 버전은 무엇인가. 코딩 에이전트가 코드를 쓰기 한 단계 앞에서 묻습니다.</p>
-        <dl className="my-8 grid gap-4 border-y border-zinc-200 py-5 text-sm sm:grid-cols-3">
-          <div><dt className="text-xs text-zinc-500">역할</dt><dd className="mt-1 font-semibold">기획 · 설계 1인</dd></div>
-          <div><dt className="text-xs text-zinc-500">형태</dt><dd className="mt-1 font-semibold">코딩 에이전트 스킬 · 모델 미내장</dd></div>
-          <div><dt className="text-xs text-zinc-500">단계</dt><dd className="mt-1 font-semibold">v0.1 · 구상 단계</dd></div>
-        </dl>
+        <div className="my-8">
+          <CaseGlance
+            cells={[
+              { label: "문제", lines: ["AI 코딩 에이전트로 만드는 속도는 빨라졌지만, 무엇을 만들지 정하는 속도는 그대로입니다."] },
+              { label: "내 역할 · 범위", lines: ["기획 · 설계 1인"] },
+              { label: "핵심 판단", lines: ["① 모델을 내장하지 않고 에이전트 스킬로", "② 다음 행동은 하나만 제시"] },
+              { label: "다음 검증", lines: ["아이디어 하나를 끝까지 처리하는 프로토타입"], sub: "이후 사용자 테스트 10~20명", highlight: true },
+            ]}
+            spec={[
+              { label: "형태", value: "코딩 에이전트 스킬 · 모델 미내장" },
+              { label: "단계", value: "v0.1 · 구상 단계" },
+              { label: "구성", value: "SKILL.md · pack.yaml · project-state.schema.json", mono: true },
+            ]}
+          />
+        </div>
         <figure>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={basePath + "/thinklayer/demo.gif"} alt="ThinkLayer 콘셉트 데모: 인터뷰 후 MAP, GAP, PATH를 보여주는 터미널 화면" width={960} height={600} className="block h-auto w-full rounded-xl border border-zinc-800 shadow-sm" />

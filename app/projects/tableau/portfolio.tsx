@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useState } from "react";
 import { SiteFooter, SiteHeader } from "../../site";
+import { CaseGlance } from "../../case-study";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -70,25 +71,25 @@ export default function TableauPortfolioPage() {
     {
       id: 0,
       title: "시작 페이지",
-      image: "/tableau/시작.png",
+      image: "/tableau/시작.webp",
       desc: "전투사관학교 스킨 챔피언들이 카드 형태로 펼쳐지는 로비 화면입니다. START 버튼을 클릭하면 가이드북으로 진입합니다.",
     },
     {
       id: 1,
       title: "챔피언 상세",
-      image: "/tableau/챔피언상세.png",
+      image: "/tableau/챔피언상세.webp",
       desc: "매개변수로 챔피언을 선택하면 6각형 레이더 차트, 추천 아이템 5종, 유사 챔피언 TOP3가 동시에 전환됩니다. FIXED LOD 계산식으로 유사 챔피언을 자동 필터링합니다.",
     },
     {
       id: 2,
       title: "챔피언 비교",
-      image: "/tableau/챔피언비교.png",
+      image: "/tableau/챔피언비교.webp",
       desc: "하단 갤러리에서 두 챔피언을 선택하면 기본 스탯 8개와 역할 스탯 7개를 가로 막대 차트로 나란히 비교합니다. 이미지 클릭이 곧 필터입니다.",
     },
     {
       id: 3,
       title: "챔피언 팝업",
-      image: "/tableau/챔피언팝업창.png",
+      image: "/tableau/챔피언팝업창.webp",
       desc: "전체 챔피언 갤러리에서 이미지를 클릭하면 Tableau 확장 기능을 활용한 팝업 화면이 열립니다. 챔피언 설명, 추천 아이템 5종, P~R 스킬 아이콘을 깔끔한 카드 형태로 확인할 수 있게 구성했습니다.",
     },
   ];
@@ -147,19 +148,19 @@ export default function TableauPortfolioPage() {
   const analysisItems = [
     {
       title: "종합점수 트리맵",
-      image: "/tableau/종합점수트리맵.png",
+      image: "/tableau/종합점수트리맵.webp",
       summary: "정규화한 주요 스탯을 합산한 종합점수로 각 챔피언의 전반적인 성능 분포를 한눈에 볼 수 있게 했습니다.",
       detail: "난이도 필터와 함께 상위권 챔피언 분포를 확인해 어떤 챔피언이 안정적으로 높은 수치를 보이는지 비교할 수 있게 했습니다.",
     },
     {
       title: "종합점수별 산점도",
-      image: "/tableau/종합점수별 산점도.png",
+      image: "/tableau/종합점수별 산점도.webp",
       summary: "종합점수와 라인별 분포를 함께 보며 챔피언별 위치와 특성 차이를 비교할 수 있게 구성했습니다.",
       detail: "라인과 난이도 필터를 조합해 어떤 챔피언이 어떤 구간에 모이는지 설명하고 비교 기준으로 활용할 수 있게 했습니다.",
     },
     {
       title: "18렙-1렙 스탯 비교",
-      image: "/tableau/18렙-1렙 스탯 비교.png",
+      image: "/tableau/18렙-1렙 스탯 비교.webp",
       summary: "초반형과 성장형 챔피언의 차이를 시각적으로 비교해 플레이 감각이 어떻게 다른지 해석할 수 있게 했습니다.",
       detail: "평균선과 극값을 함께 보여줘 성장 패턴을 읽을 수 있게 했고, 챔피언별 플레이 성향 차이를 설명할 수 있게 했습니다.",
     },
@@ -174,22 +175,27 @@ export default function TableauPortfolioPage() {
       <section className="pt-16 md:pt-24">
         <Container>
           <motion.div initial="hidden" animate="show" variants={fadeUp}>
-            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200/70 bg-white/70 px-3 py-1 text-xs text-zinc-700 shadow-sm">
-              Tableau · Riot API · Data Storytelling
-            </div>
-            <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-zinc-900 break-keep md:text-5xl">
+<p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">Bootcamp · Data Visualization</p>
+            <h1 className="mt-2 text-4xl font-bold leading-tight tracking-tight text-zinc-900 break-keep md:text-5xl">
               전투사관학교
               <br className="hidden md:block" /> 챔피언 분석 가이드
             </h1>
             <p className="mt-6 max-w-4xl text-sm leading-6 text-zinc-700">
               Riot API와 CSV 데이터를 기반으로 챔피언 스탯, 성장 패턴, 라인별 특성을 분석하고, 이를 탐색할 수 있는 Tableau 인터랙티브 대시보드로 구현했습니다.
             </p>
-            <div className="mt-8 flex flex-wrap gap-2 text-xs">
-              {["챔피언 분석", "챔피언 비교", "추천 아이템", "인터랙티브 대시보드", "Tableau 스토리텔링"].map((t) => (
-                <span key={t} className="rounded-full border border-zinc-200/70 bg-white/70 px-3 py-1 shadow-sm text-zinc-700">
-                  {t}
-                </span>
-              ))}
+            <div className="mt-8">
+              <CaseGlance
+                cells={[
+                  { label: "문제", lines: ["챔피언 수가 많아 특성과 성장 차이, 어울리는 아이템·라인을 한눈에 파악하기 어렵습니다."] },
+                  { label: "핵심 판단", lines: ["① 스탯 정규화와 성장형/초반형 분류로 비교 기준 마련", "② 아이템·라인은 시트 연결과 필터로 탐색하게 구성"] },
+                  { label: "결과", lines: ["4개 화면의 인터랙티브 대시보드"], sub: "챔피언 상세 · 비교 · 추천 아이템 · 라인 필터", highlight: true },
+                ]}
+                spec={[
+                  { label: "데이터", value: "Riot API · CSV" },
+                  { label: "스택", value: "Tableau · Riot API · Python · CSV Data", mono: true },
+                ]}
+                flow={["Riot API·CSV", "스탯 정규화", "성장 패턴 분류", "Tableau 대시보드"]}
+              />
             </div>
           </motion.div>
         </Container>

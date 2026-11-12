@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import { SiteFooter, SiteHeader } from "../../site";
+import { CaseGlance } from "../../case-study";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -77,24 +78,6 @@ function Card({
   );
 }
 
-function StatCard({
-  value,
-  label,
-  sub,
-}: {
-  value: string;
-  label: string;
-  sub?: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-zinc-200/70 bg-white/80 p-6 shadow-sm text-center backdrop-blur">
-      <div className="text-3xl font-bold text-zinc-900 tracking-tight">{value}</div>
-      <div className="mt-1 text-sm font-medium text-zinc-700">{label}</div>
-      {sub && <div className="mt-1 text-xs text-zinc-500">{sub}</div>}
-    </div>
-  );
-}
-
 function ZoomableImage({
   src,
   alt,
@@ -140,11 +123,8 @@ export default function PriceLensPortfolioPage() {
       <section id="intro" className="pt-16 md:pt-24">
         <Container>
           <motion.div initial="hidden" animate="show" variants={fadeUp}>
-            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200/70 bg-white/70 px-3 py-1 text-xs text-zinc-600 shadow-sm">
-              Python · XGBoost · SHAP · Optuna
-            </div>
-
-            <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-zinc-900 break-keep md:text-5xl">
+<p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">Bootcamp · Data Analysis</p>
+            <h1 className="mt-2 text-4xl font-bold leading-tight tracking-tight text-zinc-900 break-keep md:text-5xl">
               가격 요인을 읽고
               <br className="hidden md:block" /> 서비스 개선으로 잇다
             </h1>
@@ -155,44 +135,21 @@ export default function PriceLensPortfolioPage() {
               <span className="font-semibold text-zinc-900"> 서비스 개선 방안</span>과 실제 기능 제안, 전략 도출로 확장하였습니다.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-2 text-xs text-zinc-700">
-              {[
-                "53,659개 숙소 데이터",
-                "4가지 모델 비교",
-                "Optuna 하이퍼파라미터 튜닝",
-                "SHAP 해석",
-                "설명 가능 ML",
-                "Stacking 앙상블",
-                "통계 검정",
-              ].map((t) => (
-                <span key={t} className="rounded-full border border-zinc-200/70 bg-white/70 px-3 py-1 shadow-sm">
-                  {t}
-                </span>
-              ))}
+            <div className="mt-8">
+              <CaseGlance
+                cells={[
+                  { label: "문제", lines: ["숙소 가격에 영향을 주는 요인을 검증해, 호스트 전략과 플랫폼 기능 제안의 근거로 삼아야 했습니다."] },
+                  { label: "핵심 판단", lines: ["① 단일 모델 대신 4가지 트리 모델 비교·튜닝", "② SHAP과 Feature Importance를 함께 비교해 요인 해석"] },
+                  { label: "결과", lines: ["XGBoost 튜닝 후 RMSE 94.2 · R² 0.64"], sub: "호스트 전략과 플랫폼 기능 제안으로 연결", highlight: true },
+                ]}
+                spec={[
+                  { label: "데이터", value: "NYC Airbnb 53,659개 숙소 · 원본 73개 컬럼 (2025년 3월 기준)" },
+                  { label: "기법", value: "4가지 트리 모델 비교 · Optuna 튜닝 · Stacking 앙상블 · SHAP · 통계 검정" },
+                  { label: "스택", value: "Python · XGBoost · LightGBM · Optuna · SHAP · Statsmodels", mono: true },
+                ]}
+                flow={["수집·전처리", "탐색적 분석", "모델 구축·튜닝", "해석·전략 도출"]}
+              />
             </div>
-          </motion.div>
-        </Container>
-      </section>
-
-      {/* Stats */}
-      <section className="mt-14 md:mt-20">
-        <Container>
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="grid grid-cols-2 gap-4 md:grid-cols-4"
-          >
-            {[
-              { value: "53,659개", label: "숙소 데이터", sub: "2025년 3월 기준" },
-              { value: "73개", label: "원본 컬럼", sub: "변수 선택·가공" },
-              { value: "ML 기반", label: "가격 요인 검증", sub: "4가지 모델 비교·튜닝" },
-              { value: "SHAP 분석", label: "플랫폼·호스트 전략 도출", sub: "분석 결과를 실행 방안으로 연결" },
-            ].map((s, i) => (
-              <motion.div key={s.label} variants={fadeUp} custom={i}>
-                <StatCard {...s} />
-              </motion.div>
-            ))}
           </motion.div>
         </Container>
       </section>
@@ -733,12 +690,12 @@ export default function PriceLensPortfolioPage() {
               </div>
               <div className="px-4 pb-5">
                 <ZoomableImage
-                  src={withBasePath("/pricelens/map.png")}
+                  src={withBasePath("/pricelens/map.webp")}
                   alt="NYC 지역별 Location Score 지도"
                   className="w-full rounded-xl object-contain"
                   onOpen={() =>
                     setActiveImage({
-                      src: withBasePath("/pricelens/map.png"),
+                      src: withBasePath("/pricelens/map.webp"),
                       alt: "NYC 지역별 Location Score 지도",
                       title: "지역별 Location Score",
                     })

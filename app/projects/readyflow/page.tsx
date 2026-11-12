@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SiteFooter, SiteHeader } from "../../site";
-import { ArchitectureFlow, MetricCard } from "../../case-study";
+import { ArchitectureFlow, CaseGlance, MetricCard } from "../../case-study";
 import { ProjectTexture } from "../../visuals";
 import { cards, diagnosisFlow, evidence, nextSteps, scatter } from "./content";
 
@@ -17,11 +17,20 @@ export default function ReadyFlowPage() {
         <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-6xl">ReadyFlow</h1>
         <p className="mt-5 text-xl font-semibold leading-snug tracking-tight text-zinc-800 break-keep md:text-2xl">AI를 들이기 전에, 일하는 방식부터 봅니다.</p>
         <p className="mt-3 font-mono text-sm text-zinc-500">Understand first. Automate second. AI when ready.</p>
-        <dl className="my-8 grid gap-4 border-y border-zinc-200 py-5 text-sm sm:grid-cols-3">
-          <div><dt className="text-xs text-zinc-500">역할</dt><dd className="mt-1 font-semibold">문제 정의 · 진단 설계 · 창업 준비</dd></div>
-          <div><dt className="text-xs text-zinc-500">대상</dt><dd className="mt-1 font-semibold">20~300명 제조기업 개발 · 품질 · 생산관리 · 구매</dd></div>
-          <div><dt className="text-xs text-zinc-500">단계</dt><dd className="mt-1 font-semibold">첫 진단 현장 모집</dd></div>
-        </dl>
+        <div className="my-8">
+          <CaseGlance
+            cells={[
+              { label: "문제", lines: ["요청·데이터·진행상황이 흩어진 채로는 AI를 들여도 일하는 방식이 달라지지 않습니다."] },
+              { label: "내 역할 · 범위", lines: ["문제 정의 · 진단 설계 · 창업 준비"] },
+              { label: "핵심 판단", lines: ["① 도구보다 업무 흐름을 먼저 진단", "② 관리자 인터뷰와 실제 데이터를 대조"] },
+              { label: "다음 검증", lines: ["제조기업 1곳에서 첫 진단 수행"], sub: "첫 진단 참여 현장과 팀원 모집 중", highlight: true },
+            ]}
+            spec={[
+              { label: "대상", value: "20~300명 규모 제조기업의 개발·품질·생산관리·구매 부서" },
+              { label: "단계", value: "첫 진단 현장 모집" },
+            ]}
+          />
+        </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {cards.map(card => (
             <figure key={card.src}>
