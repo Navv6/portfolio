@@ -139,7 +139,7 @@ export default function PriceLensPortfolioPage() {
               <CaseGlance
                 cells={[
                   { label: "문제", lines: ["숙소 가격에 영향을 주는 요인을 검증해, 호스트 전략과 플랫폼 기능 제안의 근거로 삼아야 했습니다."] },
-                  { label: "내 역할 · 범위", lines: ["ML 모델링 · EDA · 응용 방안 제시 담당"] },
+                  { label: "내 역할 · 범위", lines: ["ML 모델링 · EDA · 서비스 개선 방안 제시 담당"] },
                   { label: "핵심 판단", lines: ["① 단일 모델 대신 4가지 트리 모델 비교·튜닝", "② SHAP과 Feature Importance를 함께 비교해 요인 해석"] },
                   { label: "결과", lines: ["XGBoost 튜닝 후 RMSE 94.2 · R² 0.64"], sub: "호스트 전략과 플랫폼 기능 제안으로 연결", highlight: true },
                 ]}
