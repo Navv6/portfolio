@@ -187,6 +187,7 @@ export default function TableauPortfolioPage() {
               <CaseGlance
                 cells={[
                   { label: "문제", lines: ["챔피언 수가 많아 특성과 성장 차이, 어울리는 아이템·라인을 한눈에 파악하기 어렵습니다."] },
+                  { label: "내 역할 · 범위", lines: ["기획·구성·데이터 수집·EDA·시각화 전체 담당"] },
                   { label: "핵심 판단", lines: ["① 스탯 정규화와 성장형/초반형 분류로 비교 기준 마련", "② 아이템·라인은 시트 연결과 필터로 탐색하게 구성"] },
                   { label: "결과", lines: ["4개 화면의 인터랙티브 대시보드"], sub: "챔피언 상세 · 비교 · 추천 아이템 · 라인 필터", highlight: true },
                 ]}
