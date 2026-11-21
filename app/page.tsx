@@ -96,7 +96,7 @@ export default function Home() {
               </div>
               <div className="relative hidden min-h-[22rem] border-l border-zinc-100 bg-zinc-100 md:block">
                 <img
-                  src={basePath + "/preflight/home.webp"}
+                  src={basePath + "/preflight/home-2611.webp"}
                   alt="Preflight 메인 화면 (가상 데이터)"
                   className="absolute bottom-0 left-6 top-6 w-[calc(100%-1.5rem)] rounded-tl-xl border-l border-t border-zinc-200 object-cover object-left-top shadow-sm"
                 />

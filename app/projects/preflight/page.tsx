@@ -13,10 +13,10 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const imagePath = (name: string) => basePath + "/preflight/" + name;
 type Shot = { src: string; alt: string; width: number; height: number };
 const shots = {
-  home: { src: "home.webp", alt: "담당자별 할 일과 기한 캘린더", width: 1600, height: 1056 },
-  report: { src: "import-report.webp", alt: "파일 처리 결과 — 신규 · 값 변경 · 사라짐 판정과 바뀐 칸", width: 1200, height: 806 },
-  kpi: { src: "kpi-summary.webp", alt: "업무별 집계와 준수율 대시보드", width: 1600, height: 1000 },
-  trial: { src: "trial.webp", alt: "엑셀 셀 색에서 읽은 시사출 상태와 납기 현황", width: 1600, height: 1000 },
+  home: { src: "home-2611.webp", alt: "담당자별 할 일과 기한 캘린더", width: 1600, height: 1056 },
+  report: { src: "import-report-2611.webp", alt: "파일 처리 결과 — 신규 · 값 변경 · 사라짐 판정과 바뀐 칸", width: 1200, height: 806 },
+  kpi: { src: "kpi-summary-2611.webp", alt: "업무별 집계와 준수율 대시보드", width: 1600, height: 1000 },
+  trial: { src: "trial-2611.webp", alt: "엑셀 셀 색에서 읽은 시사출 상태와 납기 현황", width: 1600, height: 1000 },
   review: { src: "review-queue.webp", alt: "업로드가 혼자 정하지 않은 건 — 검토 대기열", width: 1200, height: 605 },
   pos: { src: "pos.webp", alt: "샘플창고 반출 화면 — 품목 카드의 공지 · 입고 예정", width: 1600, height: 1000 },
   outflow: { src: "outflow.webp", alt: "반출 기록 — 반출 · 접수가 한 표에", width: 1600, height: 1000 },
