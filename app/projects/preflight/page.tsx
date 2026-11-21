@@ -7,18 +7,20 @@ import { ProjectTexture } from "../../visuals";
 import { ArchitectureFlow, CaseGlance, DecisionCard, DecisionTable, ImpactCard, NextCase, StepLabel } from "../../case-study";
 import { CaseStepNav } from "../../case-nav";
 import { confirmations } from "../../content-confirmations";
-import { changes, timeline, constraints, validation, phases, glance, decisionRows, caseSteps, traceabilityFlow, traceabilityConsiderations } from "./content";
+import { changes, timeline, constraints, validation, glance, decisionRows, caseSteps, outflowBefore, outflowAfter, outflowShifts } from "./content";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const imagePath = (name: string) => basePath + "/preflight/" + name;
 type Shot = { src: string; alt: string; width: number; height: number };
 const shots = {
-  home: { src: "home.webp", alt: "담당자별 업무와 기한 캘린더", width: 1600, height: 1056 },
-  report: { src: "import-report.webp", alt: "파일 처리 결과와 제외 사유·컬럼 충돌", width: 1600, height: 597 },
+  home: { src: "home.webp", alt: "담당자별 할 일과 기한 캘린더", width: 1600, height: 1056 },
+  report: { src: "import-report.webp", alt: "파일 처리 결과 — 신규 · 값 변경 · 사라짐 판정과 바뀐 칸", width: 1200, height: 806 },
   kpi: { src: "kpi-summary.webp", alt: "업무별 집계와 준수율 대시보드", width: 1600, height: 1000 },
-  trial: { src: "trial.webp", alt: "엑셀 색상에서 읽은 시사출 상태와 납기 현황", width: 1600, height: 1000 },
-  order: { src: "m-02-order.webp", alt: "모바일 샘플 의뢰서 작성", width: 700, height: 1515 },
-  inventory: { src: "inventory.webp", alt: "샘플실의 요청 승인·보류·거절", width: 1600, height: 1000 },
+  trial: { src: "trial.webp", alt: "엑셀 셀 색에서 읽은 시사출 상태와 납기 현황", width: 1600, height: 1000 },
+  review: { src: "review-queue.webp", alt: "업로드가 혼자 정하지 않은 건 — 검토 대기열", width: 1200, height: 605 },
+  pos: { src: "pos.webp", alt: "샘플창고 반출 화면 — 품목 카드의 공지 · 입고 예정", width: 1600, height: 1000 },
+  outflow: { src: "outflow.webp", alt: "반출 기록 — 반출 · 접수가 한 표에", width: 1600, height: 1000 },
+  inventory: { src: "inventory.webp", alt: "반출 화면에서 재고가 없어 넘어온 접수 처리", width: 1600, height: 1000 },
 } satisfies Record<string, Shot>;
 
 function Screenshot({ shot, onOpen, className = "" }: { shot: Shot; onOpen: (shot: Shot) => void; className?: string }) {
@@ -112,7 +114,7 @@ function Feature({ number, title, description, children }: { number: string; tit
   );
 }
 
-const printStyles = ".preflight-dialog:focus-visible,.preflight-dialog :focus-visible{outline:2px solid #93c5fd;outline-offset:3px}@media print{.preflight-case{background:white}.preflight-case .preflight-sheet{break-before:page}.preflight-case .preflight-feature{break-inside:avoid}.preflight-case .preflight-intro figure img{max-height:430px;object-fit:contain}.preflight-case .preflight-print-kpi img{max-height:360px;object-fit:contain}.preflight-case .preflight-print-trial img{max-height:340px;object-fit:contain}.preflight-case .preflight-request{max-width:600px;margin-inline:auto}}";
+const printStyles = ".preflight-dialog:focus-visible,.preflight-dialog :focus-visible{outline:2px solid #93c5fd;outline-offset:3px}@media print{.preflight-case{background:white}.preflight-case .preflight-sheet{break-before:page}.preflight-case .preflight-feature{break-inside:avoid}.preflight-case .preflight-intro figure img{max-height:430px;object-fit:contain}.preflight-case .preflight-print-kpi img{max-height:360px;object-fit:contain}.preflight-case .preflight-print-trial img{max-height:340px;object-fit:contain}.preflight-case .preflight-print-flow ol,.preflight-case .preflight-print-flow ol>li{flex-direction:row!important}.preflight-case .preflight-print-flow ol>li>svg{transform:none!important}.preflight-case .preflight-print-pos img{max-height:380px;object-fit:contain}.preflight-case .preflight-print-half img{max-height:260px;object-fit:contain}}";
 
 export default function PreflightPage() {
   const [selected, setSelected] = useState<Shot | null>(null);
@@ -122,7 +124,7 @@ export default function PreflightPage() {
       <SiteHeader active="work" title="Preflight" subtitle="Pre-Production R&D 업무 관리 워크스페이스" className="print:hidden" />
       <section className="preflight-intro relative mx-auto max-w-5xl px-5 pb-14 pt-12 md:pb-20 md:pt-16 print:p-0">
         <ProjectTexture kind="data" className="pointer-events-none absolute right-5 top-14 hidden w-56 opacity-70 lg:block print:hidden" />
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">Production · Internal Use · 삼화 R&D본부</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">Production · Internal Use · 제조업 R&D 조직</p>
         <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-6xl print:text-3xl">Preflight</h1>
         <p className="mt-5 text-xl font-semibold leading-snug tracking-tight text-zinc-800 break-keep md:text-2xl print:text-lg">흩어진 팀 업무를, 함께 확인하는 한 화면으로.</p>
         <p className="mt-3 max-w-3xl text-base leading-7 text-zinc-600 break-keep print:text-sm">ERP 엑셀의 반복 집계를 자동화하고, 담당 업무와 지연 사유를 함께 관리하는 R&D 워크스페이스입니다.</p>
@@ -145,7 +147,7 @@ export default function PreflightPage() {
         <div id="constraints" className="scroll-mt-32 mt-10 print:mt-4">
           <StepLabel step="02" title="Discovery & Constraints" />
           <h2 className="mt-2 text-lg font-semibold break-keep md:text-xl">현장에서 지켜야 했던 조건</h2>
-          <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 print:grid-cols-4">
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 print:grid-cols-3">
             {constraints.map(item => (
               <li key={item.title} className="rounded-2xl border border-zinc-200 bg-white p-4">
                 <p className="text-sm font-semibold break-keep">{item.title}</p>
@@ -159,7 +161,7 @@ export default function PreflightPage() {
       <section id="decisions" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 bg-white py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="decisions-heading">
         <div className="mx-auto max-w-5xl px-5 print:px-0">
           <StepLabel step="03" title="Engineering Decisions" />
-          <h2 id="decisions-heading" className="mt-2 text-2xl font-bold tracking-tight md:text-3xl print:text-xl">만들면서 바꾼 두 가지 판단</h2>
+          <h2 id="decisions-heading" className="mt-2 text-2xl font-bold tracking-tight md:text-3xl print:text-xl">만들면서 바꾼 판단</h2>
           <div className="mt-6"><DecisionTable rows={decisionRows} /></div>
           <div className="mt-10 space-y-8 print:space-y-4">
             <div>
@@ -202,6 +204,28 @@ export default function PreflightPage() {
                 tradeoff="업체별 업무를 구분하기 위해 중복 판정 규칙이 복잡해집니다."
                 result="판정 키에 워크센터를 포함하고 해당 반례를 테스트에 추가해, 업체별 진행 현황이 누락되지 않도록 보완했습니다." />
             </div>
+            <div>
+              <p className="mb-2 font-mono text-xs text-blue-700">ADR-03 · 행 번호 → 원본 내용으로 행 식별</p>
+              <DecisionCard id="identity-decision"
+                decision="팀 엑셀에 줄 하나가 끼자, 사람이 고친 값이 전부 옆 행으로 밀렸습니다."
+                reason="처음에는 엑셀의 몇 번째 행인지로 같은 업무를 찾았습니다. 팀 파일 중간에 행이 하나 끼면, 화면에서 고쳐 둔 진행 상태와 사유가 그 아래 행들에 한 칸씩 밀려 붙었습니다."
+                tradeoff="원본 값만으로는 같은 업무라고 이을 수 없는 행이 생깁니다. 그 행의 수정값은 자동으로 옮기지 않으므로, 확인할 일이 남을 수 있습니다."
+                result="행 번호 대신 원본 값으로 행을 식별하고, 확신할 수 없으면 엉뚱한 행에 붙이지 않고 제자리에 남기도록 바꿨습니다. 파일 중간에 줄이 끼는 경우를 실제 DB 점검 시나리오에 넣었습니다." />
+            </div>
+            <div>
+              <p className="mb-2 font-mono text-xs text-blue-700">ADR-05 · 파일에서 빠진 행 ≠ 삭제 · 위험한 것만 사람이 검토</p>
+              <DecisionCard id="sync-decision"
+                decision="파일에서 사라진 행이 끝난 건지 취소된 건지, 업로드는 알 수 없었습니다."
+                reason="ERP 조회는 미완료 건만 내려주기 때문에, 행이 빠진 이유가 완료인지 취소인지 파일만으로는 구분되지 않았습니다. 사람이 고친 값과 ERP의 새 값이 부딪힐 때도 한쪽을 조용히 택해 판단 근거가 남지 않았습니다."
+                tradeoff="모든 변경을 사람에게 물으면 업로드가 일이 됩니다. 그래서 위험도로 나눴고, 그 기준을 따로 관리해야 합니다."
+                result="빠진 행은 지우지 않고 업무 단계(완료 · 취소 · 드롭)로 관리합니다. 끝났다는 근거 없이 빠진 행, 완료가 진행 중으로 되돌아가는 변경, 사람이 고친 칸과 부딪히는 변경만 검토 대기열로 보내고 나머지는 자동으로 반영합니다. 마지막 업로드는 되돌릴 수 있습니다.">
+                <figure className="mt-5 print:mt-3">
+                  <Screenshot shot={shots.review} onOpen={setSelected} className="preflight-print-half" />
+                  <figcaption className="mt-2 text-xs leading-5 text-zinc-500">고르기 전까지는 지금 값을 그대로 둡니다. 같은 파일을 다시 올려도 검토 건이 늘지 않습니다.</figcaption>
+                </figure>
+              </DecisionCard>
+            </div>
+            <p className="text-xs leading-5 text-zinc-500 break-keep">ADR-07(방문 출고 자동화)은 아래 <a href="#automation" className="underline underline-offset-4 hover:text-zinc-800">자동화</a> 섹션에서 따로 다룹니다.</p>
           </div>
         </div>
       </section>
@@ -212,7 +236,7 @@ export default function PreflightPage() {
             <StepLabel step="04" title="Delivery & Iteration" />
             <h2 id="delivery-heading" className="mt-2 text-2xl font-bold tracking-tight md:text-3xl print:text-xl">파일에서 현황까지, 현장 업무와 연결</h2>
           </div>
-          <Feature number="01" title="빠진 데이터의 이유까지 확인" description="어떤 행이 제외됐는지, 컬럼 값이 어디서 충돌했는지 표시합니다. 목록이 예상과 다를 때 원본 파일을 다시 열기 전에 원인을 확인할 수 있습니다.">
+          <Feature number="01" title="업로드가 무엇을 바꿨는지 칸 단위로 확인" description="지난번 ERP 값과 칸마다 비교해 신규 · 값 변경 · 변화 없음 · 사라짐으로 나누고, 바뀐 칸을 보여 줍니다. 어제 받은 파일처럼 오래된 파일은 반영 전에 한 번 더 묻습니다.">
             <Screenshot shot={shots.report} onOpen={setSelected} />
           </Feature>
           <Feature number="02" title="수기로 만들던 KPI를 업로드 한 번으로 집계" description="업무별 현황과 준수율을 집계하고, 주간 관리 파일을 같은 기준일로 내보냅니다. 준수율의 계산 기준과 판정에서 제외한 항목도 화면에 명시했습니다.">
@@ -220,13 +244,6 @@ export default function PreflightPage() {
           </Feature>
           <Feature number="03" title="엑셀의 색상도 업무 상태로 읽기" description="금형번호 셀의 채우기 색을 엑셀 테마 색과 tint 값까지 해석해 사출완료·계획예정·금형보관 등의 상태로 변환하고, 상태별 조회와 납기 집계에 사용합니다.">
             <Screenshot shot={shots.trial} onOpen={setSelected} className="preflight-print-trial" />
-          </Feature>
-          <Feature number="04" title="샘플 요청과 승인 과정을 연결" description="모바일에서 작성한 의뢰서를 샘플실에서 승인·보류·거절할 수 있도록 구현했습니다. 요청과 처리 상태가 하나의 흐름으로 이어집니다.">
-            <div className="mb-3"><span className="rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-xs text-zinc-600">구현 완료</span></div>
-            <div className="preflight-request grid grid-cols-[minmax(0,1fr)_minmax(0,3fr)] items-start gap-3 md:gap-5">
-              <Screenshot shot={shots.order} onOpen={setSelected} />
-              <Screenshot shot={shots.inventory} onOpen={setSelected} />
-            </div>
           </Feature>
           <div>
             <h3 className="text-sm font-semibold">피드백을 받아 바로 고친 기록</h3>
@@ -243,9 +260,62 @@ export default function PreflightPage() {
         </div>
       </section>
 
-      <section id="adoption" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 bg-white py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="adoption-heading">
+      <section id="automation" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 bg-white py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="automation-heading">
         <div className="mx-auto max-w-5xl px-5 print:px-0">
-          <StepLabel step="05" title="Operation & Adoption" />
+          <StepLabel step="05" title="Automation · 방문 출고" />
+          <h2 id="automation-heading" className="mt-2 text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">종이에 적고 다시 옮겨 적던 출고 기록을, 누르는 순간 끝나게.</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">영업사원이 샘플창고에 와서 샘플을 꺼내 가면 종이에 적었고, 팀원이 그 종이를 다시 엑셀로 옮겨 KPI에 썼습니다. 샘플창고 공용 노트북에 반출 화면을 두고, 꺼내는 자리에서 누르면 기록 · 재고 차감 · KPI 집계가 한 번에 끝나도록 바꿨습니다.</p>
+
+          <div className="preflight-print-flow mt-6 grid gap-3 print:gap-2">
+            <ArchitectureFlow label="이전 — 사람이 두 번 기록" nodes={outflowBefore} />
+            <ArchitectureFlow label="지금 — 반출 화면에서 한 번" nodes={outflowAfter} />
+          </div>
+
+          <div className="mt-8 print:mt-4">
+            <h3 className="text-sm font-semibold">사람 일이 사라진 자리</h3>
+            <div className="mt-3 overflow-hidden rounded-2xl border border-zinc-200">
+              <table className="w-full text-left text-sm">
+                <thead><tr className="border-b border-zinc-200 bg-zinc-50 text-[11px] text-zinc-500">
+                  <th scope="col" className="px-4 py-2.5 font-semibold">일</th><th scope="col" className="px-4 py-2.5 font-semibold">이전</th><th scope="col" className="px-4 py-2.5 font-semibold">지금</th>
+                </tr></thead>
+                <tbody>{outflowShifts.map(row => (
+                  <tr key={row.label} className="border-b border-zinc-100 last:border-0">
+                    <th scope="row" className="px-4 py-3 font-medium text-zinc-800 break-keep">{row.label}</th>
+                    <td className="px-4 py-3 text-zinc-600 break-keep">{row.before}</td>
+                    <td className="px-4 py-3 font-medium text-blue-800 break-keep">{row.after}</td>
+                  </tr>
+                ))}</tbody>
+              </table>
+            </div>
+            <p className="mt-2 text-xs leading-5 text-zinc-500 break-keep">현업 확인을 거친 정성 비교입니다. 반출 건수 · 수기 입력 감소 같은 측정 수치는 운영 데이터에서 집계한 뒤 더합니다.</p>
+          </div>
+
+          <div className="mt-10 space-y-8 print:mt-5 print:space-y-4">
+            <Feature number="01" title="샘플창고 반출 화면" description="이름을 고르고 가져가는 샘플을 누르면 끝입니다. 승인을 기다리지 않습니다. 품목 카드에 다른 품목과 부품을 같이 쓴다는 공지와 입고 예정일이 떠서, 꺼내기 전에 압니다. 공용 기기라 누르는 곳과 글자를 크게 잡았습니다.">
+              <Screenshot shot={shots.pos} onOpen={setSelected} className="preflight-print-pos" />
+            </Feature>
+            <Feature number="02" title="반출 · 접수가 한 표에" description="반출 화면에는 고치기 · 지우기가 없습니다. 잘못 누른 것은 로그인한 팀원이 반출 기록에서 고치고, 재고와 변경 이력이 함께 맞춰집니다. 재고가 모자란 만큼은 접수로 남아 팀이 처리합니다.">
+              <div className="grid gap-3 md:grid-cols-2 print:grid-cols-2">
+                <Screenshot shot={shots.outflow} onOpen={setSelected} className="preflight-print-half" />
+                <Screenshot shot={shots.inventory} onOpen={setSelected} className="preflight-print-half" />
+              </div>
+            </Feature>
+          </div>
+
+          <div id="pos-decision" className="scroll-mt-20 mt-10 print:mt-5">
+            <p className="mb-2 font-mono text-xs text-blue-700">ADR-07 · 요청 관리 → 방문 출고 자동화</p>
+            <DecisionCard
+              decision="처음 만든 「요청 → 승인 → 준비 → 수거」 흐름은 접었습니다."
+              reason="처음 목표는 팀에 들어오는 샘플 요청을 관리하는 것이었고, 모바일 의뢰서와 승인 화면까지 만들었습니다. 그러나 업무 환경의 제약으로 영업사원이 요청 화면을 쓰기 어려웠습니다."
+              tradeoff="승인 단계가 없어 잘못 누른 기록이 바로 재고에 반영됩니다. 그래서 고치기 · 지우기를 로그인한 팀원 화면에만 두고 변경 이력을 남겼습니다."
+              result="만든 흐름을 고집하지 않고, 영업사원이 샘플창고에서 직접 꺼내 가는 현장의 방식을 그대로 둔 채 그 자리에서 누르는 기록으로 바꿨습니다." />
+          </div>
+        </div>
+      </section>
+
+      <section id="adoption" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="adoption-heading">
+        <div className="mx-auto max-w-5xl px-5 print:px-0">
+          <StepLabel step="06" title="Operation & Adoption" />
           <h2 id="adoption-heading" className="mt-2 text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">개발 서버와 운영 서버를 나눠, 팀이 실무에서 쓰고 있습니다.</h2>
           <div id="technical-details" className="scroll-mt-20 mt-6">
             <ul className="grid gap-3 sm:grid-cols-3">
@@ -276,55 +346,10 @@ export default function PreflightPage() {
             </ul>
             {confirmations.timeComparison && <div className="mt-4 max-w-sm"><ImpactCard title="도입 전후 소요 시간" metric={confirmations.timeComparison.after} description={"도입 전 " + confirmations.timeComparison.before + " · " + confirmations.timeComparison.method} /></div>}
           </div>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">샘플조달·시사출·CT 테스트·회의록 업무에 사용하고 있습니다.</p>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">샘플조달·시사출·CT 테스트·회의록·샘플 출고 업무에 사용하고 있습니다.</p>
         </div>
       </section>
 
-      <section id="ai-roadmap" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="roadmap-heading">
-        <div className="mx-auto max-w-5xl px-5 print:px-0">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">Roadmap · 확장 구상</p>
-            <h2 id="roadmap-heading" className="mt-2 max-w-3xl text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">From Workflow Tracking to Manufacturing Traceability</h2>
-            <p className="mt-2 text-sm font-medium text-zinc-700 break-keep">금형 · 시사출 · 사출조건 · 평가 결과를 연결하는 이력 관리</p>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">지금의 Preflight는 흩어진 ERP·업무 데이터를 모아 진행 현황을 관리합니다. 다음은 금형 수정 이력, 시사출 회차, 사출조건, 평가 결과를 연결해 변경과 그 결과를 추적·비교할 수 있는 구조입니다. 운영 중인 Phase 1을 제외한 내용은 구현된 기능이 아니라 확장 구상입니다.</p>
-
-            <ol className="mt-7 space-y-4" aria-label="확장 단계">
-              {phases.map(phase => (
-                <li key={phase.phase} className={`rounded-2xl border bg-white p-5 ${phase.live ? "border-emerald-200" : "border-zinc-200"}`}>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <span className="font-mono text-xs text-zinc-400">{phase.phase}</span>
-                    <h4 className="text-base font-semibold break-keep">{phase.title}</h4>
-                    <span className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${phase.live ? "bg-emerald-50 text-emerald-700" : "bg-zinc-100 text-zinc-600"}`}>{phase.status}</span>
-                  </div>
-                  <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-                    {phase.items.map(item => (
-                      <li key={item.title} className="border-l-2 border-zinc-200 pl-3">
-                        <p className="text-sm text-zinc-800 break-keep">{item.title}{item.status ? <span className="ml-2 text-[11px] text-blue-700">{item.status}</span> : null}</p>
-                        {item.description ? <p className="mt-0.5 text-xs leading-5 text-zinc-500 break-keep">{item.description}</p> : null}
-                      </li>
-                    ))}
-                  </ul>
-                  {phase.phase === "Phase 2" ? (
-                    <div className="mt-5">
-                      <ArchitectureFlow label="연결 관계 (예시 구조)" nodes={traceabilityFlow} />
-                      <ul className="mt-3 flex flex-wrap gap-2">
-                        {traceabilityConsiderations.map(item => (
-                          <li key={item} className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-700">{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
-                </li>
-              ))}
-            </ol>
-
-            <div className="mt-7 border-t border-zinc-200 pt-5 print:mt-5">
-              <h4 className="text-sm font-semibold">설계 원칙과 검증 계획</h4>
-              <p className="mt-2 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">AI가 채운 값은 담당자 확인 후 저장하고, 판독할 수 없는 항목은 추측하지 않고 빈칸으로 남깁니다. 금형 변경과 조건 변경이 동시에 일어난 경우에는 결과 차이를 한쪽의 효과로 단정하지 않습니다. 추출·매칭은 수정률과 매칭 정확도로, 예측은 실제 NG를 찾는 재현율로 평가할 계획이며, 예측 결과는 시험을 대체하지 않고 검토 순서를 정하는 데만 활용합니다.</p>
-            </div>
-          </div>
-        </div>
-      </section>
       <NextCase href="/projects/markcloud" title="MarkCloud" desc="고령 응답자 리서치의 AI 전환을 위한 한국어 STT 평가와 로컬 LLM 타당성 검토" />
       <SiteFooter className="print:hidden" />
       {selected && <ImageDialog shot={selected} onClose={closeImage} />}

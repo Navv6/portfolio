@@ -1,66 +1,31 @@
-// From Workflow Tracking to Manufacturing Traceability. Phase 1만 운영 중이고 나머지는 확장 구상입니다.
-export const phases: { phase: string; title: string; status: string; live: boolean; items: { title: string; status?: string; description?: string }[] }[] = [
-  {
-    phase: "Phase 1", title: "엑셀 연동 · 시사출 업무 · KPI 관리", status: "운영 중", live: true,
-    items: [
-      { title: "현재 워크스페이스", description: "ERP 엑셀 업로드, 현황 · KPI · 주간 관리 파일, 샘플 요청 · 승인" },
-      { title: "안료 입고 사진을 의뢰서와 연결", status: "설계 중", description: "AI로 안료 코드 · 색상명 · LOT · 수량을 읽고, 규칙으로 대조한 뒤 담당자가 확정" },
-      { title: "텍스트 요청 구조화", status: "계획", description: "회의록 · 메신저 요청을 담당자 · 기한 · 품목이 정리된 할 일 초안으로 변환" },
-    ],
-  },
-  {
-    phase: "Phase 2", title: "제품 · 금형 · 시사출 회차 · 사출조건 이력", status: "확장 검토", live: false,
-    items: [
-      { title: "이력 엔터티 설계", description: "product · mold · mold_revision · trial_run · process_condition · sample · evaluation_result" },
-      { title: "입력 · 변경 이력 화면", description: "사출설비, 원재료 Lot, 온도, 보압, 냉각시간, 변경 사유" },
-    ],
-  },
-  {
-    phase: "Phase 3", title: "변경 전후 비교 · 평가 결과 연결", status: "계획", live: false,
-    items: [
-      { title: "CT 결과 데이터 표준화", description: "NG 유형 코드와 재질 · 내용물 · 시험 조건을 구조화된 데이터로 기록" },
-      { title: "변경 전후 비교와 평가 증빙 연결", description: "개발 단계별 평가 결과를 금형 · 조건 변경 이력과 연결" },
-    ],
-  },
-  {
-    phase: "Phase 4", title: "유사 불량 검색 · 검토 우선순위 보조", status: "장기 구상", live: false,
-    items: [
-      { title: "유사 제품 NG 이력 검색", description: "재질 · 내용물이 비슷한 과거 제품의 NG 사례를 CT 검토 전에 참고" },
-      { title: "CT 결과 예측", description: "해석 가능한 모델로 NG 가능성이 높은 샘플의 검토 순서 제시" },
-    ],
-  },
-];
-
-export const traceabilityFlow = [
-  { title: "제품 · 금형" },
-  { title: "금형 Revision" },
-  { title: "시사출 회차" },
-  { title: "사출조건 · 샘플" },
-  { title: "측정 · 평가 결과" },
-];
-
-export const traceabilityConsiderations = ["설정값과 실제 계측값 분리", "이전 버전 보존", "입력자 · 변경자 기록"];
+// 2026-11 기준. 8월에 적어 둔 확장 구상(Phase 2~4 · 안료 사진 연결 · 텍스트 요청 구조화)은 구현을 보류해 뺐습니다.
 
 export const validation = [
-  { title: "개발 · 운영 서버 분리", body: "개발 서버와 운영 서버를 나눠 운영합니다. 팀이 쓰는 운영 환경에 영향을 주지 않고 개발 서버에서 변경 사항을 만들고 확인합니다." },
-  { title: "업무 규칙", body: "의뢰 1건과 여러 공정 라인을 분리해 관리합니다. 지연 기준과 관리 단위는 설정으로 분리하고, 잠정값은 화면에도 표시합니다." },
-  { title: "권한 · 데이터 저장", body: "로그인과 3단계 권한, PostgreSQL 기반 데이터 저장을 구현했습니다." },
+  { title: "개발 · 운영 분리", body: "개발 서버에서 만들고 확인한 변경만 운영에 들어갑니다. 개발을 거치지 않은 변경은 배포 스크립트가 거부하고, DB는 더하기만 해서 되돌려도 데이터가 그대로입니다." },
+  { title: "데이터가 망가지지 않는지 시험", body: "업무 규칙 단위 시험 700여 개와, 줄 삽입 · 사람 수정 · 행 빠짐 · 같은 파일 재업로드 · 되돌리기를 실제 DB에서 돌리는 점검 60여 개를 둡니다." },
+  { title: "숫자의 근거", body: "표 · 칸 · 계산식 대장을 코드에서 자동으로 만들고, 실제 DB와 칸 하나하나 대조합니다. 화면의 숫자마다 어느 행을 세는지 찾을 수 있습니다." },
 ];
-
 
 // 도입 전후로 일하는 방식이 달라진 점 (정성 비교, 수치 측정 전)
 export const changes = [
   { before: "담당자마다 실적을 각자 입력하고, 자료를 모아 보고서를 따로 만들어야 했습니다.", after: "공통 브라우저 화면 하나에서 팀 전체 현황을 바로 파악합니다." },
   { before: "담당자와 미팅을 잡아 진행 상황을 확인하고, 다음 계획까지 확정받았습니다.", after: "모두 같은 화면을 보기 때문에, 현황 확인과 계획 확정을 위한 미팅 단계를 건너뜁니다." },
+  { before: "영업사원이 종이에 적은 샘플 출고 기록을 팀원이 다시 엑셀로 옮겨 KPI에 썼습니다.", after: "영업사원이 반출 화면에서 누르면 재고와 KPI가 바로 반영됩니다. 팀원이 옮겨 적는 일이 없어졌고, 수기 누락도 줄고 있습니다." },
+  { before: "재고가 없거나 다른 품목과 부품을 같이 쓰는 샘플은 가서 물어봐야 알았습니다.", after: "품목 카드에 공지와 입고 예정일이 떠서 꺼내기 전에 압니다. 재고가 없으면 접수로 남아 놓치지 않습니다." },
 ];
 
-// 초기 구축 기간의 작업 기록 (예전 '끄적임' 페이지의 진행 로그)
+// 구축 · 개선 기록
 export const timeline = [
   { date: "08.12", text: "ERP 엑셀 파싱·저장 파이프라인 구축, 실제 파일 수치 대조" },
   { date: "08.13", text: "현업 피드백 반영 — 메인/KPI 화면 분리, 팀원별 담당자 지정" },
   { date: "08.15", text: "로그인·계정 관리 추가, 전 모듈 PostgreSQL 이전" },
   { date: "08.16", text: "엑셀 업로드를 전체 교체에서 누적 병합으로 전환 · 팀 게시판 · DB 백업 스크립트" },
-  { date: "이후", text: "개발부 T0~T4 테스트 관리 확장 요청 · 사내 IT 관리 체계 편입 논의" },
+  { date: "08.25", text: "ERP 원본 전체 보관으로 전환 · 펜딩리스트를 원본에서 계산 · KPI 7개 분류" },
+  { date: "09.28", text: "행 식별을 행 번호에서 원본 값으로 — 줄이 끼면 수정값이 밀리던 문제 해결 · 사람마다 열 고르기" },
+  { date: "11.10", text: "개발/운영 분리 · 개발을 거치지 않은 변경은 배포 거부 · DB 변경은 더하기만" },
+  { date: "11.14", text: "화면 원칙 통일(글자·대비·클릭 영역) · 계산 기준을 담당자가 직접 확정하는 기준값 관리" },
+  { date: "11.18", text: "샘플창고 반출 화면 — 방문 출고 자동화 · 재고 자동 차감 · 없는 샘플 접수" },
+  { date: "11.20", text: "동기화 · 검증 엔진 — 빠진 행 논리 삭제 · 위험한 변경만 검토 · 업로드 되돌리기" },
 ];
 
 // 현장에서 지켜야 했던 도입 조건
@@ -69,6 +34,7 @@ export const constraints = [
   { title: "원본 파일은 밖으로 보내지 않기", description: "엑셀 파일은 브라우저에서 파싱하고, 파싱한 값만 저장합니다." },
   { title: "파서가 못 읽는 ERP 파일", description: "ExcelJS·SheetJS가 모두 실패한 비표준 xlsx를 보정하는 정규화 모듈을 만들었습니다." },
   { title: "기존 관리 방식 유지", description: "셀 색상으로 적던 상태와 기존 엑셀 양식을 바꾸지 않고 그대로 읽습니다." },
+  { title: "현장의 기록 방식에 맞추기", description: "승인을 기다리는 요청 관리는 현장에 맞지 않았습니다. 샘플창고에서 직접 꺼내 가는 흐름을 그대로 두고, 그 자리에서 누르는 기록으로 바꿨습니다." },
 ];
 
 // 케이스 스터디 첫 화면 요약 (한눈에 보기 + 기술 요약)
@@ -76,20 +42,45 @@ export const glance = {
   cells: [
     { label: "문제", lines: ["현황이 ERP 엑셀·개별 파일·메신저에 흩어져, 지연을 확인하려면 파일부터 모아야 했습니다."] },
     { label: "내 역할 · 범위", lines: ["기획·개발·운영 1인"] },
-    { label: "핵심 판단", lines: ["① 일부 필드 저장 → 원본 보존", "② 중복 판정 키에 워크센터 추가"] },
-    { label: "결과", lines: ["팀 전원이 공통 화면에서 현황을 바로 파악"], sub: "현황 확인·계획 확정 미팅 단계 생략", highlight: true },
+    { label: "핵심 판단", lines: ["① 일부 필드 저장 → 원본 보존", "② 행 번호 → 원본 내용으로 행 식별", "③ 파일에서 빠진 행 ≠ 삭제 · 위험한 것만 사람이 검토", "④ 요청 관리 → 방문 출고 자동화"] },
+    { label: "결과", lines: ["팀 전원이 공통 화면에서 현황을 바로 파악", "샘플 출고 기록을 팀원이 옮겨 적던 일이 사라짐"], sub: "현황 확인·계획 확정 미팅 단계 생략", highlight: true },
   ],
   spec: [
-    { label: "기간", value: "2026.08.12–08.27 초기 구축 · 이후 개선" },
-    { label: "운영 환경", value: "사내 서버 · 개발/운영 서버 분리 · 원본 파일은 외부로 보내지 않음" },
-    { label: "스택", value: "Next.js · React · TypeScript · PostgreSQL · SheetJS · Vitest · PowerShell", mono: true },
+    { label: "기간", value: "2026.08.12 착수 · 운영 중 (2026.11 기준)" },
+    { label: "운영 환경", value: "사내 서버 · 개발/운영 분리 · 원본 파일은 외부로 보내지 않음 · 샘플창고 공용 노트북" },
+    { label: "스택", value: "Next.js · React · TypeScript · PostgreSQL · SheetJS · Express · Vitest · PowerShell", mono: true },
   ],
-  flow: ["ERP 엑셀", "브라우저 파싱", "import_batches", "erp_raw_rows", "조회·집계", "화면·KPI·주간 파일"],
+  flow: ["ERP 엑셀", "브라우저 파싱", "원본 보관", "동기화 · 검증", "검토 대기열", "화면·KPI·주간 파일"],
 };
 
 export const decisionRows = [
   { id: "ADR-01", anchor: "storage-decision", before: "화면에 필요한 12개 필드만 저장", problem: "미결 업무 목록·준수율 집계에 제외한 정보가 필요", after: "전체 원본을 보존하고 필요한 값을 가공" },
   { id: "ADR-02", anchor: "dedup-decision", before: "품목 기준으로 중복 제거", problem: "두 사출처에 나눠 맡긴 정상 데이터가 사라짐", after: "판정 키에 워크센터 포함 · 반례 테스트 추가" },
+  { id: "ADR-03", anchor: "identity-decision", before: "엑셀 행 번호로 행을 식별", problem: "팀 엑셀에 줄 하나가 끼면 사람이 고친 값이 전부 옆 행으로 밀려 붙음", after: "원본 값으로 식별 · 못 이으면 엉뚱한 행에 붙이지 않고 제자리에 남김" },
+  { id: "ADR-05", anchor: "sync-decision", before: "파일에서 빠진 행은 표시만, 사람 수정과 ERP 변경이 부딪히면 조용히 한쪽을 택함", problem: "끝난 건지 취소된 건지 모름 · 판단 근거가 남지 않음", after: "지우지 않고 업무 단계(완료·취소·드롭)로 관리 · 위험한 변경만 검토 대기열 · 업로드 되돌리기" },
+  { id: "ADR-07", anchor: "pos-decision", before: "방문 출고는 영업사원이 종이에 적고, 팀원이 다시 엑셀로 옮겨 KPI에 씀", problem: "옮겨 적는 일이 팀원 몫 · 종이 기록 누락 · 처음 계획한 「요청 → 승인」 관리는 업무 환경에 맞지 않음", after: "샘플창고 노트북 반출 화면 — 누르는 순간 재고 차감 · KPI 집계, 없는 샘플은 접수로, 품목 카드에 공지 · 입고 예정" },
+];
+
+// 방문 출고 자동화 — 흐름 비교
+export const outflowBefore = [
+  { title: "영업사원 방문" },
+  { title: "종이에 기록" },
+  { title: "팀원이 엑셀로 옮겨 적기" },
+  { title: "KPI 집계" },
+];
+
+export const outflowAfter = [
+  { title: "영업사원 방문" },
+  { title: "반출 화면에서 누름" },
+  { title: "재고 차감 · KPI 집계", description: "누르는 순간 자동" },
+  { title: "재고가 없으면 접수", description: "팀이 처리할 때까지 목록에 남음" },
+];
+
+// 사람 일이 사라진 자리 (정성, 2026-11 사용자 확인 — 측정 수치는 운영 DB에서 뽑은 뒤에 더한다)
+export const outflowShifts = [
+  { label: "팀원이 옮겨 적는 일", before: "매번 있음", after: "없음" },
+  { label: "종이 기록 누락", before: "있음", after: "줄어드는 중" },
+  { label: "재고 없는 샘플 요청", before: "기록 없이 지나감", after: "접수로 남아 처리" },
 ];
 
 export const caseSteps = [
@@ -97,6 +88,6 @@ export const caseSteps = [
   { id: "constraints", label: "제약" },
   { id: "decisions", label: "설계 판단" },
   { id: "delivery", label: "구현" },
+  { id: "automation", label: "자동화" },
   { id: "adoption", label: "운영" },
-  { id: "ai-roadmap", label: "로드맵" },
 ];
