@@ -1,13 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowRight, ArrowUpRight, Maximize2, X, ZoomIn, ZoomOut } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Maximize2, X, ZoomIn, ZoomOut } from "lucide-react";
 import { SiteFooter, SiteHeader } from "../../site";
 import { ProjectTexture } from "../../visuals";
-import { ArchitectureFlow, CaseGlance, DecisionCard, DecisionTable, ImpactCard, NextCase, StepLabel } from "../../case-study";
+import { ArchitectureFlow, CaseGlance, DecisionCard, DecisionTable, ImpactCard, MetricCard, NextCase, StepLabel } from "../../case-study";
 import { CaseStepNav } from "../../case-nav";
 import { confirmations } from "../../content-confirmations";
-import { changes, timeline, constraints, validation, glance, decisionRows, caseSteps, outflowBefore, outflowAfter, outflowShifts, deliveryBasics } from "./content";
+import { changes, timeline, constraints, validation, glance, decisionRows, caseSteps, outflowBefore, outflowAfter, outflowShifts, deliveryBasics, integrityStats, integrityPipeline, integrityRules, integrityScenarios, integrityIncidents } from "./content";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const imagePath = (name: string) => basePath + "/preflight/" + name;
@@ -178,13 +178,13 @@ export default function PreflightPage() {
                   <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center print:flex-row print:items-center">
                     <div className="min-w-0 flex-1 rounded-lg border border-zinc-200 bg-white p-3">
                       <p className="text-sm font-semibold">업로드 기록</p>
-                      <p className="mt-1 font-mono text-[11px] text-zinc-500">import_batches</p>
+                      <p className="mt-1 text-[11px] text-zinc-500">파일 단위</p>
                       <p className="mt-2 text-xs leading-5 text-zinc-600">파일명·업로드 시점 보관</p>
                     </div>
                     <ArrowRight className="h-4 w-4 shrink-0 self-center rotate-90 text-blue-600 sm:rotate-0 print:rotate-0" aria-hidden />
                     <div className="min-w-0 flex-1 rounded-lg border border-blue-200 bg-blue-50 p-3">
                       <p className="text-sm font-semibold">원본 행 보관</p>
-                      <p className="mt-1 font-mono text-[11px] text-zinc-500">erp_raw_rows</p>
+                      <p className="mt-1 text-[11px] text-zinc-500">행 단위 · 모든 칸</p>
                       <p className="mt-2 text-xs leading-5 text-zinc-600">업로드별 전체 값 저장</p>
                     </div>
                     <ArrowRight className="h-4 w-4 shrink-0 self-center rotate-90 text-blue-600 sm:rotate-0 print:rotate-0" aria-hidden />
@@ -206,6 +206,45 @@ export default function PreflightPage() {
                 tradeoff="업체별 업무를 구분하기 위해 중복 판정 규칙이 복잡해집니다."
                 result="판정 키에 워크센터를 포함하고 해당 반례를 테스트에 추가해, 업체별 진행 현황이 누락되지 않도록 보완했습니다." />
             </div>
+            <p className="text-xs leading-5 text-zinc-500 break-keep">ADR-03 · 05는 바로 아래 <a href="#integrity" className="underline underline-offset-4 hover:text-zinc-800">데이터 정합성</a>, ADR-07은 <a href="#automation" className="underline underline-offset-4 hover:text-zinc-800">자동화</a> 섹션에서 다룹니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="integrity" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="integrity-heading">
+        <div className="mx-auto max-w-5xl px-5 print:px-0">
+          <StepLabel step="04" title="Deep Dive · 데이터 정합성" />
+          <h2 id="integrity-heading" className="mt-2 text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">ERP 파일을 매주 다시 올려도, 사람이 남긴 판단은 지워지지 않게</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">팀은 매주 ERP에서 새 파일을 받아 올립니다. ERP 파일에는 미완료 건만 들어 있고, 팀 엑셀은 사람이 줄을 넣고 고칩니다. 그 위에 화면에서 고친 진행 상태와 지연 사유가 쌓입니다. 업로드 한 번이 이 판단을 덮거나 엉뚱한 행에 붙이면, 화면의 숫자를 아무도 믿지 않게 됩니다. 그래서 업로드를 「덮어쓰기」가 아니라 「판정 → 반영」으로 설계했습니다.</p>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-3 print:grid-cols-3">
+            {integrityStats.map(item => <MetricCard key={item.label} value={item.value} label={item.label} description={item.description} />)}
+          </div>
+          <p className="mt-2 text-xs leading-5 text-zinc-500">2026-11-20 기준, 저장소의 시험 코드에서 센 값입니다. 운영 성과 지표가 아닙니다.</p>
+
+          <div className="preflight-print-flow mt-8 print:mt-4">
+            <ArchitectureFlow label="업로드 한 번이 지나가는 단계" nodes={integrityPipeline} />
+          </div>
+
+          <div className="mt-8 print:mt-4">
+            <h3 className="text-sm font-semibold">부딪히는 상황마다 정한 원칙</h3>
+            <div className="mt-3 overflow-x-auto rounded-2xl border border-zinc-200 bg-white">
+              <table className="w-full min-w-[640px] text-left text-sm">
+                <thead><tr className="border-b border-zinc-200 bg-zinc-50 text-[11px] text-zinc-500">
+                  <th scope="col" className="px-4 py-2.5 font-semibold">상황</th><th scope="col" className="px-4 py-2.5 font-semibold">처리</th><th scope="col" className="px-4 py-2.5 font-semibold">이유</th>
+                </tr></thead>
+                <tbody>{integrityRules.map(row => (
+                  <tr key={row.when} className="border-b border-zinc-100 align-top last:border-0">
+                    <th scope="row" className="px-4 py-3 font-medium text-zinc-800 break-keep">{row.when}</th>
+                    <td className="px-4 py-3 font-medium text-blue-800 break-keep">{row.action}</td>
+                    <td className="px-4 py-3 text-zinc-600 break-keep">{row.why}</td>
+                  </tr>
+                ))}</tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="mt-10 space-y-8 print:mt-5 print:space-y-4">
             <div>
               <p className="mb-2 font-mono text-xs text-blue-700">ADR-03 · 행 번호 → 원본 내용으로 행 식별</p>
               <DecisionCard id="identity-decision"
@@ -227,7 +266,31 @@ export default function PreflightPage() {
                 </figure>
               </DecisionCard>
             </div>
-            <p className="text-xs leading-5 text-zinc-500 break-keep">ADR-07(방문 출고 자동화)은 아래 <a href="#automation" className="underline underline-offset-4 hover:text-zinc-800">자동화</a> 섹션에서 따로 다룹니다.</p>
+          </div>
+
+          <div className="mt-10 print:mt-5">
+            <h3 className="text-sm font-semibold">실제 DB에서 돌리는 점검 시나리오</h3>
+            <p className="mt-1 text-xs leading-5 text-zinc-500 break-keep">가상 데이터로 빈 검증용 DB를 채우고, 세 업무에 같은 시나리오를 돌립니다. 하나라도 틀리면 실패로 끝납니다.</p>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2 print:grid-cols-2">
+              {integrityScenarios.map(item => (
+                <li key={item} className="flex gap-2 rounded-xl border border-zinc-200 bg-white p-3 text-sm leading-6 text-zinc-700 break-keep">
+                  <Check className="mt-1 h-4 w-4 shrink-0 text-emerald-600" aria-hidden />{item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-10 print:mt-5">
+            <h3 className="text-sm font-semibold">만들면서 찾은 문제와, 다시 막는 장치</h3>
+            <ul className="mt-3 grid gap-3 md:grid-cols-3 print:grid-cols-3">
+              {integrityIncidents.map(item => (
+                <li key={item.title} className="rounded-2xl border border-zinc-200 bg-white p-4">
+                  <p className="text-sm font-semibold break-keep">{item.title}</p>
+                  <p className="mt-2 text-xs leading-5 text-zinc-600 break-keep"><span className="font-medium text-zinc-800">발견 · </span>{item.found}</p>
+                  <p className="mt-1.5 text-xs leading-5 text-zinc-600 break-keep"><span className="font-medium text-blue-800">장치 · </span>{item.guard}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -235,7 +298,7 @@ export default function PreflightPage() {
       <section id="delivery" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="delivery-heading">
         <div className="mx-auto max-w-5xl space-y-12 px-5 print:space-y-5 print:px-0">
           <div>
-            <StepLabel step="04" title="Delivery & Iteration" />
+            <StepLabel step="05" title="Delivery & Iteration" />
             <h2 id="delivery-heading" className="mt-2 text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">세 업무의 엑셀을 읽어, 팀이 매일 여는 화면으로</h2>
             <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">샘플조달 · 시사출 · CT 테스트는 ERP와 팀 엑셀에서 읽고, 샘플 출고 · 재고 · 회의록 · 팀 게시판은 사람이 직접 적습니다. 업무 모듈 6개가 같은 로그인 · 권한 · 화면 규칙 위에서 돌아갑니다.</p>
           </div>
@@ -281,7 +344,7 @@ export default function PreflightPage() {
 
       <section id="automation" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 bg-white py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="automation-heading">
         <div className="mx-auto max-w-5xl px-5 print:px-0">
-          <StepLabel step="05" title="Automation · 방문 출고" />
+          <StepLabel step="06" title="Automation · 방문 출고" />
           <h2 id="automation-heading" className="mt-2 text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">종이에 적고 다시 옮겨 적던 출고 기록을, 누르는 순간 끝나게.</h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">영업사원이 샘플창고에 와서 샘플을 꺼내 가면 종이에 적었고, 팀원이 그 종이를 다시 엑셀로 옮겨 KPI에 썼습니다. 샘플창고 공용 노트북에 반출 화면을 두고, 꺼내는 자리에서 누르면 기록 · 재고 차감 · KPI 집계가 한 번에 끝나도록 바꿨습니다.</p>
 
@@ -331,7 +394,7 @@ export default function PreflightPage() {
 
       <section id="adoption" className="preflight-sheet scroll-mt-28 border-t border-zinc-200 py-14 md:py-20 print:border-0 print:py-0" aria-labelledby="adoption-heading">
         <div className="mx-auto max-w-5xl px-5 print:px-0">
-          <StepLabel step="06" title="Operation & Adoption" />
+          <StepLabel step="07" title="Operation & Adoption" />
           <h2 id="adoption-heading" className="mt-2 text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">개발 서버와 운영 서버를 나눠, 팀이 실무에서 쓰고 있습니다.</h2>
           <div id="technical-details" className="scroll-mt-20 mt-6">
             <ul className="grid gap-3 sm:grid-cols-3">
