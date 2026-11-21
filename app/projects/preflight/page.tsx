@@ -7,7 +7,7 @@ import { ProjectTexture } from "../../visuals";
 import { ArchitectureFlow, CaseGlance, DecisionCard, DecisionTable, ImpactCard, NextCase, StepLabel } from "../../case-study";
 import { CaseStepNav } from "../../case-nav";
 import { confirmations } from "../../content-confirmations";
-import { changes, timeline, constraints, validation, glance, decisionRows, caseSteps, outflowBefore, outflowAfter, outflowShifts } from "./content";
+import { changes, timeline, constraints, validation, glance, decisionRows, caseSteps, outflowBefore, outflowAfter, outflowShifts, deliveryBasics } from "./content";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const imagePath = (name: string) => basePath + "/preflight/" + name;
@@ -20,6 +20,8 @@ const shots = {
   review: { src: "review-queue.webp", alt: "업로드가 혼자 정하지 않은 건 — 검토 대기열", width: 1200, height: 605 },
   pos: { src: "pos.webp", alt: "샘플창고 반출 화면 — 품목 카드의 공지 · 입고 예정", width: 1600, height: 1000 },
   outflow: { src: "outflow.webp", alt: "반출 기록 — 반출 · 접수가 한 표에", width: 1600, height: 1000 },
+  ct: { src: "ct.webp", alt: "CT 테스트 — 국내 · 해외 · 개발 구분과 완료 · 미검토", width: 1600, height: 1000 },
+  settings: { src: "settings.webp", alt: "기준값 관리 — 잠정 / 확정", width: 1600, height: 1000 },
   inventory: { src: "inventory.webp", alt: "반출 화면에서 재고가 없어 넘어온 접수 처리", width: 1600, height: 1000 },
 } satisfies Record<string, Shot>;
 
@@ -234,19 +236,36 @@ export default function PreflightPage() {
         <div className="mx-auto max-w-5xl space-y-12 px-5 print:space-y-5 print:px-0">
           <div>
             <StepLabel step="04" title="Delivery & Iteration" />
-            <h2 id="delivery-heading" className="mt-2 text-2xl font-bold tracking-tight md:text-3xl print:text-xl">파일에서 현황까지, 현장 업무와 연결</h2>
+            <h2 id="delivery-heading" className="mt-2 text-2xl font-bold tracking-tight break-keep md:text-3xl print:text-xl">세 업무의 엑셀을 읽어, 팀이 매일 여는 화면으로</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">샘플조달 · 시사출 · CT 테스트는 ERP와 팀 엑셀에서 읽고, 샘플 출고 · 재고 · 회의록 · 팀 게시판은 사람이 직접 적습니다. 업무 모듈 6개가 같은 로그인 · 권한 · 화면 규칙 위에서 돌아갑니다.</p>
           </div>
-          <Feature number="01" title="업로드가 무엇을 바꿨는지 칸 단위로 확인" description="지난번 ERP 값과 칸마다 비교해 신규 · 값 변경 · 변화 없음 · 사라짐으로 나누고, 바뀐 칸을 보여 줍니다. 어제 받은 파일처럼 오래된 파일은 반영 전에 한 번 더 묻습니다.">
+          <Feature number="01" title="업로드가 무엇을 바꿨는지 칸 단위로 확인" description="지난번 ERP 값과 칸마다 비교해 신규 · 값 변경 · 변화 없음 · 사라짐 · 다시 나타남으로 나누고, 바뀐 칸의 전과 후를 보여 줍니다. 화면 목록에서 빠진 행도 저장에서는 빠지지 않았다는 것, 비표준 파일을 어떻게 보정해 읽었는지도 함께 밝힙니다. 오래된 파일은 반영 전에 한 번 더 묻고, 마지막 업로드는 되돌릴 수 있습니다.">
             <Screenshot shot={shots.report} onOpen={setSelected} />
           </Feature>
-          <Feature number="02" title="수기로 만들던 KPI를 업로드 한 번으로 집계" description="업무별 현황과 준수율을 집계하고, 주간 관리 파일을 같은 기준일로 내보냅니다. 준수율의 계산 기준과 판정에서 제외한 항목도 화면에 명시했습니다.">
+          <Feature number="02" title="세 업무의 KPI를 한 장으로" description="샘플조달 · 시사출 · CT의 누적 건수와 통합 준수율, 워크센터 Worst 5, 7개 분류별 구성과 월별 추이를 주간 · 월간 · 연간으로 봅니다. 샘플조달은 쌓인 원본에서 라인마다 최신 값으로 계산해, 미완료만 든 주간 파일을 올려도 완료 건이 KPI에서 사라지지 않습니다. 주간 관리 파일 3개(우선순위 · 외주 사출처 · 펜딩)도 같은 기준일로 내보냅니다.">
             <Screenshot shot={shots.kpi} onOpen={setSelected} className="preflight-print-kpi" />
           </Feature>
-          <Feature number="03" title="엑셀의 색상도 업무 상태로 읽기" description="금형번호 셀의 채우기 색을 엑셀 테마 색과 tint 값까지 해석해 사출완료·계획예정·금형보관 등의 상태로 변환하고, 상태별 조회와 납기 집계에 사용합니다.">
-            <Screenshot shot={shots.trial} onOpen={setSelected} className="preflight-print-trial" />
+          <Feature number="03" title="엑셀의 색을 업무 상태로 — 시사출 · CT" description="팀이 상태를 셀 채우기 색으로 적어 온 양식을 바꾸지 않고, 테마 색과 명암(tint)까지 풀어 상태로 읽습니다. 시사출은 금형번호 셀 색으로 사출완료 · 계획예정 · 금형보관을, CT는 행 배경색으로 완료 · 미검토를 가립니다. 납기 준수율과 주차별 이월(미완료 = 전주 이월 + 의뢰 − 완료)을 함께 집계하고, CT는 국내 · 해외 · 개발로 나눠 봅니다.">
+            <div className="grid gap-3 md:grid-cols-2 print:grid-cols-2">
+              <Screenshot shot={shots.trial} onOpen={setSelected} className="preflight-print-half" />
+              <Screenshot shot={shots.ct} onOpen={setSelected} className="preflight-print-half" />
+            </div>
+          </Feature>
+          <Feature number="04" title="계산 기준은 담당자가 화면에서 확정" description="목표 준수율 · 준수 기준일 · 위험 임계값처럼 회의에서 바뀌는 값은 코드에 굳히지 않습니다. 기본값과 그 이유는 설정 파일에 두고, 담당자가 화면에서 고쳐 「확정」하면 화면의 「잠정」 표시가 사라집니다. 원본을 그대로 두고 화면을 열 때 계산하므로, 바꾼 기준은 지난 집계에도 같이 적용됩니다.">
+            <Screenshot shot={shots.settings} onOpen={setSelected} className="preflight-print-half" />
+          </Feature>
+          <Feature number="05" title="매일 쓰는 표의 기본기" description="팀원이 하루 종일 표에 적고 읽는 도구라, 화면마다 다르게 동작하지 않게 규칙을 하나로 묶었습니다.">
+            <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 print:grid-cols-3">
+              {deliveryBasics.map(item => (
+                <li key={item.title} className="rounded-xl border border-zinc-200 bg-white p-3">
+                  <p className="text-sm font-semibold break-keep">{item.title}</p>
+                  <p className="mt-1 text-xs leading-5 text-zinc-600 break-keep">{item.body}</p>
+                </li>
+              ))}
+            </ul>
           </Feature>
           <div>
-            <h3 className="text-sm font-semibold">피드백을 받아 바로 고친 기록</h3>
+            <h3 className="text-sm font-semibold">구축 · 개선 기록</h3>
             <ol className="mt-4 border-l border-zinc-200">
               {timeline.map(entry => (
                 <li key={entry.date} className="relative grid gap-1 pb-4 pl-6 last:pb-0 sm:grid-cols-[4rem_minmax(0,1fr)] sm:gap-4">
