@@ -22,7 +22,6 @@ const shots = {
   outflow: { src: "outflow.webp", alt: "반출 기록 — 반출 · 접수가 한 표에", width: 1600, height: 1000 },
   ct: { src: "ct.webp", alt: "CT 테스트 — 국내 · 해외 · 개발 구분과 완료 · 미검토", width: 1600, height: 1000 },
   settings: { src: "settings.webp", alt: "기준값 관리 — 잠정 / 확정", width: 1600, height: 1000 },
-  inventory: { src: "inventory.webp", alt: "반출 화면에서 재고가 없어 넘어온 접수 처리", width: 1600, height: 1000 },
 } satisfies Record<string, Shot>;
 
 function Screenshot({ shot, onOpen, className = "" }: { shot: Shot; onOpen: (shot: Shot) => void; className?: string }) {
@@ -129,11 +128,11 @@ export default function PreflightPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">Production · Internal Use · 제조업 R&D 조직</p>
         <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-6xl print:text-3xl">Preflight</h1>
         <p className="mt-5 text-xl font-semibold leading-snug tracking-tight text-zinc-800 break-keep md:text-2xl print:text-lg">흩어진 팀 업무를, 함께 확인하는 한 화면으로.</p>
-        <p className="mt-3 max-w-3xl text-base leading-7 text-zinc-600 break-keep print:text-sm">ERP 엑셀의 반복 집계를 자동화하고, 담당 업무와 지연 사유를 함께 관리하는 R&D 워크스페이스입니다.</p>
+        <p className="mt-3 max-w-3xl text-base leading-7 text-zinc-600 break-keep print:text-sm">ERP 엑셀의 반복 집계를 자동화하고, 담당 업무와 지연 사유, 샘플 출고와 재고까지 한곳에서 관리하는 R&D 워크스페이스입니다.</p>
         <div className="my-8 print:my-4"><CaseGlance {...glance} /></div>
         <figure>
           <Screenshot shot={shots.home} onOpen={setSelected} />
-          <figcaption className="mt-3 text-xs leading-5 text-zinc-500">회의록의 할 일을 담당자와 기한별로 모으고, 미배정 업무와 지연 사유도 함께 확인합니다.</figcaption>
+          <figcaption className="mt-3 text-xs leading-5 text-zinc-500">회의록의 할 일을 담당자와 기한별로 모으고, 미배정 업무와 지연 사유, 팀 게시판을 메인 화면에서 함께 확인합니다.</figcaption>
         </figure>
         <p className="mt-2 text-xs leading-5 text-zinc-500">화면은 가상 데이터로 재현했습니다. 인물·업체명과 화면 속 수치는 실제 운영 성과가 아닙니다.</p>
       </section>
@@ -144,6 +143,7 @@ export default function PreflightPage() {
           <div className="mt-3 border-l-2 border-blue-300 pl-5">
             <h2 className="text-lg font-semibold break-keep md:text-xl">지연된 업무를 확인하려면, 먼저 파일부터 모아야 했습니다.</h2>
             <p className="mt-2 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">샘플조달과 시사출 현황이 ERP 엑셀·개별 파일·메신저에 흩어져 있었습니다. 무엇이 늦어지는지 보려면 매번 파일을 다시 모아 정리해야 했고, 그 정리 작업 자체에 시간이 들었습니다.</p>
+            <p className="mt-2 max-w-3xl text-sm leading-7 text-zinc-600 break-keep">샘플 출고도 같았습니다. 영업사원이 샘플창고에서 꺼내 가며 종이에 적으면, 팀원이 그 기록을 다시 엑셀로 옮겨 KPI에 썼습니다.</p>
           </div>
         </div>
         <div id="constraints" className="scroll-mt-32 mt-10 print:mt-4">
@@ -314,10 +314,7 @@ export default function PreflightPage() {
               <Screenshot shot={shots.pos} onOpen={setSelected} className="preflight-print-pos" />
             </Feature>
             <Feature number="02" title="반출 · 접수가 한 표에" description="반출 화면에는 고치기 · 지우기가 없습니다. 잘못 누른 것은 로그인한 팀원이 반출 기록에서 고치고, 재고와 변경 이력이 함께 맞춰집니다. 재고가 모자란 만큼은 접수로 남아 팀이 처리합니다.">
-              <div className="grid gap-3 md:grid-cols-2 print:grid-cols-2">
-                <Screenshot shot={shots.outflow} onOpen={setSelected} className="preflight-print-half" />
-                <Screenshot shot={shots.inventory} onOpen={setSelected} className="preflight-print-half" />
-              </div>
+              <Screenshot shot={shots.outflow} onOpen={setSelected} className="preflight-print-pos" />
             </Feature>
           </div>
 

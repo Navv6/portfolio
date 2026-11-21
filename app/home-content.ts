@@ -13,7 +13,7 @@ export const featuredProjects = [
     id: "preflight", eyebrow: "Production · Internal Use", status: "운영 중", title: "Preflight",
     problem: "업무 현황이 ERP 엑셀·개별 파일·메신저에 흩어져, 지연을 확인하려면 파일부터 모아야 했습니다.",
     role: "기획·개발·운영 1인",
-    result: "팀 전원이 실무에 사용 · 사내망 운영",
+    result: "팀 전원이 실무에 사용 · 방문 출고 기록 자동화",
     href: "/projects/preflight", visible: true,
   },
   {
@@ -75,7 +75,6 @@ export const skills = [
 ];
 
 export const currentlyBuilding = [
-  { title: "Preflight 이력 관리 확장", description: "금형 · 시사출 회차 · 사출조건 · 평가 결과를 연결해 변경과 결과를 추적하는 구조로 확장 구상", status: "확장 검토", href: "/projects/preflight#ai-roadmap" },
   { title: "ReadyFlow", description: "AI 도입 전, 흩어진 업무부터 진단하는 제조 중소기업 대상 창업 아이템. Preflight 경험을 다른 현장으로 넓히는 시도", status: "검증 준비", href: "/projects/readyflow" },
   { title: "ThinkLayer", description: "만들기 전에 아이디어의 구조 · 빈틈 · 다음 행동 하나를 보여주는 코딩 에이전트용 스킬", status: "구상 단계", href: "/projects/thinklayer" },
 ];
